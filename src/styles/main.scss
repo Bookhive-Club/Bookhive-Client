@@ -1,0 +1,62 @@
+
+body {
+    background: #141414 !important;
+    color: white !important;
+}
+
+.hive_gradient {
+    background-image: linear-gradient(to bottom right ,  rgba(2, 108, 85, 0.197) , rgba(0, 0, 0, 0) , rgba(2, 108, 85, 0.087) ) !important;
+}
+
+.green-shade {
+
+    
+    background: linear-gradient(98.88deg, #0DBA63 6.27%, #107844 96.4%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  
+}
+
+.active-community-shade {
+    background: linear-gradient(101.96deg, #9FE645 8.1%, #C6920F 98.12%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+   
+}
+
+.active-stores-shade {
+   
+    
+
+    background: linear-gradient(100.69deg, #81D4FA 12.84%, #DB58F0 103.41%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(5deg); }
+  }
+  
+  /* Apply the animation to the element */
+  .rotate-item {
+    animation: rotate 9s linear infinite;
+  }
+
+
+  #qaEQTa {
+    background-color: #191919 !important;
+  }
+
+  .launchlist-widget {
+    background-color: #191919 !important;
+  }
+
+  .launchlist-widget iframe[data-key-id="qaEQTa"] {
+    background-color: #191919 !important;
+  }
