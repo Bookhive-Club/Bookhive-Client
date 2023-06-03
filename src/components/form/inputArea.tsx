@@ -18,6 +18,8 @@ type TextArea = {
   border?: string;
   bg?: string;
   width?: string;
+  value?: any;
+  name?: string;
 };
 
 const InputArea: FC<TextArea> = ({
@@ -30,6 +32,8 @@ const InputArea: FC<TextArea> = ({
   border,
   bg,
   width,
+  name,
+  value,
 }) => {
   return (
     <FormControl isInvalid={isInvalid} my={"1em"}>
@@ -39,6 +43,8 @@ const InputArea: FC<TextArea> = ({
         placeholder={placeholder}
         onChange={onChange}
         h={"58"}
+        name={name ? name : ""}
+        value={value}
         borderRadius={"10px"}
         outline={"none"}
         border={border ? border : "none"}

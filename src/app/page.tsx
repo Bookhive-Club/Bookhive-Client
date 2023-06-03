@@ -42,7 +42,7 @@ export default function Home() {
           var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
           s1.async=true;
           s1.src='https://embed.tawk.to/646106c7ad80445890ece090/1h0dg51aa';
-          s1.charset='UTF-8';
+          s1.charSet='UTF-8';
           s1.setAttribute('crossorigin','*');
           s0.parentNode.insertBefore(s1,s0);
           })();`,

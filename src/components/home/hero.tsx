@@ -9,7 +9,7 @@ import {
   TagLike,
   TagOne,
 } from "../micro/heroSvgs";
-import WaitlistForm from "./waitlistForm";
+import Link from "next/link";
 const Hero = () => {
   return (
     <ContainerLayout>
@@ -57,19 +57,18 @@ const Hero = () => {
             vibrant literary community.
           </Text>
 
-          {/* <Buttons
-            size={"lg"}
-            radius={"1em"}
-            py={"1.6em"}
-            px={"3em"}
-            w={"300px"}
-            h={"55px"}
-            my={"1em"}>
-            Get Started
-          </Buttons> */}
-          <Box w={["100%", "50%", "50%"]} my={"2em"} mx={"auto"}>
-            <WaitlistForm />
-          </Box>
+          <Link href={"/auth/signup"}>
+            <Buttons
+              size={"lg"}
+              radius={"1em"}
+              py={"1.6em"}
+              px={"3em"}
+              w={"300px"}
+              h={"55px"}
+              my={"1em"}>
+              Get Started
+            </Buttons>
+          </Link>
         </Box>
       </Flex>
     </ContainerLayout>

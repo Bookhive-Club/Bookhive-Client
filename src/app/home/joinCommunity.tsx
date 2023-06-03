@@ -25,8 +25,7 @@ const JoinCommunity = () => {
                 book lovers today.
               </Text>
 
-              {/* <Buttons>Join Community</Buttons> */}
-              <WaitlistForm />
+              <Buttons>Join Community</Buttons>
             </Box>
 
             <Box>

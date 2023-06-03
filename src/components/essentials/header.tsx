@@ -12,7 +12,9 @@ const Header = () => {
           <Logo />
         </Box>
 
-        <Box>{/* <Buttons>Join Waitlist</Buttons> */}</Box>
+        <Box>
+          <Buttons>Join Waitlist</Buttons>
+        </Box>
       </Flex>
     </ContainerLayout>
   );

@@ -12,20 +12,6 @@ const Footer = () => {
         </Box>
 
         <Center>
-          <Box>
-            {/* <form
-              className="launchlist-form"
-              action="https://getlaunchlist.com/s/qaEQTa"
-              method="POST">
-              <input name="name" type="text" placeholder="Enter your name" />
-              <input name="email" type="email" placeholder="Enter your email" />
-              <button type="submit">Sign Up</button>
-            </form> */}
-            <WaitlistForm />
-          </Box>
-        </Center>
-
-        <Center>
           <a
             href="https://www.producthunt.com/posts/book-hive?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-book&#0045;hive"
             target="_blank">

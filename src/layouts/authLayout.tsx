@@ -5,10 +5,13 @@ import { ReactNode, FC } from "react";
 type TLayout = {
   children: ReactNode;
   layoutHeader: string;
+  CTA?: string;
+  revarse?: boolean;
 };
-const AuthLayout: FC<TLayout> = ({ children, layoutHeader }) => {
+const AuthLayout: FC<TLayout> = ({ CTA, children, layoutHeader, revarse }) => {
   return (
-    <Flex flexDir={["column", "column", "row"]}>
+    <Flex
+      flexDir={["column", "column", revarse === false ? "row-reverse" : "row"]}>
       <Box
         h={["50vh", "50vh", "100vh"]}
         display={"flex"}
@@ -33,6 +36,15 @@ const AuthLayout: FC<TLayout> = ({ children, layoutHeader }) => {
           <Text my={"1em"}>
             To Keep Connected with us pleased login with your personal info.
           </Text>
+
+          <Box
+            w={"100%"}
+            border={"1px solid white"}
+            p={"1.5em"}
+            textAlign={"center"}
+            fontWeight={"bold"}>
+            {CTA}
+          </Box>
         </Box>
       </Box>
       <Box w={["100%", "100%", "50%"]} mx={"2em"} py={"2em"}>
