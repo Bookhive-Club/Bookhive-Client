@@ -5,14 +5,9 @@ import AuthLayout from "@/layouts/authLayout";
 import { Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { useFormik } from "formik";
-import * as Yup from "yup";
+import { signInValidationSchema } from "@/validations/auth/signinValidationSchema";
 
 const SignIn = () => {
-  const userValidationSchema = Yup.object().shape({
-    email: Yup.string().required().email(),
-    password: Yup.string().required(),
-  });
-
   const payload = {
     email: "",
     password: "",
@@ -22,13 +17,17 @@ const SignIn = () => {
 
   const formik = useFormik({
     initialValues: payload,
-    validationSchema: userValidationSchema,
+    validationSchema: signInValidationSchema,
     validateOnChange: true,
     onSubmit: handleSubmit,
   });
 
   return (
-    <AuthLayout revarse={false} CTA="SIGN UP" layoutHeader={"Welcome Back"}>
+    <AuthLayout
+      ctaPath="/auth/signnup"
+      revarse={false}
+      CTA="SIGN UP"
+      layoutHeader={"Welcome Back"}>
       <form onSubmit={formik.handleSubmit}>
         <InputArea
           isInvalid={formik.touched.email && !!formik.errors.email}

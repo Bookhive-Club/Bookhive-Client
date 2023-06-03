@@ -1,14 +1,22 @@
 "use client";
 import { WhiteLogo } from "@/components/micro/logo";
 import { Box, Text, Flex } from "@chakra-ui/react";
+import Link from "next/link";
 import { ReactNode, FC } from "react";
 type TLayout = {
   children: ReactNode;
   layoutHeader: string;
   CTA?: string;
   revarse?: boolean;
+  ctaPath?: string;
 };
-const AuthLayout: FC<TLayout> = ({ CTA, children, layoutHeader, revarse }) => {
+const AuthLayout: FC<TLayout> = ({
+  CTA,
+  ctaPath,
+  children,
+  layoutHeader,
+  revarse,
+}) => {
   return (
     <Flex
       flexDir={["column", "column", revarse === false ? "row-reverse" : "row"]}>
@@ -37,14 +45,16 @@ const AuthLayout: FC<TLayout> = ({ CTA, children, layoutHeader, revarse }) => {
             To Keep Connected with us pleased login with your personal info.
           </Text>
 
-          <Box
-            w={"100%"}
-            border={"1px solid white"}
-            p={"1.5em"}
-            textAlign={"center"}
-            fontWeight={"bold"}>
-            {CTA}
-          </Box>
+          <a href={ctaPath}>
+            <Box
+              w={"100%"}
+              border={"1px solid white"}
+              p={"1.5em"}
+              textAlign={"center"}
+              fontWeight={"bold"}>
+              {CTA}
+            </Box>
+          </a>
         </Box>
       </Box>
       <Box w={["100%", "100%", "50%"]} mx={"2em"} py={"2em"}>

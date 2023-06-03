@@ -5,20 +5,9 @@ import AuthLayout from "@/layouts/authLayout";
 import { Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { useFormik } from "formik";
-import * as Yup from "yup";
+import { signUpValidationSchema } from "@/validations/auth/signupValidationSchema";
 
 const SignUp = () => {
-  const userValidationSchema = Yup.object().shape({
-    email: Yup.string().required().email(),
-    phone_number: Yup.string().required().min(8, ""),
-    username: Yup.string().required().min(3, ""),
-    password: Yup.string().required().min(3, ""),
-    confirm_password: Yup.string().oneOf(
-      [Yup.ref("password"), null],
-      "Passwords must match"
-    ),
-  });
-
   const payload = {
     email: "",
     username: "",
@@ -31,13 +20,17 @@ const SignUp = () => {
 
   const formik = useFormik({
     initialValues: payload,
-    validationSchema: userValidationSchema,
+    validationSchema: signUpValidationSchema,
     validateOnChange: true,
     onSubmit: handleSubmit,
   });
 
+  console.log(formik.values.username);
   return (
-    <AuthLayout CTA="SIGN IN" layoutHeader={"Create an Account"}>
+    <AuthLayout
+      ctaPath="/auth/signin"
+      CTA="SIGN IN"
+      layoutHeader={"Create an Account"}>
       <form onSubmit={formik.handleSubmit}>
         <InputArea
           type="text"
@@ -46,6 +39,7 @@ const SignUp = () => {
           name="username"
           value={formik.values.username}
           onChange={formik.handleChange}
+          isInvalid={formik.touched.username && !!formik.errors.username}
           isErrorMessage={formik.errors.username}
         />
         <InputArea
@@ -55,6 +49,7 @@ const SignUp = () => {
           label="Email"
           value={formik.values.email}
           onChange={formik.handleChange}
+          isInvalid={formik.touched.email && !!formik.errors.email}
           isErrorMessage={formik.errors.email}
         />
         <InputArea
@@ -64,6 +59,9 @@ const SignUp = () => {
           label="Phone number"
           value={formik.values.phone_number}
           onChange={formik.handleChange}
+          isInvalid={
+            formik.touched.phone_number && !!formik.errors.phone_number
+          }
           isErrorMessage={formik.errors.phone_number}
         />
         <InputArea
@@ -74,16 +72,20 @@ const SignUp = () => {
           value={formik.values.password}
           onChange={formik.handleChange}
           isErrorMessage={formik.errors.password}
+          isInvalid={formik.touched.password && !!formik.errors.password}
         />
 
         <InputArea
           type="password"
           name="confirm_password"
           placeholder="********"
-          label="Password"
+          label="Confirm Password"
           value={formik.values.confirm_password}
           onChange={formik.handleChange}
           isErrorMessage={formik.errors.confirm_password}
+          isInvalid={
+            formik.touched.confirm_password && !!formik.errors.confirm_password
+          }
         />
 
         <Buttons type="submit" w="100%" radius="5px" my={"1em"}>
