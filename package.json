@@ -2,7 +2,9 @@
   "name": "bookhive",
   "version": "0.1.0",
   "private": true,
-  "resolutions": { "react-error-overlay": "6.0.9" },
+  "resolutions": {
+    "react-error-overlay": "6.0.9"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -29,6 +31,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-error-overlay": "^6.0.11",
+    "react-icons": "^4.9.0",
     "react-redux": "^8.0.5",
     "sass": "^1.62.1",
     "typescript": "5.0.4",
