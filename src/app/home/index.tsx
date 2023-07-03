@@ -1,13 +1,13 @@
 "use client";
-import Header from "@/components/essentials/header";
-import Hero from "@/components/home/hero";
+import Header from "@/components/atom/home/header";
+import Hero from "@/components/templates/home/hero";
 import { Box } from "@chakra-ui/react";
 import Info from "./info";
 import Community from "./stats";
 import Groups from "./groups";
 import JoinCommunity from "./joinCommunity";
 import Features from "./features";
-import Footer from "@/components/essentials/footer";
+import Footer from "@/components/atom/home/footer";
 import { useEffect } from "react";
 import Script from "next/script";
 

@@ -1,6 +1,6 @@
 "use client";
-import InputArea from "@/components/form/inputArea";
-import Buttons from "@/components/micro/buttons";
+import InputArea from "@/components/atom/form/inputArea";
+import Buttons from "@/components/atom/button/buttons";
 import AuthLayout from "@/layouts/authLayout";
 import { Text } from "@chakra-ui/react";
 import Link from "next/link";

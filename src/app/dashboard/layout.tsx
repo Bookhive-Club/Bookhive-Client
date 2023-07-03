@@ -28,8 +28,8 @@
 // };
 
 // export default Layout;
-import DashboardHeader from "@/components/dashboard/dashboardHeader";
-import DashboardSidebar from "@/components/dashboard/dashboardSidebar";
+import DashboardHeader from "@/components/templates/home/layouts/dashboard/dashboardHeader";
+import DashboardSidebar from "@/components/templates/home/layouts/dashboard/dashboardSidebar";
 import { Box, Container, Flex } from "@chakra-ui/react";
 import { ReactNode } from "react";
 

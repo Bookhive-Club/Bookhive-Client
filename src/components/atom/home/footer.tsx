@@ -1,7 +1,7 @@
-import ContainerLayout from "@/layouts/containerLayout";
+import ContainerLayout from "@/components/templates/home/layouts/container/containerLayout";
 import { Box, Center, Text } from "@chakra-ui/react";
-import { Logo } from "../micro/logo";
-import WaitlistForm from "../home/waitlistForm";
+import { Logo } from "../icons/logo";
+import WaitlistForm from "../../templates/home/waitlistForm";
 const Footer = () => {
   const date = new Date().getFullYear();
   return (

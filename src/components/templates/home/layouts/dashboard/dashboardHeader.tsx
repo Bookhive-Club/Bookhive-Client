@@ -9,7 +9,7 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
-import { Logo } from "../micro/logo";
+import { Logo } from "../../../../micro/logo";
 import { IoIosNotificationsOutline } from "react-icons/io";
 
 const DashboardHeader = () => {
