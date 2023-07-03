@@ -44,8 +44,7 @@ We welcome contributions from book lovers and developers alike. If you're intere
 
 #### We are using Atomic folder structure for out application
 
-
-
+```md
 src/
 ├── components/
 │   ├── atoms/
@@ -97,6 +96,8 @@ src/
         ├── About.js
         ├── about.css
         └── index.js
+```
+
 
 We value your feedback and strive to continuously improve the Book Lovers' Open Platform. If you have any suggestions, encounter any issues, or need support, please reach out to our support team at support@bookloversplatform.com.
 
