@@ -1,5 +1,6 @@
 "use client";
-import { WhiteLogo } from "@/components/micro/logo";
+
+import { WhiteLogo } from "@/components/atom/icons/logo";
 import { Box, Text, Flex } from "@chakra-ui/react";
 import Link from "next/link";
 import { ReactNode, FC } from "react";

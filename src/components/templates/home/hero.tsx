@@ -1,14 +1,14 @@
 "use client";
-import ContainerLayout from "@/layouts/containerLayout";
+import ContainerLayout from "@/components/templates/home/layouts/container/containerLayout";
 import { Box, Text, Center, Flex } from "@chakra-ui/react";
-import Buttons from "../micro/buttons";
+import Buttons from "../../atom/button/buttons";
 import {
   StackedBooksLike,
   SmallAi,
   LargeAi,
   TagLike,
   TagOne,
-} from "../micro/heroSvgs";
+} from "../../atom/icons/heroSvgs";
 import Link from "next/link";
 const Hero = () => {
   return (

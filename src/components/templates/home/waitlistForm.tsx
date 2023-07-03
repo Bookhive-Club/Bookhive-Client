@@ -1,5 +1,5 @@
 import { Input, Box, FormLabel } from "@chakra-ui/react";
-import Buttons from "../micro/buttons";
+import Buttons from "../../atom/button/buttons";
 import { useState } from "react";
 
 const WaitlistForm = () => {

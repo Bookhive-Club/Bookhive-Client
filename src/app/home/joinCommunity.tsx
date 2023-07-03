@@ -1,6 +1,6 @@
-import WaitlistForm from "@/components/home/waitlistForm";
-import Buttons from "@/components/micro/buttons";
-import ContainerLayout from "@/layouts/containerLayout";
+import WaitlistForm from "@/components/templates/home/waitlistForm";
+import Buttons from "@/components/atom/button/buttons";
+import ContainerLayout from "@/components/templates/home/layouts/container/containerLayout";
 import { Box, Text, Flex } from "@chakra-ui/react";
 
 const JoinCommunity = () => {

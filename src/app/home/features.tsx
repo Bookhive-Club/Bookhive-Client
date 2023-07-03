@@ -1,4 +1,4 @@
-import ContainerLayout from "@/layouts/containerLayout";
+import ContainerLayout from "@/components/templates/home/layouts/container/containerLayout";
 import { Text, Box, Flex } from "@chakra-ui/react";
 import { FC } from "react";
 import { ForumeSvg, RecommedBooksSvg, RateBookSvg } from "./svgs/featuredSvg";
