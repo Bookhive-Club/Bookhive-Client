@@ -41,7 +41,62 @@ To get started with the Book Lovers' Open Platform, follow these simple steps:
 
 We welcome contributions from book lovers and developers alike. If you're interested in improving the platform, adding new features, or fixing issues, please refer to our [contribution guidelines](CONTRIBUTING.md) for more information.
 
-## Feedback and Support
+
+#### We are using Atomic folder structure for out application
+
+
+
+src/
+├── components/
+│   ├── atoms/
+│   │   ├── button/
+│   │   │   ├── Button.js
+│   │   │   ├── button.css
+│   │   │   └── index.js
+│   │   ├── input/
+│   │   │   ├── Input.js
+│   │   │   ├── input.css
+│   │   │   └── index.js
+│   │   └── icon/
+│   │       ├── Icon.js
+│   │       ├── icon.css
+│   │       └── index.js
+│   ├── molecules/
+│   │   ├── loginForm/
+│   │   │   ├── LoginForm.js
+│   │   │   ├── loginForm.css
+│   │   │   └── index.js
+│   │   └── navbar/
+│   │       ├── Navbar.js
+│   │       ├── navbar.css
+│   │       └── index.js
+│   └── organisms/
+│       ├── userProfile/
+│       │   ├── UserProfile.js
+│       │   ├── userProfile.css
+│       │   └── index.js
+│       └── productCard/
+│           ├── ProductCard.js
+│           ├── productCard.css
+│           └── index.js
+├── templates/
+│   ├── dashboard/
+│   │   ├── Dashboard.js
+│   │   ├── dashboard.css
+│   │   └── index.js
+│   └── landingPage/
+│       ├── LandingPage.js
+│       ├── landingPage.css
+│       └── index.js
+└── pages/
+    ├── home/
+    │   ├── Home.js
+    │   ├── home.css
+    │   └── index.js
+    └── about/
+        ├── About.js
+        ├── about.css
+        └── index.js
 
 We value your feedback and strive to continuously improve the Book Lovers' Open Platform. If you have any suggestions, encounter any issues, or need support, please reach out to our support team at support@bookloversplatform.com.
 
