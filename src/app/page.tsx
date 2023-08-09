@@ -2,7 +2,6 @@
 import "@/styles/main.scss";
 import { Poppins } from "next/font/google";
 import Homepage from "./home";
-import { Box } from "@chakra-ui/react";
 import Script from "next/script";
 import { useEffect } from "react";
 
@@ -25,7 +24,7 @@ export default function Home() {
     }
   }, []);
   return (
-    <main className={poppins.className}>
+    <main>
       <Homepage />
       <Script
         id={"waitlist"}

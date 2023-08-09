@@ -3,10 +3,13 @@ import Script from "next/script";
 import ChakraWrapper from "@/provider/chakraProvider";
 import { Inter } from "next/font/google";
 import "@/styles/main.scss";
-import Head from "next/head";
-import ErrorBoundary from "@/utils/errorBoundary";
-
+import { Poppins } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
 
 export const metadata = {
   title: "Bookhive",
@@ -37,7 +40,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         {/* <title>Document</title> */}
       </head>
-      <body>
+      <body className="poppins.className">
         <body>
           <ChakraWrapper>{children}</ChakraWrapper>
         </body>

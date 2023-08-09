@@ -1,4 +1,4 @@
-import ContainerLayout from "@/components/templates/home/layouts/container/containerLayout";
+import ContainerLayout from "@/layouts/container/containerLayout";
 import { Box, Center, Text } from "@chakra-ui/react";
 import { Logo } from "../icons/logo";
 import WaitlistForm from "../../templates/home/waitlistForm";
