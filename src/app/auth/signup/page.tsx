@@ -1,7 +1,8 @@
 "use client";
 import InputArea from "@/components/atom/form/inputArea";
 import Buttons from "@/components/atom/button/buttons";
-import AuthLayout from "@/layouts/authLayout";
+// import AuthLayout from "@/layouts/authLayout";
+import AuthLayout from "@/components/templates/home/layouts/auth/authLayout";
 import { Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { useFormik } from "formik";
@@ -93,7 +94,7 @@ const SignUp = () => {
         </Buttons>
       </form>
 
-      <Text my={"1.5em"} textAlign={"center"} fontWeight={"bold"}>
+      <Text textAlign={"center"} fontWeight={"bold"}>
         Already have an account?
         <Link href={"/auth/signin"}>
           {" "}
