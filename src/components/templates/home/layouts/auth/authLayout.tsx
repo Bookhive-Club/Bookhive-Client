@@ -58,8 +58,8 @@ const AuthLayout: FC<TLayout> = ({
           </a>
         </Box>
       </Box>
-      <Box w={["100%", "100%", "50%"]} mx={"2em"} py={"0.15rem"}>
-        <Box width={["100%", "100%", "550px"]} mx={"auto"} py={"1rem"}>
+      <Box w={["100%", "100%", "50%"]} mx={"2em"} py={"1rem"}>
+        <Box width={["100%", "100%", "550px"]} mx={"auto"} py={"2rem"}>
           <Text fontWeight={"bold"} fontSize={["20px", "20px", "25px"]}>
             {layoutHeader}
           </Text>
