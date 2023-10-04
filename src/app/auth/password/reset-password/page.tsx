@@ -1,7 +1,7 @@
 "use client";
 import InputArea from "@/components/atom/form/inputArea";
 import Buttons from "@/components/atom/button/buttons";
-import AuthVerificationLayout from "@/layouts/authVerificationLayout";
+import AuthVerificationLayout from "@/components/templates/home/layouts/auth/authVerificationLayout";
 import { Box, Text } from "@chakra-ui/react";
 
 const ResetPassword = () => {
