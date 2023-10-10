@@ -1,7 +1,7 @@
 "use client";
 import InputArea from "@/components/atom/form/inputArea";
 import Buttons from "@/components/atom/button/buttons";
-import AuthLayout from "@/layouts/auth/authLayout";
+import AuthLayout from "@/components/templates/home/layouts/auth/authLayout";
 import { Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { useFormik } from "formik";
@@ -11,7 +11,6 @@ const SignUp = () => {
   const payload = {
     email: "",
     username: "",
-    phone_number: "",
     password: "",
     confirm_password: "",
   };
@@ -52,7 +51,7 @@ const SignUp = () => {
           isInvalid={formik.touched.email && !!formik.errors.email}
           isErrorMessage={formik.errors.email}
         />
-        <InputArea
+        {/* <InputArea
           type="tel"
           name="phone_number"
           placeholder="09102321234"
@@ -63,7 +62,7 @@ const SignUp = () => {
             formik.touched.phone_number && !!formik.errors.phone_number
           }
           isErrorMessage={formik.errors.phone_number}
-        />
+        /> */}
         <InputArea
           type="password"
           name="password"

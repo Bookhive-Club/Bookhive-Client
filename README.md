@@ -39,7 +39,7 @@ To get started with the Book Lovers' Open Platform, follow these simple steps:
 
 ## Contribution
 
-We welcome contributions from book lovers and developers alike. If you're interested in improving the platform, adding new features, or fixing issues, please refer to our [contribution guidelines](CONTRIBUTING.md) for more information.
+We welcome contributions from book lovers and developers alike. If you're interested in improving the platform, adding new features, or fixing issues, please refer to our [contribution guidelines](./CONTRBUTING.md) for more information.
 
 
 #### We are using Atomic folder structure for out application
@@ -99,6 +99,5 @@ src/
 ```
 
 
-We value your feedback and strive to continuously improve the Book Lovers' Open Platform. If you have any suggestions, encounter any issues, or need support, please reach out to our support team at support@bookloversplatform.com.
-
+We value your feedback and strive to continuously improve the Book Lovers' Open Platform. If you have any suggestions, please raise an issue
 Happy reading and enjoy your journey through the Book Lovers' Open Platform!
