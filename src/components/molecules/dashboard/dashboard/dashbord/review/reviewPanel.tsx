@@ -11,65 +11,113 @@ import { BiCategoryAlt } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { RiPagesLine } from "react-icons/ri";
 import Buttons from "@/components/atom/button/buttons";
+import { Fragment } from "react";
+import RecommendBox from "./booksRecommendations";
 
 export const ReviewPanel = () => {
   return (
-    <Flex
-      gap={"1em"}
-      flexDir={["column", "row"]}
-      alignItems={"center"}
-      h={["270px"]}>
-      <Box w={["100%", "100%", "359px"]} h={"100%"} bg={"red"}>
-        lorel
-      </Box>
-      <Box w={["100%", "549px"]}>
-        <Text fontWeight={600} fontSize={["20px", " 30px"]}>
-          The Venerable Swordsman Origins: Almighty Domain
+    <>
+      <Flex
+        gap={"1em"}
+        flexDir={["column", "row"]}
+        alignItems={"center"}
+        h={["329px"]}>
+        <Box
+          w={["100%", "100%", "359px"]}
+          h={"100%"}
+          bg={"black"}
+          borderRadius={"10px"}></Box>
+
+        <Box w={["100%", "549px"]}>
+          <Text fontWeight={600} fontSize={["20px", " 30px"]}>
+            The Venerable Swordsman Origins: Almighty Domain
+          </Text>
+
+          <UnorderedList
+            display={"inline-flex"}
+            gap={"2em"}
+            listStyleType={"none"}
+            my={"1em"}>
+            <ListItem>
+              <ListIcon as={BiCategoryAlt} />
+              Fantasy
+            </ListItem>
+
+            <ListItem>
+              <ListIcon as={RiPagesLine} />
+              Chapters
+            </ListItem>
+
+            <ListItem>
+              <ListIcon as={BiCategoryAlt} />
+              Fantasy
+            </ListItem>
+
+            <ListItem>
+              <ListIcon as={BiCategoryAlt} />
+              Fantasy
+            </ListItem>
+          </UnorderedList>
+
+          <Box></Box>
+
+          <Flex gap={"1em"} my={"1em"}>
+            <Buttons color={"#fff"} borderRadius={"none"}>
+              Read
+            </Buttons>
+            <Buttons
+              color={"brand.primary"}
+              bg={"none"}
+              border={"1px solid #0DBA63"}
+              borderRadius={"none"}>
+              + Add to Shelf
+            </Buttons>
+            <Buttons color={"#fff"} borderRadius={"none"}>
+              <AiOutlineHeart />
+            </Buttons>
+          </Flex>
+        </Box>
+      </Flex>
+
+      <Box my={"4em"} bg={"brand.secondary"} py={"2em"} px={"2em"}>
+        <Text fontWeight={600} fontSize={["18px"]}>
+          Synopsis
         </Text>
 
-        <UnorderedList
-          display={"inline-flex"}
-          gap={"2em"}
-          listStyleType={"none"}>
-          <ListItem>
-            <ListIcon as={BiCategoryAlt} />
-            Fantasy
-          </ListItem>
+        <Text my={"1em"}>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora
+          corrupti cumque magni laudantium cupiditate! Voluptatem esse ex, qui
+          nisi quidem ipsum alias ipsam tempora labore odit, quaerat unde,
+          similique neque.
+        </Text>
 
-          <ListItem>
-            <ListIcon as={RiPagesLine} />
-            Chapters
-          </ListItem>
+        <Box>
+          <Text fontWeight={600} fontSize={["18px"]}>
+            Tag
+          </Text>
 
-          <ListItem>
-            <ListIcon as={BiCategoryAlt} />
-            Fantasy
-          </ListItem>
+          <Flex my={"2em"} gap={"1em"}>
+            {Array(3)
+              .fill(null)
+              .map((items, index) => {
+                return (
+                  <Fragment key={index}>
+                    <Buttons
+                      bg={"none"}
+                      border={"1px solid #0DBA63  "}
+                      color="#fff">
+                      #Mystery
+                    </Buttons>
+                  </Fragment>
+                );
+              })}
+          </Flex>
 
-          <ListItem>
-            <ListIcon as={BiCategoryAlt} />
-            Fantasy
-          </ListItem>
-        </UnorderedList>
+          <RecommendBox />
 
-        <Box></Box>
-
-        <Flex gap={"1em"}>
-          <Buttons color={"#fff"} borderRadius={"none"}>
-            Read
-          </Buttons>
-          <Buttons
-            color={"brand.primary"}
-            bg={"none"}
-            border={"1px solid #0DBA63"}
-            borderRadius={"none"}>
-            + Add to Shelf
-          </Buttons>
-          <Buttons color={"#fff"} borderRadius={"none"}>
-            <AiOutlineHeart />
-          </Buttons>
-        </Flex>
+          {/* todo: include comment session */}
+        </Box>
       </Box>
-    </Flex>
+    </>
   );
 };
