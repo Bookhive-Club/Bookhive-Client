@@ -1,4 +1,4 @@
-import { Button } from "./buttonConfig"
+import { Button } from "./buttonConfig";
 export const components = {
-    Button
-}
+  Button,
+};

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export function convertToIcon(icon: React.ReactNode) {
   if (!React.isValidElement(icon)) {

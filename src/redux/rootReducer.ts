@@ -1,6 +1,4 @@
-
-import {authReducer} from "./slice/auth"; 
+import { authReducer } from "./slice/auth";
 export const rootReducer = {
-    auth: authReducer
-}
-
+  auth: authReducer,
+};

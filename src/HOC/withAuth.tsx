@@ -1,9 +1,5 @@
 const withAuth = () => {
+  const authRouter = () => {};
 
-    const authRouter = () => {
-
-    }
-
-    return authRouter; 
-
-}
+  return authRouter;
+};

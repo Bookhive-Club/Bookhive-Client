@@ -1,5 +1,5 @@
-import { Html, Head, Main, NextScript } from 'next/document'
-import Script from 'next/script'
+import { Html, Head, Main, NextScript } from "next/document";
+import Script from "next/script";
 
 export default function Document() {
   return (
@@ -9,10 +9,10 @@ export default function Document() {
         <Main />
         <NextScript />
         <Script
-        id={"tawkto"}
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
+          id={"tawkto"}
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
           var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
           (function(){
           var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
@@ -22,14 +22,14 @@ export default function Document() {
           s1.setAttribute('crossorigin','*');
           s0.parentNode.insertBefore(s1,s0);
           })();`,
-        }}
-      />
+          }}
+        />
 
-      <Script
-        id={"metrica"}
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
+        <Script
+          id={"metrica"}
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
           (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
           m[i].l=1*new Date();
           for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
@@ -42,15 +42,15 @@ export default function Document() {
             accurateTrackBounce:true,
             webvisor:true
           });`,
-        }}
-      />
+          }}
+        />
 
-      <Script
-        src="https://getlaunchlist.com/js/widget.js"
-        strategy="beforeInteractive"
-        defer
-      />
+        <Script
+          src="https://getlaunchlist.com/js/widget.js"
+          strategy="beforeInteractive"
+          defer
+        />
       </body>
     </Html>
-  )
+  );
 }
