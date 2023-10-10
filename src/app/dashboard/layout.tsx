@@ -25,7 +25,8 @@ const Layout = ({ children }: { children: ReactNode }) => {
           maxW={["100%", "70%", "70%"]}
           overflowY="auto"
           height="100vh"
-          mx={"auto"}>
+          mx={"auto"}
+          py={"2em"}>
           <Box w={"100%"}>{children}</Box>
         </Container>
       </Flex>

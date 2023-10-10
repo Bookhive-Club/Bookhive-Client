@@ -1,4 +1,5 @@
 import { Badge, Box, Text, Flex } from "@chakra-ui/react";
+import CommentBox from "./commentBox";
 const RecommendBox = () => {
   return (
     <Box my={"2em"}>
@@ -19,16 +20,17 @@ const RecommendBox = () => {
                 p={"1em"}
                 key={items}>
                 <Box
-                  borderRadius={"10px"}
+                  borderRadius={"8px"}
                   h={"201.134px"}
                   w={"100%"}
                   bg={"black"}></Box>
                 <Badge
-                  my={"0.8em"}
+                  my={"1em"}
                   px={"0.6em"}
                   py={"0.5em"}
                   bg={"brand.primary"}
-                  color={"#fff"}>
+                  color={"#fff"}
+                  borderRadius={"md"}>
                   Fiction
                 </Badge>
                 <Text fontSize={["18px"]} fontWeight={600}>
@@ -40,6 +42,14 @@ const RecommendBox = () => {
             );
           })}
       </Flex>
+
+      <Box my={"1em"}>
+        <Text fontWeight={"bold"}>Reviews</Text>
+
+        <Box my={"1em"}>
+          <CommentBox />
+        </Box>
+      </Box>
     </Box>
   );
 };
