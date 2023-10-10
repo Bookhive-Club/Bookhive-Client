@@ -1,7 +1,8 @@
 "use client";
-import { Box } from "@chakra-ui/react";
+import DashboardHome from "@/components/pages/dashbord/dashbordHome";
 
 const Page = () => {
-  return <Box></Box>;
+  return <DashboardHome />;
 };
+
 export default Page;

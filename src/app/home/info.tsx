@@ -1,6 +1,6 @@
 "use client";
 import { Box, Flex, Text } from "@chakra-ui/react";
-import ContainerLayout from "@/components/templates/home/layouts/container/containerLayout";
+import ContainerLayout from "@/layouts/container/containerLayout";
 import React, { FC } from "react";
 import { Big_Shoulders_Stencil_Text } from "next/font/google";
 

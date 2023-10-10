@@ -1,4 +1,4 @@
-import ContainerLayout from "@/components/templates/home/layouts/container/containerLayout";
+import ContainerLayout from "@/layouts/container/containerLayout";
 import { Box, Flex, Text } from "@chakra-ui/react";
 const Community = () => {
   return (

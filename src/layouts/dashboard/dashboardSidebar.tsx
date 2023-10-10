@@ -1,10 +1,11 @@
+import { Logo } from "@/components/atom/icons/logo";
 import { dashboardSideBarData } from "@/utils/data/dashboardSideData";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import Link from "next/link";
 
 const DashboardSidebar = () => {
   return (
-    <Box py={"2em"} w={"200px"}>
+    <Box w={"200px"}>
       {dashboardSideBarData?.map(({ name, path, icon }, index) => {
         return (
           <Box

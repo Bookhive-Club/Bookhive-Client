@@ -1,8 +1,7 @@
 "use client";
-import { Button } from "@chakra-ui/react";
+import { Button, ButtonProps } from "@chakra-ui/react";
 import { FC, ReactNode } from "react";
-
-type TButton = {
+interface TButton extends ButtonProps {
   children?: ReactNode;
   border?: string | [];
   color?: string;
@@ -19,7 +18,7 @@ type TButton = {
   type?: "button" | "submit";
   isLoading?: boolean;
   loadingText?: string;
-};
+}
 
 const Buttons: FC<TButton> = ({
   children,
@@ -47,7 +46,7 @@ const Buttons: FC<TButton> = ({
       bg={bg ? bg : "brand.primary"}
       size={size ? size : ["md", "lg"]}
       px={px ? px : "2em"}
-      py={py ? py : "1.5em"}
+      py={py ? py : "1em"}
       my={my}
       h={h}
       w={w}

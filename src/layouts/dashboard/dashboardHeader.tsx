@@ -9,7 +9,7 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
-import { Logo } from "../../../../micro/logo";
+import { Logo } from "@/components/atom/icons/logo";
 import { IoIosNotificationsOutline } from "react-icons/io";
 
 const DashboardHeader = () => {
@@ -21,7 +21,7 @@ const DashboardHeader = () => {
     <Flex
       alignItems={"center"}
       justifyContent={"space-between"}
-      px={"2em"}
+      px={["1em", "2em", "10em"]}
       py={"1.2em"}
       bg={"brand.secondary"}>
       <Box>

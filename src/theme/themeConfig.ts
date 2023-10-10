@@ -8,6 +8,9 @@ export const colors = {
     dark: {
         10: '#212121',
         20 : '#1A1A1A'
-        
+    }, 
+
+    grayed: {
+        100: 'rgba(255, 255, 255, 0.70)'
     }
 }

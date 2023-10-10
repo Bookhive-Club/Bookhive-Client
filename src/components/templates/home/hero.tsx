@@ -1,5 +1,5 @@
 "use client";
-import ContainerLayout from "@/components/templates/home/layouts/container/containerLayout";
+import ContainerLayout from "@/layouts/container/containerLayout";
 import { Box, Text, Center, Flex } from "@chakra-ui/react";
 import Buttons from "../../atom/button/buttons";
 import {
