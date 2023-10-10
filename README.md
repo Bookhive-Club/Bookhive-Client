@@ -1,6 +1,5 @@
 ![97shots_so](https://github.com/Bookhive-Club/Bookhive-Client/assets/54102389/d6aa026f-1480-469a-8d34-ca6dd7c60a54)
 
-
 # Book Lovers' Open Platform
 
 Welcome to the Book Lovers' Open Platform! This platform is designed to provide a space for book enthusiasts to connect, engage, and share their love for books. Whether you're an avid reader, an aspiring author, or simply someone who appreciates the written word, this platform is for you.
@@ -41,63 +40,61 @@ To get started with the Book Lovers' Open Platform, follow these simple steps:
 
 We welcome contributions from book lovers and developers alike. If you're interested in improving the platform, adding new features, or fixing issues, please refer to our [contribution guidelines](./CONTRBUTING.md) for more information.
 
-
 #### We are using Atomic folder structure for out application
 
 ```md
 src/
 ├── components/
-│   ├── atoms/
-│   │   ├── button/
-│   │   │   ├── Button.js
-│   │   │   ├── button.css
-│   │   │   └── index.js
-│   │   ├── input/
-│   │   │   ├── Input.js
-│   │   │   ├── input.css
-│   │   │   └── index.js
-│   │   └── icon/
-│   │       ├── Icon.js
-│   │       ├── icon.css
-│   │       └── index.js
-│   ├── molecules/
-│   │   ├── loginForm/
-│   │   │   ├── LoginForm.js
-│   │   │   ├── loginForm.css
-│   │   │   └── index.js
-│   │   └── navbar/
-│   │       ├── Navbar.js
-│   │       ├── navbar.css
-│   │       └── index.js
-│   └── organisms/
-│       ├── userProfile/
-│       │   ├── UserProfile.js
-│       │   ├── userProfile.css
-│       │   └── index.js
-│       └── productCard/
-│           ├── ProductCard.js
-│           ├── productCard.css
-│           └── index.js
+│ ├── atoms/
+│ │ ├── button/
+│ │ │ ├── Button.js
+│ │ │ ├── button.css
+│ │ │ └── index.js
+│ │ ├── input/
+│ │ │ ├── Input.js
+│ │ │ ├── input.css
+│ │ │ └── index.js
+│ │ └── icon/
+│ │ ├── Icon.js
+│ │ ├── icon.css
+│ │ └── index.js
+│ ├── molecules/
+│ │ ├── loginForm/
+│ │ │ ├── LoginForm.js
+│ │ │ ├── loginForm.css
+│ │ │ └── index.js
+│ │ └── navbar/
+│ │ ├── Navbar.js
+│ │ ├── navbar.css
+│ │ └── index.js
+│ └── organisms/
+│ ├── userProfile/
+│ │ ├── UserProfile.js
+│ │ ├── userProfile.css
+│ │ └── index.js
+│ └── productCard/
+│ ├── ProductCard.js
+│ ├── productCard.css
+│ └── index.js
 ├── templates/
-│   ├── dashboard/
-│   │   ├── Dashboard.js
-│   │   ├── dashboard.css
-│   │   └── index.js
-│   └── landingPage/
-│       ├── LandingPage.js
-│       ├── landingPage.css
-│       └── index.js
+│ ├── dashboard/
+│ │ ├── Dashboard.js
+│ │ ├── dashboard.css
+│ │ └── index.js
+│ └── landingPage/
+│ ├── LandingPage.js
+│ ├── landingPage.css
+│ └── index.js
 └── pages/
-    ├── home/
-    │   ├── Home.js
-    │   ├── home.css
-    │   └── index.js
-    └── about/
-        ├── About.js
-        ├── about.css
-        └── index.js
+├── home/
+│ ├── Home.js
+│ ├── home.css
+│ └── index.js
+└── about/
+├── About.js
+├── about.css
+└── index.js
 ```
-
 
 We value your feedback and strive to continuously improve the Book Lovers' Open Platform. If you have any suggestions, please raise an issue
 Happy reading and enjoy your journey through the Book Lovers' Open Platform!

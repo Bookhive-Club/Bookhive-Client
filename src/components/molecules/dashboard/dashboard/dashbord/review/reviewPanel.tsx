@@ -9,10 +9,10 @@ import {
 } from "@chakra-ui/react";
 import { BiCategoryAlt } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
-import { RiPagesLine } from "react-icons/ri";
 import Buttons from "@/components/atom/button/buttons";
 import { Fragment } from "react";
 import RecommendBox from "./booksRecommendations";
+import { HiEye, HiCollection, HiDocumentText } from "react-icons/hi";
 
 export const ReviewPanel = () => {
   return (
@@ -21,7 +21,7 @@ export const ReviewPanel = () => {
         gap={"1em"}
         flexDir={["column", "row"]}
         alignItems={"center"}
-        h={["329px"]}>
+        h={["500px", "329px"]}>
         <Box
           w={["100%", "100%", "359px"]}
           h={"100%"}
@@ -37,25 +37,21 @@ export const ReviewPanel = () => {
             display={"inline-flex"}
             gap={"2em"}
             listStyleType={"none"}
-            my={"1em"}>
+            my={"1em"}
+            mx={0}>
             <ListItem>
-              <ListIcon as={BiCategoryAlt} />
+              <ListIcon as={HiCollection} />
               Fantasy
             </ListItem>
 
             <ListItem>
-              <ListIcon as={RiPagesLine} />
-              Chapters
-            </ListItem>
-
-            <ListItem>
-              <ListIcon as={BiCategoryAlt} />
+              <ListIcon as={HiDocumentText} />
               Fantasy
             </ListItem>
 
             <ListItem>
-              <ListIcon as={BiCategoryAlt} />
-              Fantasy
+              <ListIcon as={HiEye} />
+              3k
             </ListItem>
           </UnorderedList>
 
@@ -72,7 +68,11 @@ export const ReviewPanel = () => {
               borderRadius={"none"}>
               + Add to Shelf
             </Buttons>
-            <Buttons color={"#fff"} borderRadius={"none"}>
+            <Buttons
+              bg={"none"}
+              border={"1px solid brand.100"}
+              color={"#fff"}
+              borderRadius={"none"}>
               <AiOutlineHeart />
             </Buttons>
           </Flex>

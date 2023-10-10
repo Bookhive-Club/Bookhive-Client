@@ -23,6 +23,13 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/utils/errorBoundary.js", "src/components/molecules/dashboard/dashboard/dashbord/dashboardAdsHero.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/utils/errorBoundary.js",
+    "src/components/molecules/dashboard/dashboard/dashbord/dashboardAdsHero.tsx"
+  ],
   "exclude": ["node_modules"]
 }
