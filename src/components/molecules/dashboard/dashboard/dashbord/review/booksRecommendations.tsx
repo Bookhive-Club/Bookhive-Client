@@ -1,5 +1,7 @@
 import { Badge, Box, Text, Flex } from "@chakra-ui/react";
 import CommentBox from "./commentBox";
+import InputArea from "@/components/atom/form/inputArea";
+import Buttons from "@/components/atom/button/buttons";
 const RecommendBox = () => {
   return (
     <Box my={"2em"}>
@@ -15,7 +17,7 @@ const RecommendBox = () => {
               <Box
                 h={["383.242px"]}
                 borderRadius={"10px"}
-                w={["100%", "279.051px"]}
+                w={["100%", "300px"]}
                 bg={"#212121"}
                 p={"1em"}
                 key={items}>
@@ -48,6 +50,16 @@ const RecommendBox = () => {
 
         <Box my={"1em"}>
           <CommentBox />
+        </Box>
+
+        <Box my={"1em"}>
+          <InputArea type="text" placeholder="comment" name="comment" />
+          <Flex alignItems={"center"} gap={".6em"} justifyContent={"end"}>
+            <Text>Cancel</Text>
+            <Buttons borderRadius={"0"} border={"none"}>
+              Reply
+            </Buttons>
+          </Flex>
         </Box>
       </Box>
     </Box>

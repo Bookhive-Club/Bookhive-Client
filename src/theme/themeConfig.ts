@@ -1,8 +1,10 @@
 export const colors = {
   brand: {
     100: "#0DBA63",
+    200: 'rgba(255, 255, 255, 0.30)', 
     primary: "#0DBA63",
     secondary: "#191919",
+
   },
 
   dark: {

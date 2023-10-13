@@ -1,12 +1,14 @@
 import { Avatar, Box, Flex, Text } from "@chakra-ui/react";
 import React from "react";
+import Link from "next/link";
 
 interface IContainer {
   title: string;
   image: string;
   content: string;
+  path: string;
 }
-const Container = ({ title, content, image }: IContainer) => (
+const Container = ({ title, path, content, image }: IContainer) => (
   <Box
     w={["100%", "409px"]}
     borderRadius="10px"
@@ -27,9 +29,11 @@ const Container = ({ title, content, image }: IContainer) => (
       <Text fontWeight={600} fontSize={["17px", "20px"]}>
         {title}
       </Text>
-      <Text color="brand.primary" size="17px" fontWeight={600}>
-        {content}
-      </Text>
+      <Link href={path}>
+        <Text color="brand.primary" size="17px" fontWeight={600}>
+          {content}
+        </Text>
+      </Link>
     </Box>
   </Box>
 );
@@ -40,16 +44,19 @@ const DashboardFlexBox = () => {
       title: "Saved Books",
       content: "View all saved books",
       image: "/assets/dashboard/favorite.svg",
+      path: "/dashboard/favorites",
     },
     {
       title: "Store",
       content: "View store",
       image: "/assets/dashboard/store.svg",
+      path: "/dashboard/stores",
     },
     {
-      title: "Swapped Books", // Changed title to "Swapped Books"
-      content: "View swapped books", // Changed content to "View swapped books"
+      title: "Swapped Books",
+      content: "View swapped books",
       image: "/assets/dashboard/swap.svg",
+      path: "/dashboard/swap",
     },
   ];
 
@@ -61,6 +68,7 @@ const DashboardFlexBox = () => {
           title={item.title}
           content={item.content}
           image={item.image}
+          path={item.path}
         />
       ))}
     </Flex>
