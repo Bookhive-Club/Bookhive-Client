@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <ContainerLayout>
       <Flex py={"1em"} justify={"space-between"}>
-        <Box>
+        <Box as={"a"} href="/">
           <Logo />
         </Box>
 
