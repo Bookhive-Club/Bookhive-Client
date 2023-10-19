@@ -10,6 +10,7 @@ export const colors = {
   dark: {
     10: "#212121",
     20: "#1A1A1A",
+    30: "#323d51"
   },
 
   grayed: {

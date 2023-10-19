@@ -22,6 +22,7 @@ import { usePathname } from "next/navigation";
 import { HiOutlineAdjustments, HiOutlineUser } from "react-icons/hi";
 import { AiOutlinePoweroff } from "react-icons/ai";
 import ModalContainer from "../popups/modalLayout";
+import IndexSettings from "@/components/molecules/dashboard/dashboard/dashbord/settings";
 
 interface MenuItem {
   name: string;
@@ -44,7 +45,7 @@ const DashboardHeader = () => {
       name: "Settings",
       path: "/dashboard/settings",
       icon: <HiOutlineAdjustments />,
-      action: () => alert(0),
+      action: () => onOpen(),
     },
     {
       name: "Logout",
@@ -145,8 +146,8 @@ const DashboardHeader = () => {
         </Flex>
       </Flex>
 
-      <ModalContainer isOpen={isOpen} onClose={onClose}>
-        Modal Item
+      <ModalContainer title="Settings" isOpen={isOpen} onClose={onClose}>
+        <IndexSettings />
       </ModalContainer>
     </>
   );
