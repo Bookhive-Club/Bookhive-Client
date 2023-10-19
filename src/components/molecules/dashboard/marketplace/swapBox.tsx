@@ -1,9 +1,15 @@
 "use client";
-import React, { Fragment } from "react";
+import React, { FC, Fragment } from "react";
 import { Box, Badge, Text, Flex, Avatar, Button } from "@chakra-ui/react";
 import { FaEye } from "react-icons/fa";
 
-const BookShowcaseBox = () => {
+interface IBookShowCaseProps {
+  action: () => void;
+}
+
+const BookShowcaseBox: FC<IBookShowCaseProps> = ({
+  action,
+}: IBookShowCaseProps) => {
   return (
     <Box
       //   h={["450.242px"]}
@@ -59,7 +65,7 @@ const BookShowcaseBox = () => {
       </Flex>
 
       <Flex gap=".5em" alignItems={"center"}>
-        <Button w={"100%"} bg={"brand.primary"}>
+        <Button w={"100%"} bg={"brand.primary"} onClick={action}>
           Send Request
         </Button>
         <Box
