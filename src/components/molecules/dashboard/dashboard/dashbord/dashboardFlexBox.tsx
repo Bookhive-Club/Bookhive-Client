@@ -61,7 +61,11 @@ const DashboardFlexBox = () => {
   ];
 
   return (
-    <Flex my="1em" gap={"1em"} flexDir={["column", "column", "row"]}>
+    <Flex
+      my="1em"
+      gap={"1em"}
+      justifyContent={"space-between"}
+      flexDir={["column", "column", "row"]}>
       {data.map((item, index) => (
         <Container
           key={index}
