@@ -1,4 +1,5 @@
 // "use client";
+"use client";
 import React from "react";
 import { ChakraProvider, theme, VStack } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/react";
