@@ -22,7 +22,7 @@ const IndexSettings = () => {
     {
       name: "Update Settings",
       icon: <MdSettingsSuggest size="1.5em" />,
-      path: "/dashboard/settings/security",
+      path: "/dashboard/settings",
     },
   ];
 
