@@ -1,3 +1,4 @@
+"use client";
 import InputArea from "@/components/atom/form/inputArea";
 import {
   Box,
@@ -6,9 +7,9 @@ import {
   Textarea,
   FormControl,
   FormLabel,
-  SelectField,
 } from "@chakra-ui/react";
 import React from "react";
+import SelectionField from "@/components/atom/form/selectField";
 
 const CreateSwap = () => {
   return (
@@ -48,8 +49,23 @@ const CreateSwap = () => {
               <Textarea bg="dark.50" placeholder="Short description" />
             </FormControl>
 
-            <Flex justifyContent={"space-between"} alignItems={"center"}>
-              <SelectField></SelectField>
+            <Flex
+              gap="1em"
+              justifyContent={"space-between"}
+              alignItems={"center"}>
+              <SelectionField
+                bg={"dark.50"}
+                label="Condition of Book"
+                onChange={() => {}}>
+                <option value="">Select Field</option>
+              </SelectionField>
+
+              <SelectionField
+                bg={"dark.50"}
+                label="Condition of Book"
+                onChange={() => {}}>
+                <option value="">Genre</option>
+              </SelectionField>
             </Flex>
           </form>
         </Box>
