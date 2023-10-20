@@ -5,10 +5,12 @@ import { FaEye } from "react-icons/fa";
 
 interface IBookShowCaseProps {
   action: () => void;
+  view: () => void;
 }
 
 const BookShowcaseBox: FC<IBookShowCaseProps> = ({
   action,
+  view,
 }: IBookShowCaseProps) => {
   return (
     <Box
@@ -75,7 +77,8 @@ const BookShowcaseBox: FC<IBookShowCaseProps> = ({
           py=".8em"
           px={"1em"}
           width={"fit-content"}
-          cursor="pointer">
+          cursor="pointer"
+          onClick={view}>
           <FaEye />
         </Box>
       </Flex>
