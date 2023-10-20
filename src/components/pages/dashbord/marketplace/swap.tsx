@@ -3,6 +3,7 @@ import BookShowcaseBox from "@/components/molecules/dashboard/marketplace/swapBo
 import React, { Fragment } from "react";
 import { Box, Text, useDisclosure } from "@chakra-ui/react";
 import DrawerContainer from "@/layouts/popups/appDrawerLayout";
+import PreviewMarketplaceData from "@/components/templates/dashboard/marketplace/preview_marketplacedata";
 
 const MarketplaceSwap = () => {
   const { onOpen, isOpen, onClose } = useDisclosure();
@@ -11,13 +12,17 @@ const MarketplaceSwap = () => {
       {[1, 1, 1, 1, 1, 1].map((item, key) => {
         return (
           <Fragment key={key}>
-            <BookShowcaseBox action={() => alert(0)} />
+            <BookShowcaseBox action={() => alert(0)} view={onOpen} />
           </Fragment>
         );
       })}
 
-      <DrawerContainer isOpen={isOpen} onClose={onClose}>
-        itesm
+      <DrawerContainer
+        title="Book Title"
+        size={["full", "md"]}
+        isOpen={isOpen}
+        onClose={onClose}>
+        <PreviewMarketplaceData />
       </DrawerContainer>
     </Box>
   );
