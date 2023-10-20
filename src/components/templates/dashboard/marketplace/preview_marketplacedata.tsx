@@ -81,7 +81,7 @@ const PreviewMarketplaceData: FC<MarketplaceData<Date | string | number>> = ({
             ))}
           </Flex>
 
-          <Box display="flex" alignItems={"center"} gap="1em">
+          <Box display="flex" mt={"2em"} alignItems={"center"} gap="1em">
             <MdLocationOn /> Lagos, Nigeria
           </Box>
         </Box>

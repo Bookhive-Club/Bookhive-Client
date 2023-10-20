@@ -1,9 +1,10 @@
 "use client";
 import BookShowcaseBox from "@/components/molecules/dashboard/marketplace/swapBox";
-import React, { Fragment } from "react";
+import React, { Fragment, Suspense } from "react";
 import { Box, Text, useDisclosure } from "@chakra-ui/react";
 import DrawerContainer from "@/layouts/popups/appDrawerLayout";
 import PreviewMarketplaceData from "@/components/templates/dashboard/marketplace/preview_marketplacedata";
+import PeerSkeletonLoader from "@/components/skeletons/dashboard/peer_showcasebox_skeleton";
 
 const MarketplaceSwap = () => {
   const { onOpen, isOpen, onClose } = useDisclosure();
@@ -12,7 +13,9 @@ const MarketplaceSwap = () => {
       {[1, 1, 1, 1, 1, 1].map((item, key) => {
         return (
           <Fragment key={key}>
-            <BookShowcaseBox action={() => alert(0)} view={onOpen} />
+            <Suspense fallback={<PeerSkeletonLoader />}>
+              <BookShowcaseBox action={() => alert(0)} view={onOpen} />
+            </Suspense>
           </Fragment>
         );
       })}
