@@ -5,10 +5,11 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
+  InputProps,
 } from "@chakra-ui/react";
 import { ChangeEventHandler, FC } from "react";
 
-type TextArea = {
+interface TextArea extends InputProps {
   label?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   isInvalid?: boolean;
@@ -20,7 +21,7 @@ type TextArea = {
   width?: string;
   value?: any;
   name?: string;
-};
+}
 
 const InputArea: FC<TextArea> = ({
   label,
@@ -34,6 +35,7 @@ const InputArea: FC<TextArea> = ({
   width,
   name,
   value,
+  ...rest
 }) => {
   return (
     <FormControl isInvalid={isInvalid} my={"1em"}>
@@ -51,6 +53,7 @@ const InputArea: FC<TextArea> = ({
         bg={bg ? bg : "#191919"}
         width={width ? width : "100%"}
         color={"rgba(255, 255, 255, 0.4)"}
+        {...rest}
       />
       <FormErrorMessage>
         <FormErrorIcon /> {isErrorMessage}
