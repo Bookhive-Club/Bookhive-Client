@@ -37,13 +37,13 @@ const DashboardHeader = () => {
   const menuItems: MenuItem[] = [
     {
       name: "Profile",
-      path: "",
+      path: "/dashboard/settings",
       icon: <HiOutlineUser />,
       action: () => onOpen(),
     },
     {
       name: "Settings",
-      path: "/dashboard/settings",
+      path: "/dashboard/settings/profile",
       icon: <HiOutlineAdjustments />,
       action: () => onOpen(),
     },
