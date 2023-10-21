@@ -1,35 +1,43 @@
 import ContainerLayout from "@/layouts/container/containerLayout";
-import { Box, Center, Text } from "@chakra-ui/react";
-import { Logo } from "../icons/logo";
-import WaitlistForm from "../../templates/home/waitlistForm";
+import { Box, Text, Flex, Link, Divider } from "@chakra-ui/react";
+import { RxDiscordLogo } from 'react-icons/rx';
+import { FaXTwitter } from 'react-icons/fa6';
+import { PiGithubLogo } from 'react-icons/pi';
+import { LiaLinkedin } from 'react-icons/lia';
+
 const Footer = () => {
   const date = new Date().getFullYear();
+
   return (
-    <Box mt={"3em"} bg={"#191919"} py={"4em"}>
+    <Box color="#cfcfcf" w="100%" bg="#191919" pb={{ base: "2em", md: "7em" }} pt={{ base: "2em", md: "4em" }}>
       <ContainerLayout>
-        <Box>
-          <Logo />
-        </Box>
-
-        <Center>
-          <a
-            href="https://www.producthunt.com/posts/book-hive?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-book&#0045;hive"
-            target="_blank">
-            <img
-              src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=394323&theme=light"
-              alt="Book&#0032;Hive - &#0032;Book&#0032;Club&#0044;&#0032;&#0032;Connect&#0044;&#0032;Swap&#0044;&#0032;Summarize&#0032;Book&#0032;&#0032;with&#0032;AI&#0044;&#0032;Engage | Product Hunt"
-              style={{ width: "250px", height: "54px" }}
-              width="250"
-              height="54"
-            />
-          </a>
-        </Center>
-
-        <Text textAlign={"center"} my={"2em"}>
-          &copy; {date} Allright reserved
-        </Text>
+        <Divider mb={{ base: "2em", md: "1.5em" }} />
+        <Flex justify="space-between" direction={{ base: "column", md: "row" }} align={"center"}>
+          <Flex gap="1em">
+            <Link>Privacy Policy</Link>
+            <Link>Terms of Use</Link>
+          </Flex>
+          <Text my={{ base: "1em", md: "0" }}>
+            &copy; {date} Bookhive. All rights reserved
+          </Text>
+          <Flex direction="row" align="center" mt={{ base: "2em", md: "0em" }} gap="2em">
+            <Link href="#" p="0.5em" borderRadius="50%" backgroundColor="#292727">
+              <FaXTwitter size={20} />
+            </Link>
+            <Link href="#" p="0.5em" borderRadius="50%" backgroundColor="#292727">
+              <LiaLinkedin size={20} />
+            </Link>
+            <Link href="#" p="0.5em" borderRadius="50%" backgroundColor="#292727">
+              <PiGithubLogo size={20} />
+            </Link>
+            <Link href="#" p="0.5em" borderRadius="50%" backgroundColor="#292727">
+              <RxDiscordLogo size={20} />
+            </Link>
+          </Flex>
+        </Flex>
       </ContainerLayout>
     </Box>
   );
 };
+
 export default Footer;
