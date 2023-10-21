@@ -1,5 +1,5 @@
 "use client";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment } from "react";
 import { Box, Text, Flex } from "@chakra-ui/react";
 import UserProfileTop from "@/components/molecules/dashboard/community/user_profile_container";
 import ContentPostedBlocks from "@/components/molecules/dashboard/community/post_blocks";
