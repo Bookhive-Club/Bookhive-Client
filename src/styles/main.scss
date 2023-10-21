@@ -12,6 +12,16 @@ body {
   ) !important;
 }
 
+
+.fixed-user-profile {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  margin-bottom: 8em;
+}
+
+
 .green-shade {
   background: linear-gradient(98.88deg, #0dba63 6.27%, #107844 96.4%);
   -webkit-background-clip: text;
@@ -42,7 +52,7 @@ body {
   }
 }
 
-/* Apply the animation to the element */
+
 .rotate-item {
   animation: rotate 9s linear infinite;
 }

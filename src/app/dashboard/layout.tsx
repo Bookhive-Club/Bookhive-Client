@@ -7,10 +7,10 @@ import { ReactNode } from "react";
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <>
-      <Box top={0} left={0} right={0}>
+      <Box>
         <DashboardHeader />
       </Box>
-      <Flex py={"1em"}>
+      <Flex py={"1em"} my={"5em"}>
         {/* <Box
         top={0}
         left={0}
