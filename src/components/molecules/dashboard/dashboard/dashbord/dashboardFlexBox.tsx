@@ -42,12 +42,12 @@ const DashboardFlexBox = () => {
   const data = [
     {
       title: "Saved Books",
-      content: "View all saved books",
+      content: "View all saved items",
       image: "/assets/dashboard/favorite.svg",
       path: "/dashboard/favorites",
     },
     {
-      title: "Store",
+      title: "Stores",
       content: "View store",
       image: "/assets/dashboard/store.svg",
       path: "/dashboard/stores",
@@ -57,6 +57,12 @@ const DashboardFlexBox = () => {
       content: "View swapped books",
       image: "/assets/dashboard/swap.svg",
       path: "/dashboard/swap",
+    },
+    {
+      title: "Marketplace",
+      content: "View marketplace",
+      image: "/assets/dashboard/marketplace.svg",
+      path: "/dashboard/marketplace",
     },
   ];
 

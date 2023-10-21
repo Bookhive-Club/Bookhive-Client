@@ -24,6 +24,9 @@ import { AiOutlinePoweroff } from "react-icons/ai";
 import ModalContainer from "../popups/modalLayout";
 import IndexSettings from "@/components/molecules/dashboard/dashboard/dashbord/settings";
 import { useState, useEffect } from "react";
+import { RiMenu2Fill } from "react-icons/ri";
+import DrawerContainer from "../popups/appDrawerLayout";
+import { useRouter } from "next/navigation";
 
 interface MenuItem {
   name: string;
@@ -34,13 +37,19 @@ interface MenuItem {
 
 const DashboardHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const router = useRouter();
+  const {
+    isOpen: isDrawerOpen,
+    onOpen: openDrawer,
+    onClose: closeDrawer,
+  } = useDisclosure();
 
   const menuItems: MenuItem[] = [
     {
       name: "Profile",
       path: "/dashboard/settings",
       icon: <HiOutlineUser />,
-      action: () => onOpen(),
+      action: () => router.push("/dashboard/profile"),
     },
     {
       name: "Settings",
@@ -133,6 +142,12 @@ const DashboardHeader = () => {
 
         <Flex alignItems={"center"} gap={"2em"}>
           {/* <IoIosNotificationsOutline size={".5em"} /> */}
+          <Box
+            display={["block", "block", "none"]}
+            cursor={"pointer"}
+            onClick={openDrawer}>
+            <RiMenu2Fill size="1.5em" />
+          </Box>
           <Menu>
             <MenuButton>
               <Avatar name="O" />
@@ -168,6 +183,51 @@ const DashboardHeader = () => {
       <ModalContainer title="Settings" isOpen={isOpen} onClose={onClose}>
         <IndexSettings />
       </ModalContainer>
+
+      {/* Header mobile sidebar */}
+      <DrawerContainer
+        title="Menue"
+        isOpen={isDrawerOpen}
+        onClose={closeDrawer}>
+        <UnorderedList
+          cursor={"pointer"}
+          listStyleType={"none"}
+          display={"flex"}
+          flexDir={"column"}
+          mx={0}
+          gap="3em">
+          {dashboardHeaderNav.map(({ title, path, active, icon }, key) => {
+            return (
+              <Fragment key={key}>
+                <Link href={path}>
+                  {pathname === path ? (
+                    <ListItem
+                      display={"flex"}
+                      gap=".3em"
+                      alignItems={"center !important"}
+                      color={"brand.100"}>
+                      {active}
+                      {title}
+                    </ListItem>
+                  ) : (
+                    <ListItem
+                      _hover={{
+                        color: "gray",
+                      }}
+                      display={"flex"}
+                      gap=".3em"
+                      alignItems={"center"}
+                      color={"gray.400"}>
+                      {icon}
+                      {title}
+                    </ListItem>
+                  )}
+                </Link>
+              </Fragment>
+            );
+          })}
+        </UnorderedList>
+      </DrawerContainer>
     </Box>
   );
 };
