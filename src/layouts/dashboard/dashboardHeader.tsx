@@ -23,6 +23,7 @@ import { HiOutlineAdjustments, HiOutlineUser } from "react-icons/hi";
 import { AiOutlinePoweroff } from "react-icons/ai";
 import ModalContainer from "../popups/modalLayout";
 import IndexSettings from "@/components/molecules/dashboard/dashboard/dashbord/settings";
+import { useState, useEffect } from "react";
 
 interface MenuItem {
   name: string;
@@ -58,8 +59,26 @@ const DashboardHeader = () => {
   ];
 
   const pathname = usePathname();
+
+  const [isUserProfileFixed, setIsUserProfileFixed] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY >= 0) {
+        setIsUserProfileFixed(true);
+      } else {
+        setIsUserProfileFixed(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
-    <>
+    <Box className="fixed-user-profile">
       <Flex
         alignItems={"center"}
         justifyContent={"space-between"}
@@ -149,7 +168,7 @@ const DashboardHeader = () => {
       <ModalContainer title="Settings" isOpen={isOpen} onClose={onClose}>
         <IndexSettings />
       </ModalContainer>
-    </>
+    </Box>
   );
 };
 export default DashboardHeader;
