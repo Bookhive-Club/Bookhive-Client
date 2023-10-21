@@ -49,7 +49,7 @@ const DashboardHeader = () => {
       name: "Profile",
       path: "/dashboard/settings",
       icon: <HiOutlineUser />,
-      action: () => router.push("/dashboard/profile"),
+      action: () => router.push("/dashboard/profile/obiabo"),
     },
     {
       name: "Settings",
