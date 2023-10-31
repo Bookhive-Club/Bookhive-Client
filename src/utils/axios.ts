@@ -1,10 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 const axiosInstance = axios.create({
-    baseURL: process.env.NEXT_DEV_URL,
-    timeout: 3000, 
-    headers: {
-
-    }
-})
+  baseURL: 'http://localhost:3001',
+});
 
 export { axiosInstance };

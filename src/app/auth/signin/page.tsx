@@ -6,6 +6,7 @@ import { Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { useFormik } from "formik";
 import { signInValidationSchema } from "@/validations/auth/signinValidationSchema";
+import { axiosInstance } from "@/utils/axios";
 
 const SignIn = () => {
   const payload = {
@@ -13,7 +14,10 @@ const SignIn = () => {
     password: "",
   };
 
-  const handleSubmit = (values: any) => {};
+  const handleSubmit = async (values: any) => {
+    const request = await axiosInstance.post("/api/auth/login");
+    console.log(request);
+  };
 
   const formik = useFormik({
     initialValues: payload,
