@@ -12,7 +12,7 @@ interface IWrapper {
 }
 
 const queryClient = new QueryClient();
-const ChakraWrapper: FC<IWrapper> = ({ children }) => {
+const ProviderWrapper: FC<IWrapper> = ({ children }) => {
   return (
     <Provider store={store}>
       <CacheProvider>
@@ -27,4 +27,4 @@ const ChakraWrapper: FC<IWrapper> = ({ children }) => {
   );
 };
 
-export default ChakraWrapper;
+export default ProviderWrapper;

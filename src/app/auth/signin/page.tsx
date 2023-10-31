@@ -2,30 +2,66 @@
 import InputArea from "@/components/atom/form/inputArea";
 import Buttons from "@/components/atom/button/buttons";
 import AuthLayout from "@/layouts/auth/authLayout";
-import { Text } from "@chakra-ui/react";
+import { Text, useToast } from "@chakra-ui/react";
 import Link from "next/link";
 import { useFormik } from "formik";
 import { signInValidationSchema } from "@/validations/auth/signinValidationSchema";
 import { axiosInstance } from "@/utils/axios";
-import { useState } from "react";
-import { sendRequest } from "@/utils/request";
+import { useEffect, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { setCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
 
 const SignIn = () => {
-  const [loader, setLoader] = useState<boolean>(false);
+  const router = useRouter();
+  const toast = useToast();
 
   const payload = {
     email: "",
     password: "",
   };
 
-  const handleSubmit = async (values: any) => {
-    const response = await sendRequest({
-      url: "/api/auth/login",
-      data: values,
-    });
+  const mutation = useMutation({
+    mutationFn: (formData: any) => {
+      return axiosInstance.post("/auth/login", formData);
+    },
+  });
 
-    
+  const handleSubmit = async (values: any) => {
+    mutation.mutate(values);
   };
+
+  useEffect(() => {
+    //if successfull
+    if (mutation.isSuccess) {
+      const { data } = mutation?.data;
+      const token = data?.token;
+      setCookie("_auth_token", token);
+
+      toast({
+        variant: "solid",
+        status: "success",
+        description: data?.message,
+        position: "top",
+      });
+
+      setTimeout(() => router.push("/dashboard"), 2500);
+    }
+  }, [mutation.isSuccess]);
+
+  useEffect(() => {
+    //display error message if any
+    if (mutation.isError) {
+      //@ts-ignore
+      const { data } = mutation.error.response;
+      toast({
+        variant: "solid",
+        status: "error",
+        description: data?.error,
+        position: "top",
+      });
+    }
+  }, [mutation.isError]);
 
   const formik = useFormik({
     initialValues: payload,
@@ -74,7 +110,7 @@ const SignIn = () => {
           type="submit"
           w="100%"
           radius="5px"
-          isLoading={loader}
+          isLoading={mutation.isPending}
           loadingText="Logging In">
           Log In
         </Buttons>
