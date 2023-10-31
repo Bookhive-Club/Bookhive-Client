@@ -50,7 +50,7 @@ const InputArea: FC<TextArea> = ({
         borderRadius={"10px"}
         outline={"none"}
         border={border ? border : "none"}
-        bg={bg ? bg : "#191919"}
+        bg={bg ? bg : "brand.secondary"}
         width={width ? width : "100%"}
         color={"rgba(255, 255, 255, 0.4)"}
         {...rest}

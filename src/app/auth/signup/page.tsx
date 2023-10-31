@@ -2,20 +2,62 @@
 import InputArea from "@/components/atom/form/inputArea";
 import Buttons from "@/components/atom/button/buttons";
 import AuthLayout from "@/layouts/auth/authLayout";
-import { Text } from "@chakra-ui/react";
+import { Text, useToast } from "@chakra-ui/react";
 import Link from "next/link";
 import { useFormik } from "formik";
 import { signUpValidationSchema } from "@/validations/auth/signupValidationSchema";
+import { setCookie } from "cookies-next";
+import { useMutation } from "@tanstack/react-query";
+import { axiosInstance } from "@/utils/axios";
+import SelectionField from "@/components/atom/form/selectField";
+import { useRouter } from "next/navigation";
 
 const SignUp = () => {
+  const toast = useToast();
+  const router = useRouter();
+
   const payload = {
     email: "",
-    username: "",
+    firstName: "",
+    lastName: "",
     password: "",
-    confirm_password: "",
+    gender: "",
   };
 
-  const handleSubmit = (values: any) => {};
+  const mutation = useMutation({
+    mutationFn: (formData: any) => {
+      return axiosInstance.post("/auth/create_account", formData);
+    },
+    onSuccess: (response) => {
+      //@ts-ignore
+      const { message } = response?.data;
+
+      toast({
+        variant: "solid",
+        status: "success",
+        description: message,
+        position: "top",
+      });
+
+      setTimeout(() => router.push("/otp"), 2500);
+      setCookie("_auth_token", "");
+    },
+    onError: (err: any) => {
+      const { data } = err?.response;
+      toast({
+        variant: "solid",
+        status: "error",
+        description: data?.message,
+        position: "top",
+      });
+    },
+  });
+
+  const handleSubmit = (values: any) => {
+    mutation.mutate(values);
+  };
+
+  //check if requeest is usccessfull
 
   const formik = useFormik({
     initialValues: payload,
@@ -24,7 +66,6 @@ const SignUp = () => {
     onSubmit: handleSubmit,
   });
 
-  console.log(formik.values.username);
   return (
     <AuthLayout
       ctaPath="/auth/signin"
@@ -33,14 +74,26 @@ const SignUp = () => {
       <form onSubmit={formik.handleSubmit}>
         <InputArea
           type="text"
-          placeholder="Book Hive"
-          label={"Username"}
-          name="username"
-          value={formik.values.username}
+          placeholder="William"
+          label={"First Name"}
+          name="firstName"
+          value={formik.values.firstName}
           onChange={formik.handleChange}
-          isInvalid={formik.touched.username && !!formik.errors.username}
-          isErrorMessage={formik.errors.username}
+          isInvalid={formik.touched.firstName && !!formik.errors.firstName}
+          isErrorMessage={formik.errors.firstName}
         />
+
+        <InputArea
+          type="text"
+          placeholder="Shakespare"
+          label={"Last Name"}
+          name="lastName"
+          value={formik.values.lastName}
+          onChange={formik.handleChange}
+          isInvalid={formik.touched.lastName && !!formik.errors.lastName}
+          isErrorMessage={formik.errors.lastName}
+        />
+
         <InputArea
           type="email"
           name="email"
@@ -74,7 +127,7 @@ const SignUp = () => {
           isInvalid={formik.touched.password && !!formik.errors.password}
         />
 
-        <InputArea
+        {/* <InputArea
           type="password"
           name="confirm_password"
           placeholder="********"
@@ -85,9 +138,24 @@ const SignUp = () => {
           isInvalid={
             formik.touched.confirm_password && !!formik.errors.confirm_password
           }
-        />
+        /> */}
+        <SelectionField
+          name="gender"
+          onChange={formik.handleChange}
+          isInvalid={formik.touched.gender && !!formik.errors.gender}
+          isErrorMessage={formik.errors.gender}
+          size={"lg"}
+          label="Gender">
+          <option value="Make">Male</option>
+          <option value="Femail">Female</option>
+        </SelectionField>
 
-        <Buttons type="submit" w="100%" radius="5px" my={"1em"}>
+        <Buttons
+          type="submit"
+          w="100%"
+          radius="5px"
+          my={"1em"}
+          isLoading={mutation.isPending}>
           Create Account
         </Buttons>
       </form>
