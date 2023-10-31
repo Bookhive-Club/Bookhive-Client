@@ -7,16 +7,24 @@ import Link from "next/link";
 import { useFormik } from "formik";
 import { signInValidationSchema } from "@/validations/auth/signinValidationSchema";
 import { axiosInstance } from "@/utils/axios";
+import { useState } from "react";
+import { sendRequest } from "@/utils/request";
 
 const SignIn = () => {
+  const [loader, setLoader] = useState<boolean>(false);
+
   const payload = {
     email: "",
     password: "",
   };
 
   const handleSubmit = async (values: any) => {
-    const request = await axiosInstance.post("/api/auth/login");
-    console.log(request);
+    const response = await sendRequest({
+      url: "/api/auth/login",
+      data: values,
+    });
+
+    
   };
 
   const formik = useFormik({
@@ -62,7 +70,12 @@ const SignIn = () => {
             Forgotten password ?
           </Text>
         </Link>
-        <Buttons type="submit" w="100%" radius="5px">
+        <Buttons
+          type="submit"
+          w="100%"
+          radius="5px"
+          isLoading={loader}
+          loadingText="Logging In">
           Log In
         </Buttons>
       </form>
