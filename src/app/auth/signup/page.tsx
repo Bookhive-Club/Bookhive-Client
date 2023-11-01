@@ -38,8 +38,8 @@ const SignUp = () => {
         description: message,
         position: "top",
       });
-
-      const url = `otp?email=${formik.values.email}`;
+      const user_email = formik.values.email;
+      const url = `otp?email=${user_email}`;
       setTimeout(() => router.push(url), 1000);
       setCookie("_auth_token", "");
     },

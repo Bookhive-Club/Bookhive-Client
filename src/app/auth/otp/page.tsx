@@ -7,7 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import { axiosInstance } from "@/utils/axios";
 import { useRouter } from "next/navigation";
 import { setCookie } from "cookies-next";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, redirect } from "next/navigation";
 import { useState } from "react";
 
 const svg = (
@@ -34,7 +34,7 @@ const svg = (
 );
 
 const VerifyOtp = () => {
-  const [otp, setOtp] = useState();
+  const [otp, setOtp] = useState<number>();
   const toast = useToast();
   const router = useRouter();
   const search = useSearchParams();
@@ -44,7 +44,7 @@ const VerifyOtp = () => {
     mutationFn: (any) => {
       return axiosInstance.post("/auth/verify_otp", {
         email: getEmail,
-        otp: otp,
+        otp: Number(otp),
       });
     },
     onSuccess: (response) => {
@@ -58,7 +58,7 @@ const VerifyOtp = () => {
         position: "top",
       });
 
-      setTimeout(() => router.push("/"), 2500);
+      setTimeout(() => router.replace("/dashboard"), 1000);
       setCookie("_auth_token", "");
     },
     onError: (err: any) => {
@@ -81,7 +81,7 @@ const VerifyOtp = () => {
           Enter OTP
         </Text>
         <Text my={"1em"}>
-          we have sent you access code Via{" "}
+          we have sent you access code Via
           <span
             style={{
               color: "brand.primary",

@@ -14,9 +14,8 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { Logo } from "@/components/atom/icons/logo";
-import { IoIosNotificationsOutline } from "react-icons/io";
 import { dashboardHeaderNav } from "@/utils/navigations/nagiation";
-import { Fragment, ReactNode } from "react";
+import { Fragment } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { HiOutlineAdjustments, HiOutlineUser } from "react-icons/hi";
@@ -27,6 +26,7 @@ import { useState, useEffect } from "react";
 import { RiMenu2Fill } from "react-icons/ri";
 import DrawerContainer from "../popups/appDrawerLayout";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
 
 interface MenuItem {
   name: string;
@@ -86,6 +86,10 @@ const DashboardHeader = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  //@ts-ignore
+  const { userDetails } = useSelector((state) => state?.user);
+
   return (
     <Box className="fixed-user-profile">
       <Flex
@@ -150,16 +154,23 @@ const DashboardHeader = () => {
           </Box>
           <Menu>
             <MenuButton>
-              <Avatar name="O" />
+              <Avatar
+                name={`${userDetails?.firstName} ${userDetails?.lastName}`}
+              />
             </MenuButton>
 
             <MenuList>
               <MenuItem>
                 <Flex gap={"1em"} alignItems={"center"}>
-                  <Avatar size={"sm"} />
+                  <Avatar
+                    name={`${userDetails?.firstName} ${userDetails?.lastName}`}
+                    size={"md"}
+                  />
                   <Box>
-                    <Text fontWeight={"semibold"}>Sudo</Text>
-                    <Text fontSize="14px">sudo@gmail.com</Text>
+                    <Text fontWeight={"semibold"}>
+                      {userDetails?.firstName}
+                    </Text>
+                    <Text fontSize="14px">{userDetails?.email}</Text>
                   </Box>
                 </Flex>
               </MenuItem>
