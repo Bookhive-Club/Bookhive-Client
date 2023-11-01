@@ -39,7 +39,8 @@ const SignUp = () => {
         position: "top",
       });
 
-      setTimeout(() => router.push("/otp"), 2500);
+      const url = `otp?email=${formik.values.email}`;
+      setTimeout(() => router.push(url), 1000);
       setCookie("_auth_token", "");
     },
     onError: (err: any) => {

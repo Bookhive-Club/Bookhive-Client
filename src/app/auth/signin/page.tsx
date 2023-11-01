@@ -53,7 +53,7 @@ const SignIn = () => {
     //display error message if any
     if (mutation.isError) {
       //@ts-ignore
-      const { data } = mutation.error.response;
+      const { data } = mutation?.error?.response;
       toast({
         variant: "solid",
         status: "error",
