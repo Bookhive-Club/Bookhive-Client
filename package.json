@@ -29,6 +29,7 @@
     "axios": "^1.6.0",
     "cogo-toast": "^4.2.3",
     "cookies-next": "^4.0.0",
+    "date-fns": "^2.30.0",
     "eslint": "8.52.0",
     "eslint-config-next": "14.0.1",
     "formik": "^2.4.5",

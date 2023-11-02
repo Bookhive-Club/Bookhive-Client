@@ -1,5 +1,5 @@
 "use client";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useRef, RefObject } from "react";
 import {
   Box,
   Text,
@@ -8,10 +8,13 @@ import {
   FormLabel,
   useDisclosure,
   FormControl,
+  useToast,
 } from "@chakra-ui/react";
 import ModalContainer from "@/layouts/popups/modalLayout";
 import Buttons from "@/components/atom/button/buttons";
 import { FcReading, FcApproval, FcBookmark, FcAddImage } from "react-icons/fc";
+import { useMutation } from "@tanstack/react-query";
+import { axiosInstance } from "@/utils/axios";
 
 const imageUploader = (
   <Box
@@ -53,13 +56,52 @@ const actionStatus = [
 const UserProfileTop = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const [isStatus, setStatus] = useState<string>("");
+  const [contentData, setContentData] = useState<string | null>();
   const [fileObject, setFileObject] = useState();
+  const toast = useToast();
+
+  const editableRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 
   //handle image upload
   //@ts-ignore
   const uploadImage = (event) => {
     const file = event.target.files;
     console.log(file);
+  };
+
+  const createPost = () => {};
+
+  const mutation = useMutation({
+    mutationFn: (formData: any) => {
+      return axiosInstance.post("/community/post", formData);
+    },
+    onSuccess: (response) => {
+      //@ts-ignore
+      const { message } = response?.data;
+
+      toast({
+        variant: "solid",
+        status: "success",
+        description: message,
+        position: "top",
+      });
+    },
+    onError: (err: any) => {
+      const { data } = err?.response;
+      toast({
+        variant: "solid",
+        status: "error",
+        description: data?.message,
+        position: "top",
+      });
+    },
+  });
+
+  const handleContent = () => {
+    if (editableRef?.current) {
+      //set content editable data
+      setContentData(editableRef?.current?.textContent);
+    }
   };
 
   return (
@@ -96,16 +138,16 @@ const UserProfileTop = () => {
         isOpen={isOpen}
         onClose={onClose}
         title="Create Post">
+        {/* Content Editable part */}
         <Box
+          ref={editableRef}
           w="100%"
           h="150px"
           bg="dark.30"
           contentEditable={true}
           outline={"none"}
           p="1em"
-          placeholder="What are you doing">
-          {isStatus}
-        </Box>
+          onInput={handleContent}></Box>
         <Box my="1em" display={"flex"} gap="1em" justifyContent={"center"}>
           {actionStatus.map(({ name, icon, action, status }, key) => {
             const check_status =

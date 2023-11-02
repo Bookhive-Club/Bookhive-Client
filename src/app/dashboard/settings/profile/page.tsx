@@ -12,8 +12,8 @@ const ProfileSettings = () => {
   const { userDetails } = useSelector((state) => state?.user);
 
   const payloads = {
-    firstName: userDetails?.firstName || "",
-    lastName: userDetails?.lastName || "",
+    firstName: userDetails?.firstName || undefined,
+    lastName: userDetails?.lastName || undefined,
   };
 
   const handleSubmit = () => {};
