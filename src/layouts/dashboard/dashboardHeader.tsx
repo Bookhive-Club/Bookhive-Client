@@ -27,6 +27,7 @@ import { RiMenu2Fill } from "react-icons/ri";
 import DrawerContainer from "../popups/appDrawerLayout";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
+import { deleteCookie } from "cookies-next";
 
 interface MenuItem {
   name: string;
@@ -62,7 +63,8 @@ const DashboardHeader = () => {
       path: "",
       icon: <AiOutlinePoweroff color="red" />,
       action: () => {
-        return;
+        deleteCookie("_auth_token");
+        router.replace("/");
       },
     },
   ];

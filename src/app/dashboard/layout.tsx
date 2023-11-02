@@ -34,4 +34,5 @@ const Layout = ({ children }: { children: ReactNode }) => {
   );
 };
 
+//@ts-ignore
 export default isAuthenticated(Layout);

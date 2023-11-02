@@ -1,21 +1,21 @@
-import { ComponentType, ReactElement, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { AUTH_COOKIE } from "@/constants";
+import React, { useEffect } from "react";
+import { getCookie } from "cookies-next";
 
-const isAuthenticated = (AuthWrapperComponent: ComponentType<any>) => {
-  const AuthComponent = (props: any): ReactElement => {
+const isAuthenticated = (WrapperFunction: React.ComponentType) => {
+  const AuthWrapper = (props: any) => {
     const router = useRouter();
-
     useEffect(() => {
-      //check if token is present
-      if (!AUTH_COOKIE) {
+      const hasToken = getCookie("_auth_token");
+      if (!hasToken) {
         router.replace("/auth/signin");
       }
-    }, [AUTH_COOKIE]);
+    }, []);
 
-    return <AuthWrapperComponent {...props} />;
+    return <WrapperFunction {...props} />;
   };
 
-  return AuthComponent;
+  return AuthWrapper;
 };
+
 export default isAuthenticated;

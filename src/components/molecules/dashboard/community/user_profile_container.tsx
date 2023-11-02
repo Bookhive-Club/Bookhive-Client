@@ -15,7 +15,13 @@ import {
 } from "@chakra-ui/react";
 import ModalContainer from "@/layouts/popups/modalLayout";
 import Buttons from "@/components/atom/button/buttons";
-import { FcReading, FcApproval, FcBookmark, FcAddImage } from "react-icons/fc";
+import {
+  FcReading,
+  FcApproval,
+  FcBookmark,
+  FcAddImage,
+  FcFinePrint,
+} from "react-icons/fc";
 import { useMutation } from "@tanstack/react-query";
 import { axiosInstance } from "@/utils/axios";
 import { useFormik } from "formik";
@@ -49,13 +55,19 @@ const actionStatus = [
   {
     name: "Reading",
     icon: <FcReading size="1.5em" />,
-    status: "Is Currently Reading",
+    status: "Is currently reading",
     action: () => {},
   },
   {
     name: "To Read",
     icon: <FcBookmark size="1.5em" />,
-    status: "Wants to Read",
+    status: "Planning to read",
+    action: () => {},
+  },
+  {
+    name: "Search For",
+    icon: <FcFinePrint size="1.5em" />,
+    status: "Is Looking for",
     action: () => {},
   },
 ];

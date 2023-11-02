@@ -31,10 +31,12 @@ const CommunityPage = () => {
         <Flex flexDir="column" gap="2em">
           {retrivedData?.map((_: any, index: number) => {
             const user = _.user;
+            const status = _?.status;
             return (
               <Fragment key={index}>
                 <ContentPostedBlocks
                   content={_?.description}
+                  status={status}
                   date={_?.createdAt}
                   name={`${user?.firstName} ${user?.lastName}`}
                 />
