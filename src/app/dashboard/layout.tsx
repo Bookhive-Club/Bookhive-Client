@@ -1,4 +1,5 @@
 "use client";
+import isAuthenticated from "@/HOC/withAuth";
 import DashboardHeader from "@/layouts/dashboard/dashboardHeader";
 import DashboardSidebar from "@/layouts/dashboard/dashboardSidebar";
 import { Box, Container, Flex } from "@chakra-ui/react";
@@ -33,4 +34,4 @@ const Layout = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default Layout;
+export default isAuthenticated(Layout);

@@ -95,6 +95,8 @@ const UserProfileTop = () => {
         description: message,
         position: "top",
       });
+
+      onClose();
       setTimeout(() => router.refresh(), 1000);
     },
     onError: (err: any) => {

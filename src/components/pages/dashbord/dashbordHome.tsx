@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { updateUserDetails } from "@/redux/slice/users.slice";
 import { AUTH_COOKIE } from "@/constants";
-import { useSelector } from "react-redux";
 
 const DashboardHome = () => {
   const dispatch = useDispatch();
