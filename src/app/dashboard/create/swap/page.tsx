@@ -8,12 +8,125 @@ import {
   FormControl,
   FormLabel,
   Center,
+  useToast,
+  FormErrorMessage,
+  FormErrorIcon,
 } from "@chakra-ui/react";
 import React from "react";
 import SelectionField from "@/components/atom/form/selectField";
 import Buttons from "@/components/atom/button/buttons";
+import { useFormik } from "formik";
+import { create_swap_listings_schema } from "@/validations/marketplace";
+import { useMutation } from "@tanstack/react-query";
+import { axiosInstance } from "@/utils/axios";
+import { AUTH_COOKIE } from "@/constants";
+
+const condition = [
+  {
+    name: "New",
+    value: "NEW",
+  },
+  {
+    name: "Nearly New",
+    value: "NEARLY_NEW",
+  },
+  {
+    name: "Used",
+    value: "USED",
+  },
+];
+
+const genre = [
+  {
+    name: "Self Help",
+    value: "SELF_HELP",
+  },
+  {
+    name: "Fantasy",
+    value: "FANTASY",
+  },
+  {
+    name: "Biography",
+    value: "BIOGRAPHY",
+  },
+  {
+    name: "Horror",
+    value: "HORROR",
+  },
+  {
+    name: "Thriller",
+    value: "THRILLER",
+  },
+  {
+    name: "Poetry ",
+    value: "POETRY",
+  },
+  {
+    name: "Mistry ",
+    value: "MYSTERY",
+  },
+  {
+    name: "Others ",
+    value: "OTHER",
+  },
+];
 
 const CreateSwap = () => {
+  const toast = useToast();
+
+  //create swap item
+  const mutation = useMutation({
+    mutationFn: (formData: any) => {
+      return axiosInstance.post("/marketplace/create_swap", formData, {
+        headers: {
+          Authorization: `Bearer ${AUTH_COOKIE}`,
+        },
+      });
+    },
+    onSuccess: (response) => {
+      //@ts-ignore
+      const { message } = response?.data;
+
+      toast({
+        variant: "solid",
+        status: "success",
+        description: message,
+        position: "top",
+      });
+    },
+    onError: (err: any) => {
+      const { data } = err?.response;
+      toast({
+        variant: "solid",
+        status: "error",
+        description: data?.message,
+        position: "top",
+      });
+    },
+  });
+
+  const payload = {
+    title: "",
+    price: "",
+    genre: "",
+    author: "",
+    condition: "",
+    isbn: "",
+    description: "",
+    image: "",
+  };
+
+  //handle form data
+  const formik = useFormik({
+    initialValues: payload,
+    validationSchema: create_swap_listings_schema,
+    validateOnChange: true,
+    onSubmit: (values) => {
+      console.log(values);
+      mutation.mutate(values);
+    },
+  });
+
   return (
     <>
       <Flex gap="1em">
@@ -28,33 +141,58 @@ const CreateSwap = () => {
           </Text>
 
           <Box my={"1.5em"}>
-            <form>
+            <form onSubmit={formik.handleSubmit}>
               <InputArea
                 bg={"#212121"}
                 type="text"
                 placeholder="Rich Dad Poor Dad"
+                name="title"
                 label="Title"
+                onChange={formik.handleChange}
+                isErrorMessage={formik.errors.title}
+                isInvalid={formik.touched.title && !!formik.errors.title}
               />
 
               <Flex gap="1em" alignItems="center">
                 <InputArea
                   bg={"#212121"}
                   type="text"
+                  name="author"
                   placeholder="John Doe"
                   label="Author"
+                  onChange={formik.handleChange}
+                  isErrorMessage={formik.errors.author}
+                  isInvalid={formik.touched.author && !!formik.errors.author}
                 />
 
                 <InputArea
                   bg={"#212121"}
                   type="number"
+                  name="isbn"
                   placeholder="123451212"
                   label="ISBN"
+                  onChange={formik.handleChange}
+                  isErrorMessage={formik.errors.isbn}
+                  isInvalid={formik.touched.isbn && !!formik.errors.isbn}
                 />
               </Flex>
 
               <FormControl my={"1em"}>
                 <FormLabel> Brief Description </FormLabel>
-                <Textarea bg="dark.50" placeholder="Short description" />
+                <Textarea
+                  onChange={formik.handleChange}
+                  name="description"
+                  bg="dark.50"
+                  placeholder="Short description"
+                />
+                <FormControl
+                  isInvalid={
+                    formik.touched.description && !!formik.errors.description
+                  }>
+                  <FormErrorMessage>
+                    <FormErrorIcon /> {formik.errors.description}
+                  </FormErrorMessage>
+                </FormControl>
               </FormControl>
 
               <Flex
@@ -64,21 +202,52 @@ const CreateSwap = () => {
                 <SelectionField
                   bg={"dark.50"}
                   label="Condition of Book"
-                  onChange={() => {}}>
+                  name="condition"
+                  isErrorMessage={formik.errors.condition}
+                  isInvalid={
+                    formik.touched.condition && !!formik.errors.condition
+                  }
+                  onChange={formik.handleChange}>
                   <option value="">Select Field</option>
+                  {condition.map((_, key) => {
+                    return <option key={_.value}>{_.name}</option>;
+                  })}
                 </SelectionField>
 
                 <SelectionField
                   bg={"dark.50"}
-                  label="Condition of Book"
-                  onChange={() => {}}>
+                  name="genre"
+                  label="Genre"
+                  isErrorMessage={formik.errors.genre}
+                  isInvalid={formik.touched.genre && !!formik.errors.genre}
+                  onChange={formik.handleChange}>
                   <option value="">Genre</option>
+                  {genre.map((_, key) => {
+                    return <option key={_.value}>{_.name}</option>;
+                  })}
                 </SelectionField>
               </Flex>
 
+              <InputArea
+                bg={"#212121"}
+                type="number"
+                name="price"
+                placeholder="$0"
+                label="Price"
+                onChange={formik.handleChange}
+                isErrorMessage={formik.errors.price}
+                isInvalid={formik.touched.price && !!formik.errors.price}
+              />
+
               <Box>
                 <Center>
-                  <Buttons radius="8px" w={"100%"} mt={"2em"}>
+                  <Buttons
+                    isLoading={mutation.isPending}
+                    loadingText="Please wait..."
+                    type="submit"
+                    radius="8px"
+                    w={"100%"}
+                    mt={"2em"}>
                     Post
                   </Buttons>
                 </Center>

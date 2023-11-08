@@ -1,5 +1,5 @@
 import React, { FC, Fragment } from "react";
-import { Box, Text, Flex } from "@chakra-ui/react";
+import { Box, Text, Flex, Avatar } from "@chakra-ui/react";
 import Buttons from "@/components/atom/button/buttons";
 import { MdLocationOn } from "react-icons/md";
 
@@ -12,10 +12,12 @@ interface MarketplaceData<T> {
   image: string;
   title?: string;
   owner: string;
+  description: string;
+  genre: string;
   condition: Status;
-  location: string;
+  // location: string;
   ISBN: number;
-  postedAt: T;
+  postedAt?: T;
 }
 
 interface Details {
@@ -28,9 +30,11 @@ const PreviewMarketplaceData: FC<MarketplaceData<Date | string | number>> = ({
   title,
   owner,
   condition,
-  location,
+  // location,
+  genre,
+  description,
   ISBN,
-  postedAt,
+  // postedAt,
 }) => {
   const details: Details[] = [
     {
@@ -38,8 +42,8 @@ const PreviewMarketplaceData: FC<MarketplaceData<Date | string | number>> = ({
       value: condition,
     },
     {
-      name: "ISN",
-      value: ISBN,
+      name: "Genre",
+      value: genre,
     },
     {
       name: "ISN",
@@ -49,19 +53,31 @@ const PreviewMarketplaceData: FC<MarketplaceData<Date | string | number>> = ({
 
   return (
     <Box>
-      <Box bg={"black"} w={"100%"} borderRadius={"10px"} height="250px"></Box>
+      <Box
+        bg={"black"}
+        w={"100%"}
+        borderRadius={"10px"}
+        height="250px"
+        backgroundImage={image}
+        backgroundSize={"cover"}
+        backgroundPosition={"center"}
+        backgroundRepeat={"no-repeat"}></Box>
 
       <Box my={"1em"}>
+        <Flex mb=".8em">
+          <Box>
+            <Avatar src={""} />
+            <Box>
+              <Text>{owner}</Text>
+              <Text></Text>
+            </Box>
+          </Box>
+        </Flex>
         <Text fontSize={"1.5em"} fontWeight="semibold">
-          The Crying Fish
+          {title}
         </Text>
 
-        <Text my="1em">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione
-          facilis harum sit iusto doloribus ducimus vitae numquam iure,
-          laudantium odio incidunt error quas eligendi consectetur beatae omnis
-          vero doloremque quisquam.
-        </Text>
+        <Text my="1em">{description}</Text>
 
         <Box my="1em">
           <Text fontWeight="semibold">Details</Text>
