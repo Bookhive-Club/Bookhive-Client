@@ -64,15 +64,14 @@ const PreviewMarketplaceData: FC<MarketplaceData<Date | string | number>> = ({
         backgroundRepeat={"no-repeat"}></Box>
 
       <Box my={"1em"}>
-        <Flex mb=".8em">
+        <Box mb=".9em" display="flex" gap="0.3em" alignItems={"center"}>
+          <Avatar src={""} name={owner} />
           <Box>
-            <Avatar src={""} />
-            <Box>
-              <Text>{owner}</Text>
-              <Text></Text>
-            </Box>
+            <Text>{owner}</Text>
+            <Text></Text>
           </Box>
-        </Flex>
+        </Box>
+
         <Text fontSize={"1.5em"} fontWeight="semibold">
           {title}
         </Text>

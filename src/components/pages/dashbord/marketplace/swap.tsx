@@ -28,8 +28,6 @@ const MarketplaceSwap = () => {
 
   const retrivedData = data?.data?.data;
 
-  console.log(retrivedData);
-
   return (
     <>
       <Box
@@ -46,41 +44,45 @@ const MarketplaceSwap = () => {
         </Link>
       </Box>
       <Box display="flex" flexWrap={"wrap"} gap={["1em", "2em"]}>
-        {retrivedData?.map((item, key: number) => {
-          return (
-            <Fragment key={key}>
-              <Suspense fallback={<PeerSkeletonLoader />}>
-                <BookShowcaseBox
-                  username={item?.user?.firstName}
-                  genre={item?.genre}
-                  title={item?.title}
-                  author={item?.author}
-                  profileimage=""
-                  bookimage={item?.image}
-                  action={() => alert(0)}
-                  view={onOpen}
-                />
-              </Suspense>
+        {Array.isArray(retrivedData) && (
+          <>
+            {retrivedData?.map((item, key: number) => {
+              return (
+                <Fragment key={key}>
+                  <Suspense fallback={<PeerSkeletonLoader />}>
+                    <BookShowcaseBox
+                      username={item?.user?.firstName}
+                      genre={item?.genre}
+                      title={item?.title}
+                      author={item?.author}
+                      profileimage=""
+                      bookimage={item?.image}
+                      action={() => alert(0)}
+                      view={onOpen}
+                    />
+                  </Suspense>
 
-              <DrawerContainer
-                title="Book Title"
-                size={["full", "md"]}
-                isOpen={isOpen}
-                onClose={onClose}>
-                <PreviewMarketplaceData
-                  title={item?.title}
-                  description={item?.description}
-                  image={item?.image}
-                  ISBN={item?.isbn}
-                  genre={item?.genre}
-                  condition={item?.condition}
-                  owner={item?.user?.firstName}
-                  postedAt={item?.createdAt}
-                />
-              </DrawerContainer>
-            </Fragment>
-          );
-        })}
+                  <DrawerContainer
+                    title="Book Title"
+                    size={["full", "md"]}
+                    isOpen={isOpen}
+                    onClose={onClose}>
+                    <PreviewMarketplaceData
+                      title={item?.title}
+                      description={item?.description}
+                      image={item?.image}
+                      ISBN={item?.isbn}
+                      genre={item?.genre}
+                      condition={item?.condition}
+                      owner={item?.user?.firstName}
+                      postedAt={item?.createdAt}
+                    />
+                  </DrawerContainer>
+                </Fragment>
+              );
+            })}
+          </>
+        )}
 
         {/* <ModalContainer isOpen={isModal} onClose={closeModal}>
           <Flex gap="1em">

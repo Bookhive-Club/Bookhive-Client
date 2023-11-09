@@ -1,6 +1,10 @@
 import axios from "axios";
+
 const axiosInstance = axios.create({
-  baseURL: "http://127.0.0.1:3001/api",
+  baseURL:
+  process.env.NODE_ENV === "production"
+  ? process.env.NEXT_PUBLIC_DEFAULT_URL
+  : process.env.NEXT_PUBLIC_DEV_URL,
   timeout: 11000,
 });
 
