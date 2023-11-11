@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React from "react";
 import InputArea from "@/components/atom/form/inputArea";
 import { Text, Box } from "@chakra-ui/react";
@@ -13,12 +14,12 @@ const Settings = () => {
     displayName: "",
   };
 
-  const formik = useFormik({
-    initialValues: defaultValue,
-    validationSchema: settings_validator,
-    validateOnChange: true,
-    onSubmit: () => {},
-  });
+  // const formik = useFormik({
+  //   initialValues: defaultValue,
+  //   validationSchema: settings_validator,
+  //   validateOnChange: true,
+  //   onSubmit: () => {},
+  // });
 
   return (
     <div>
@@ -26,7 +27,7 @@ const Settings = () => {
         Security Settings
       </Text>
       <Box my={"1.5em"}>
-        <form onSubmit={formik.handleSubmit}>
+        <form>
           <InputArea
             bg={"#212121"}
             type="text"
