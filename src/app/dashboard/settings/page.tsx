@@ -2,15 +2,31 @@ import React from "react";
 import InputArea from "@/components/atom/form/inputArea";
 import { Text, Box } from "@chakra-ui/react";
 import Buttons from "@/components/atom/button/buttons";
+import { useSelector } from "react-redux";
+import { useFormik } from "formik";
+import { settings_validator } from "@/validations/profile/settings";
 
 const Settings = () => {
+  const defaultValue = {
+    firstName: "",
+    lastName: "",
+    displayName: "",
+  };
+
+  const formik = useFormik({
+    initialValues: defaultValue,
+    validationSchema: settings_validator,
+    validateOnChange: true,
+    onSubmit: () => {},
+  });
+
   return (
     <div>
       <Text fontWeight="semibold" fontSize={["20px", "25px"]}>
         Security Settings
       </Text>
       <Box my={"1.5em"}>
-        <form>
+        <form onSubmit={formik.handleSubmit}>
           <InputArea
             bg={"#212121"}
             type="text"
@@ -33,7 +49,7 @@ const Settings = () => {
           />
 
           <Box>
-            <Buttons radius="8px" w={"100%"} mt={"1em"}>
+            <Buttons type="submit" radius="8px" w={"100%"} mt={"1em"}>
               Update
             </Buttons>
           </Box>

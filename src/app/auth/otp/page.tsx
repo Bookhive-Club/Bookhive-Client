@@ -2,7 +2,13 @@
 import InputArea from "@/components/atom/form/inputArea";
 import Buttons from "@/components/atom/button/buttons";
 import AuthVerificationLayout from "@/layouts/auth/authVerificationLayout";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, useToast } from "@chakra-ui/react";
+import { useMutation } from "@tanstack/react-query";
+import { axiosInstance } from "@/utils/axios";
+import { useRouter } from "next/navigation";
+import { setCookie } from "cookies-next";
+import { useSearchParams, redirect } from "next/navigation";
+import { useState } from "react";
 
 const svg = (
   <svg
@@ -28,6 +34,43 @@ const svg = (
 );
 
 const VerifyOtp = () => {
+  const [otp, setOtp] = useState<number>();
+  const toast = useToast();
+  const router = useRouter();
+  const search = useSearchParams();
+  const getEmail = search?.get("email");
+
+  const mutation = useMutation({
+    mutationFn: (any) => {
+      return axiosInstance.post("/auth/verify_otp", {
+        email: getEmail,
+        otp: Number(otp),
+      });
+    },
+    onSuccess: (response) => {
+      //@ts-ignore
+      const { message } = response?.data;
+
+      toast({
+        variant: "solid",
+        status: "success",
+        description: message,
+        position: "top",
+      });
+
+      setTimeout(() => router.replace("/dashboard"), 1000);
+      setCookie("_auth_token", "");
+    },
+    onError: (err: any) => {
+      const { data } = err?.response;
+      toast({
+        variant: "solid",
+        status: "error",
+        description: data?.message,
+        position: "top",
+      });
+    },
+  });
   return (
     <AuthVerificationLayout>
       <Box>
@@ -38,19 +81,31 @@ const VerifyOtp = () => {
           Enter OTP
         </Text>
         <Text my={"1em"}>
-          we have sent you access code Via{" "}
+          we have sent you access code Via
           <span
             style={{
               color: "brand.primary",
             }}>
-            chris.....@gmail.com{" "}
+            {getEmail}
           </span>{" "}
           for verification
         </Text>
 
         <Box w={["100%", "100%", "500px"]} mx={"auto"}>
-          <InputArea type="number" placeholder="Enter Code" bg={"#212121"} />
-          <Buttons w={"100%"}>VERIFY</Buttons>
+          <InputArea
+            type="number"
+            placeholder="Enter Code"
+            bg={"#212121"}
+            onChange={(e: any) => setOtp(e.target.value)}
+          />
+          <Buttons
+            w={"100%"}
+            isLoading={mutation.isPending}
+            loadingText="Please wait"
+            //@ts-ignore
+            onClick={mutation.mutate}>
+            VERIFY
+          </Buttons>
         </Box>
 
         <Text fontWeight={"bold"} my={"1em"}>

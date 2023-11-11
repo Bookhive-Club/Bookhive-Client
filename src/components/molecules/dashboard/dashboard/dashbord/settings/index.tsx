@@ -5,6 +5,7 @@ import { RxCaretRight } from "react-icons/rx";
 import { FcDeleteDatabase } from "react-icons/fc";
 import { MdSettingsSuggest } from "react-icons/md";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 interface ProfileInterface {
   name: string;
@@ -26,14 +27,22 @@ const IndexSettings = () => {
     },
   ];
 
+  //@ts-ignore
+  const { userDetails } = useSelector((state) => state?.user);
+
   return (
     <>
       <Box>
         <Flex gap="1em" alignItems={"center"}>
-          <Avatar size={"lg"} name="Emmanuel Obiabo" />
+          <Avatar
+            size={"lg"}
+            name={`${userDetails?.firstName} ${userDetails?.lastName}`}
+          />
           <Box>
-            <Text fontWeight={"semibold"}>Emmanuel Obiabo</Text>
-            <Text>Sudo whoami</Text>
+            <Text fontWeight={"semibold"}>
+              {userDetails?.firstName} {userDetails?.lastName}
+            </Text>
+            <Text>{userDetails?.email}</Text>
           </Box>
         </Flex>
       </Box>

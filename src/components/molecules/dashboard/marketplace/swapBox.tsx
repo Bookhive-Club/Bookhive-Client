@@ -6,11 +6,23 @@ import { FaEye } from "react-icons/fa";
 interface IBookShowCaseProps {
   action: () => void;
   view: () => void;
+  title: string;
+  author: string;
+  username: string;
+  profileimage: string;
+  bookimage: string;
+  genre: string;
 }
 
 const BookShowcaseBox: FC<IBookShowCaseProps> = ({
   action,
   view,
+  title,
+  profileimage,
+  genre,
+  bookimage,
+  username,
+  author,
 }: IBookShowCaseProps) => {
   return (
     <Box
@@ -25,7 +37,11 @@ const BookShowcaseBox: FC<IBookShowCaseProps> = ({
         px=".7em"
         h={"201.134px"}
         w={"100%"}
-        bg={"black"}>
+        bg={"black"}
+        bgImage={bookimage}
+        bgSize="cover"
+        bgPosition="center"
+        bgRepeat="no-repeat">
         <Flex justifyContent="flex-end" alignItems={"end"}>
           <Badge
             my={"1em"}
@@ -34,7 +50,7 @@ const BookShowcaseBox: FC<IBookShowCaseProps> = ({
             bg={"brand.primary"}
             color={"#fff"}
             borderRadius={"md"}>
-            Fiction
+            {genre}
           </Badge>
         </Flex>
       </Box>
@@ -44,16 +60,16 @@ const BookShowcaseBox: FC<IBookShowCaseProps> = ({
           fontSize={["18px"]}
           fontWeight={600}
           color={"rgba(255, 255, 255, 0.70)"}>
-          The Crying Book
+          {title}
         </Text>
 
-        <Text color={"brand.grayed"}>Lieather Christel</Text>
+        <Text color={"brand.grayed"}>{author}</Text>
       </Box>
 
       <Flex my={"1em"} gap=".5em" alignItems="center">
         <Avatar size={"sm"} />
         <Box>
-          <Text>Obiabo </Text>
+          <Text>{username} </Text>
           {/* <Badge
             my={"1em"}
             px={"0.6em"}

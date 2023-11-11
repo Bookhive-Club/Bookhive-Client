@@ -1,10 +1,8 @@
-//@ts-nocheck
-import ChakraWrapper from "@/provider/chakraProvider";
 import { Inter } from "next/font/google";
 import "@/styles/main.scss";
 import { Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
-const inter = Inter({ subsets: ["latin"] });
+import ProviderWrapper from "@/provider/chakraProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -42,7 +40,7 @@ export default function RootLayout({
       </head>
       <body className="poppins.className">
         <body>
-          <ChakraWrapper>{children}</ChakraWrapper>
+          <ProviderWrapper>{children}</ProviderWrapper>
           <Analytics />
         </body>
       </body>

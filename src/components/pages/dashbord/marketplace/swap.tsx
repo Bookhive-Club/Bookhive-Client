@@ -7,9 +7,26 @@ import PreviewMarketplaceData from "@/components/templates/dashboard/marketplace
 import PeerSkeletonLoader from "@/components/skeletons/dashboard/peer_showcasebox_skeleton";
 import Buttons from "@/components/atom/button/buttons";
 import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
+import { axiosInstance } from "@/utils/axios";
+import { AUTH_COOKIE } from "@/constants";
 
 const MarketplaceSwap = () => {
   const { onOpen, isOpen, onClose } = useDisclosure();
+
+  const getData = () =>
+    axiosInstance("/marketplace/get_all_swap_listings", {
+      headers: {
+        Authorization: `Bearer ${AUTH_COOKIE}`,
+      },
+    });
+
+  const { data, isError, isLoading, isPending } = useQuery({
+    queryKey: ["details"],
+    queryFn: getData,
+  });
+
+  const retrivedData = data?.data?.data;
 
   return (
     <>
@@ -27,23 +44,45 @@ const MarketplaceSwap = () => {
         </Link>
       </Box>
       <Box display="flex" flexWrap={"wrap"} gap={["1em", "2em"]}>
-        {[1, 1, 1, 1, 1, 1].map((item, key) => {
-          return (
-            <Fragment key={key}>
-              <Suspense fallback={<PeerSkeletonLoader />}>
-                <BookShowcaseBox action={() => alert(0)} view={onOpen} />
-              </Suspense>
-            </Fragment>
-          );
-        })}
+        {Array.isArray(retrivedData) && (
+          <>
+            {retrivedData?.map((item, key: number) => {
+              return (
+                <Fragment key={key}>
+                  <Suspense fallback={<PeerSkeletonLoader />}>
+                    <BookShowcaseBox
+                      username={item?.user?.firstName}
+                      genre={item?.genre}
+                      title={item?.title}
+                      author={item?.author}
+                      profileimage=""
+                      bookimage={item?.image}
+                      action={() => alert(0)}
+                      view={onOpen}
+                    />
+                  </Suspense>
 
-        <DrawerContainer
-          title="Book Title"
-          size={["full", "md"]}
-          isOpen={isOpen}
-          onClose={onClose}>
-          <PreviewMarketplaceData />
-        </DrawerContainer>
+                  <DrawerContainer
+                    title="Book Title"
+                    size={["full", "md"]}
+                    isOpen={isOpen}
+                    onClose={onClose}>
+                    <PreviewMarketplaceData
+                      title={item?.title}
+                      description={item?.description}
+                      image={item?.image}
+                      ISBN={item?.isbn}
+                      genre={item?.genre}
+                      condition={item?.condition}
+                      owner={item?.user?.firstName}
+                      postedAt={item?.createdAt}
+                    />
+                  </DrawerContainer>
+                </Fragment>
+              );
+            })}
+          </>
+        )}
 
         {/* <ModalContainer isOpen={isModal} onClose={closeModal}>
           <Flex gap="1em">
