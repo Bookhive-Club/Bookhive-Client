@@ -23,11 +23,17 @@ const dashboardHeaderNav = [
     path: "/dashboard/book_club",
   },
 
+  // {
+  //   title: "Reading List",
+  //   icon: <HiOutlineCollection size="1.2em" />,
+  //   active: <HiCollection />,
+  //   path: "/dashboard/reading_list",
+  // },
   {
-    title: "Reading List",
+    title: "Discover",
     icon: <HiOutlineCollection size="1.2em" />,
     active: <HiCollection />,
-    path: "/dashboard/reading_list",
+    path: "/dashboard/discover",
   },
 
   {

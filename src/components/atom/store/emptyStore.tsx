@@ -2,7 +2,13 @@ import { Box, Button } from "@chakra-ui/react";
 import React from "react";
 import Buttons from "../button/buttons";
 import { FcShop } from "react-icons/fc";
-const EmptyStore = () => {
+
+type StoreFront = {
+  content?: string;
+  button?: boolean;
+};
+
+const EmptyStore = ({ content, button }: StoreFront) => {
   return (
     <Box
       h={"50vh"}
@@ -16,8 +22,8 @@ const EmptyStore = () => {
       <Box>
         <FcShop size="4em" />
       </Box>
-      <Box>You dont have any store yet</Box>
-      <Button>Create Store</Button>
+      <Box>{content ? content : "You dont have any store yet"}</Box>
+      {!button && <Button>Create Store</Button>}
     </Box>
   );
 };

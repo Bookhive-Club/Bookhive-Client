@@ -40,12 +40,12 @@ const Container = ({ title, path, content, image }: IContainer) => (
 
 const DashboardFlexBox = () => {
   const data = [
-    {
-      title: "Saved Books",
-      content: "View all saved items",
-      image: "/assets/dashboard/favorite.svg",
-      path: "/dashboard/favorites",
-    },
+    // {
+    //   title: "Saved Books",
+    //   content: "View all saved items",
+    //   image: "/assets/dashboard/favorite.svg",
+    //   path: "/dashboard/favorites",
+    // },
     {
       title: "Stores",
       content: "View store",
