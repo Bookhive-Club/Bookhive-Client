@@ -15,10 +15,23 @@ const CommunityPage = () => {
       },
     });
 
-  const { data, isError, isLoading, isPending } = useQuery({
+  // const { data, isError, isLoading, isPending } = useQuery({
+  //   queryKey: ["details"],
+  //   queryFn: getData,
+  //   {
+  //     refetchInterval: 3000,
+  //   }
+
+  // });
+  const { data, isError, isLoading, isFetching } = useQuery({
     queryKey: ["details"],
     queryFn: getData,
+    refetchInterval: 3000,
   });
+
+  if (isLoading) {
+    return <>Datas are loading</>;
+  }
 
   const retrivedData = data?.data?.data;
 

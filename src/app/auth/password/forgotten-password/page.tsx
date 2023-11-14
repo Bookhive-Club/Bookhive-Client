@@ -18,7 +18,7 @@ const ForgottenPassowrd = () => {
             email with instructions on how to reset your password
           </Text>
           <InputArea
-            type="number"
+            type="email"
             label="Email"
             placeholder="Email Address"
             bg={"#212121"}
