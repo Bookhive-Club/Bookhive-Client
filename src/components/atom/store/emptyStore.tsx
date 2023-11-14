@@ -1,6 +1,5 @@
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, useToast } from "@chakra-ui/react";
 import React from "react";
-import Buttons from "../button/buttons";
 import { FcShop } from "react-icons/fc";
 
 type StoreFront = {
@@ -23,7 +22,7 @@ const EmptyStore = ({ content, button }: StoreFront) => {
         <FcShop size="4em" />
       </Box>
       <Box>{content ? content : "You dont have any store yet"}</Box>
-      {!button && <Button>Create Store</Button>}
+      {/* {!button && <Button>Create Store</Button>} */}
     </Box>
   );
 };
