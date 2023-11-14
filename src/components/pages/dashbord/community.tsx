@@ -6,6 +6,7 @@ import ContentPostedBlocks from "@/components/molecules/dashboard/community/post
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "@/utils/axios";
 import { AUTH_COOKIE } from "@/constants";
+import { useSelector } from "react-redux";
 
 const CommunityPage = () => {
   const getData = () =>
@@ -47,6 +48,7 @@ const CommunityPage = () => {
                       date={_?.createdAt}
                       name={`${user?.firstName} ${user?.lastName}`}
                       postId={_?.id}
+                      usersId={_?.userId}
                     />
                   </Fragment>
                 );

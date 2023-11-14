@@ -17,12 +17,14 @@ import { TbBookmark } from "react-icons/tb";
 import { useMutation } from "@tanstack/react-query";
 import { axiosInstance } from "@/utils/axios";
 import { AUTH_COOKIE } from "@/constants";
+import { useSelector } from "react-redux";
 
 interface ContentDetails {
   name: string;
   date?: string;
   content: string;
   status?: string;
+  usersId: string;
   postId: string;
 }
 
@@ -47,6 +49,7 @@ const ContentPostedBlocks: FC<ContentDetails> = ({
   content,
   status,
   postId,
+  usersId,
 }) => {
   //@ts-ignore
   const parseDate = parseISO(date);
@@ -78,6 +81,7 @@ const ContentPostedBlocks: FC<ContentDetails> = ({
         },
       });
     },
+
     onSuccess: (response) => {
       //@ts-ignore
       const { message } = response?.data;
@@ -104,6 +108,10 @@ const ContentPostedBlocks: FC<ContentDetails> = ({
   const handleDelete = () => {
     mutation.mutate();
   };
+
+  //@ts-ignore
+  const { userDetails } = useSelector((state) => state?.user);
+  const logedInUserPassword = userDetails?.id;
 
   return (
     <Box borderBottom={"1px solid #3636368a"} py={"2.5em"}>

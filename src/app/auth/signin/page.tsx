@@ -51,7 +51,8 @@ const SignIn = () => {
 
   useEffect(() => {
     //display error message if any
-    if (mutation.isError) {
+    //@ts-ignore
+    if (mutation.isError && mutation?.error?.response) {
       //@ts-ignore
       const { data } = mutation?.error?.response;
       toast({
