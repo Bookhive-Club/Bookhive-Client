@@ -81,7 +81,7 @@ const VerifyOtp = () => {
           Enter OTP
         </Text>
         <Text my={"1em"}>
-          we have sent you access code Via
+          we send an email to
           <span
             style={{
               color: "brand.primary",

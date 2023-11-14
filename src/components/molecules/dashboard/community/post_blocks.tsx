@@ -113,6 +113,9 @@ const ContentPostedBlocks: FC<ContentDetails> = ({
   const { userDetails } = useSelector((state) => state?.user);
   const logedInUserPassword = userDetails?.id;
 
+  //check if post belongs to a user before they can delete
+  const checkPostAuthorization = logedInUserPassword === usersId;
+
   return (
     <Box borderBottom={"1px solid #3636368a"} py={"2.5em"}>
       <Flex alignItems={"center"} justifyContent={"space-between"}>
@@ -147,16 +150,19 @@ const ContentPostedBlocks: FC<ContentDetails> = ({
               <MenuItem>
                 <TbBookmark /> <Text>Save Post</Text>
               </MenuItem>
-              <MenuItem>
-                <Box
-                  display={"flex"}
-                  alignItems={"center"}
-                  gap=".3em"
-                  onClick={handleDelete}>
-                  <HiOutlineTrash color="red" />{" "}
-                  <Text color={"red"}>Delete</Text>
-                </Box>
-              </MenuItem>
+
+              {checkPostAuthorization && (
+                <MenuItem>
+                  <Box
+                    display={"flex"}
+                    alignItems={"center"}
+                    gap=".3em"
+                    onClick={handleDelete}>
+                    <HiOutlineTrash color="red" />{" "}
+                    <Text color={"red"}>Delete</Text>
+                  </Box>
+                </MenuItem>
+              )}
             </MenuList>
           </Menu>
         </Box>

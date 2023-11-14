@@ -161,7 +161,9 @@ const UserProfileTop = () => {
         onClick={onOpen}>
         <Box display="flex" gap=".5em" alignItems="center">
           <Avatar name="SO" />
-          <Text fontSize={"17px"}>Share Content</Text>
+          <Text fontSize={"17px"} color="gray">
+            What do you have in mind ?
+          </Text>
         </Box>
         <Box
           width="50px"
