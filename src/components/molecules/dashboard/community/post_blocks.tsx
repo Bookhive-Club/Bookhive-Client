@@ -1,13 +1,29 @@
 import React, { FC } from "react";
-import { Box, Text, Avatar, Flex } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Avatar,
+  Flex,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  useToast,
+} from "@chakra-ui/react";
 import { FiMoreVertical } from "react-icons/fi";
-import { formatDistanceToNow, parseISO } from "date-fns";
+import { parseISO } from "date-fns";
+import { HiOutlineTrash } from "react-icons/hi";
+import { TbBookmark } from "react-icons/tb";
+import { useMutation } from "@tanstack/react-query";
+import { axiosInstance } from "@/utils/axios";
+import { AUTH_COOKIE } from "@/constants";
 
 interface ContentDetails {
   name: string;
   date?: string;
   content: string;
   status?: string;
+  postId: string;
 }
 
 const formatTwitterDate = (date: any) => {
@@ -30,6 +46,7 @@ const ContentPostedBlocks: FC<ContentDetails> = ({
   date,
   content,
   status,
+  postId,
 }) => {
   //@ts-ignore
   const parseDate = parseISO(date);
@@ -47,7 +64,47 @@ const ContentPostedBlocks: FC<ContentDetails> = ({
     statusBg = "#5422ff";
     statusColor = "#fff";
   }
-  const datePosted = formatDistanceToNow(parseDate, { addSuffix: true });
+
+  const toast = useToast();
+
+  //handle item delete
+  const url = `/community/post/${postId}`;
+
+  const mutation = useMutation({
+    mutationFn: () => {
+      return axiosInstance.delete(url, {
+        headers: {
+          Authorization: `Bearer ${AUTH_COOKIE}`,
+        },
+      });
+    },
+    onSuccess: (response) => {
+      //@ts-ignore
+      const { message } = response?.data;
+
+      toast({
+        variant: "solid",
+        status: "success",
+        description: message,
+        position: "top",
+      });
+    },
+    onError: (err: any) => {
+      console.log(err);
+      const { data } = err?.response;
+      toast({
+        variant: "solid",
+        status: "error",
+        description: data?.message,
+        position: "top",
+      });
+    },
+  });
+
+  const handleDelete = () => {
+    mutation.mutate();
+  };
+
   return (
     <Box borderBottom={"1px solid #3636368a"} py={"2.5em"}>
       <Flex alignItems={"center"} justifyContent={"space-between"}>
@@ -68,13 +125,32 @@ const ContentPostedBlocks: FC<ContentDetails> = ({
               py={"5px"}
               px="10px">
               <Text color={statusColor} fontSize="13.6px">
-                {status}📗{" "}
+                {status}📗
               </Text>
             </Box>
           </Box>
         </Box>
         <Box cursor={"pointer"}>
-          <FiMoreVertical />
+          <Menu>
+            <MenuButton>
+              <FiMoreVertical />
+            </MenuButton>
+            <MenuList>
+              <MenuItem>
+                <TbBookmark /> <Text>Save Post</Text>
+              </MenuItem>
+              <MenuItem>
+                <Box
+                  display={"flex"}
+                  alignItems={"center"}
+                  gap=".3em"
+                  onClick={handleDelete}>
+                  <HiOutlineTrash color="red" />{" "}
+                  <Text color={"red"}>Delete</Text>
+                </Box>
+              </MenuItem>
+            </MenuList>
+          </Menu>
         </Box>
       </Flex>
 
@@ -82,8 +158,17 @@ const ContentPostedBlocks: FC<ContentDetails> = ({
 
       <Box my="1.7em" width={"85%"} mx="auto">
         <Text>{content}</Text>
+        <Box
+          w="100%"
+          h="250px"
+          bg="black"
+          my="1em"
+          borderRadius={"15px"}
+          bgImage={""}></Box>
 
-        <Box></Box>
+        <Box>
+          <Text>Rating: 3.4</Text>
+        </Box>
       </Box>
     </Box>
   );

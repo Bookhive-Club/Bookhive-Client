@@ -18,7 +18,7 @@ const CommunityPage = () => {
   const { data, isError, isLoading, isFetching } = useQuery({
     queryKey: ["details"],
     queryFn: getData,
-    refetchInterval: 3000,
+    refetchInterval: 5000,
   });
 
   if (isLoading) {
@@ -46,6 +46,7 @@ const CommunityPage = () => {
                       status={status}
                       date={_?.createdAt}
                       name={`${user?.firstName} ${user?.lastName}`}
+                      postId={_?.id}
                     />
                   </Fragment>
                 );
