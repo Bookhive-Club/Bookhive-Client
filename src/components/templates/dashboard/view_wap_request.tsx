@@ -3,54 +3,20 @@ import { Box, Text, Flex, Avatar } from "@chakra-ui/react";
 import Buttons from "@/components/atom/button/buttons";
 import { MdLocationOn } from "react-icons/md";
 
-enum Status {
-  new,
-  old,
-}
-
 interface ViewSwapRequest<T> {
   image: string;
   title?: string;
   owner: string;
   description: string;
   genre: string;
-  condition: Status;
-  // location: string;
-  ISBN: number;
   postedAt?: T;
-}
-
-interface Details {
-  name: string;
-  value: string | number;
 }
 
 const ViewSwapRequest: FC<ViewSwapRequest<Date | string | number>> = ({
   image,
   title,
   owner,
-  condition,
-  // location,
-  genre,
-  description,
-  ISBN,
-  // postedAt,
 }) => {
-  const details: Details[] = [
-    {
-      name: "Condition",
-      value: condition,
-    },
-    {
-      name: "Genre",
-      value: genre,
-    },
-    {
-      name: "ISN",
-      value: ISBN,
-    },
-  ];
-
   return (
     <Box>
       <Box
@@ -76,25 +42,11 @@ const ViewSwapRequest: FC<ViewSwapRequest<Date | string | number>> = ({
           {title}
         </Text>
 
-        <Text my="1em">{description}</Text>
-
         <Box my="1em">
-          <Text fontWeight="semibold">Details</Text>
-
-          <Flex gap="1em" flexWrap={["wrap", "wrap", "nowrap"]}>
-            {details.map((_, key) => (
-              <Fragment key={key}>
-                <Box
-                  bg="dark.30"
-                  w="150px"
-                  borderRadius={"10px"}
-                  px="1em"
-                  py="1em">
-                  {_.name}: {_.value}
-                </Box>
-              </Fragment>
-            ))}
-          </Flex>
+          <Text fontWeight="semibold">Message</Text>
+          <Box my="1em" bg="#0000002b" p="1em" borderRadius={"lg"}>
+            lore
+          </Box>
 
           <Box display="flex" mt={"2em"} alignItems={"center"} gap="1em">
             <MdLocationOn /> Lagos, Nigeria
@@ -102,11 +54,20 @@ const ViewSwapRequest: FC<ViewSwapRequest<Date | string | number>> = ({
         </Box>
 
         <Box display={"flex "} gap={"1em"}>
-          <Buttons radius="10px" w={"100%"}>
+          <Buttons radius="10px" w={"100%"} _hover={{}}>
             Accept Request
           </Buttons>
 
-          <Buttons radius="10px" w={"100%"}>
+          <Buttons
+            border={"1px solid red"}
+            color="#fff"
+            radius="10px"
+            bg="red"
+            w={"100%"}
+            _hover={{
+              background: "red",
+              color: "white",
+            }}>
             Reject Request
           </Buttons>
         </Box>

@@ -72,7 +72,7 @@ const RequestBox: FC<IBookShowCaseProps> = ({
 
       <Flex gap=".5em" alignItems={"center"}>
         <Button w={"100%"} bg={"dark.40"} onClick={view}>
-          Send Request
+          View Request
         </Button>
         {/* <Box
           bg={"dark.40"}
