@@ -1,11 +1,14 @@
 "use client";
-import { Box, Text, Flex } from "@chakra-ui/react";
+import { Box, Text, Flex, useDisclosure } from "@chakra-ui/react";
 import { Logo } from "../icons/logo";
 import ContainerLayout from "@/layouts/container/containerLayout";
 import Buttons from "../button/buttons";
 import Link from "next/link";
+import ModalContainer from "@/layouts/popups/modalLayout";
+import AccountTypeUI from "@/components/molecules/account_type";
 
 const Header = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <ContainerLayout>
       <Flex py={"1em"} justify={"space-between"}>
@@ -19,11 +22,13 @@ const Header = () => {
               Login
             </Text>
           </Link>
-          <Link href="/auth/signup">
-            <Buttons>Sign Up</Buttons>
-          </Link>
+
+          <Buttons onClick={onOpen}> Sign Up</Buttons>
         </Box>
       </Flex>
+      <ModalContainer isOpen={isOpen} onClose={onClose}>
+        <AccountTypeUI />
+      </ModalContainer>
     </ContainerLayout>
   );
 };

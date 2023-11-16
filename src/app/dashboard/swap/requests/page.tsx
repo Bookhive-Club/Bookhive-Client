@@ -12,12 +12,13 @@ import { axiosInstance } from "@/utils/axios";
 import { AUTH_COOKIE } from "@/constants";
 import RequestBox from "@/components/molecules/dashboard/requestBox";
 import ViewSwapRequest from "@/components/templates/dashboard/view_wap_request";
+import NoDataFound from "@/components/atom/errors/noDataFound";
 
 const Page = () => {
   const { onOpen, isOpen, onClose } = useDisclosure();
 
   const getData = () =>
-    axiosInstance("/marketplace/get_all_swap_listings", {
+    axiosInstance("/swap/requests", {
       headers: {
         Authorization: `Bearer ${AUTH_COOKIE}`,
       },
@@ -46,43 +47,48 @@ const Page = () => {
         </Link> */}
       </Box>
       <Box display="flex" flexWrap={"wrap"} gap={["1em", "2em"]}>
-        {Array.isArray(retrivedData) && (
+        {/* check if data is empty  */}
+        {retrivedData?.length === 0 ? (
+          <NoDataFound content="No Request" />
+        ) : (
           <>
-            {retrivedData?.map((item, key: number) => {
-              return (
-                <Fragment key={key}>
-                  <Suspense fallback={<PeerSkeletonLoader />}>
-                    <RequestBox
-                      username={item?.user?.firstName}
-                      genre={item?.genre}
-                      title={item?.title}
-                      author={item?.author}
-                      profileimage=""
-                      bookimage={item?.image}
-                      action={() => alert(0)}
-                      view={onOpen}
-                    />
-                  </Suspense>
+            {Array.isArray(retrivedData) && (
+              <>
+                {retrivedData?.map((item, key: number) => {
+                  return (
+                    <Fragment key={key}>
+                      <Suspense fallback={<PeerSkeletonLoader />}>
+                        <RequestBox
+                          username={item?.user?.firstName}
+                          genre={item?.genre}
+                          title={item?.title}
+                          author={item?.author}
+                          profileimage=""
+                          bookimage={item?.image}
+                          action={() => alert(0)}
+                          view={onOpen}
+                        />
+                      </Suspense>
 
-                  <DrawerContainer
-                    title="Book Title"
-                    size={["full", "md"]}
-                    isOpen={isOpen}
-                    onClose={onClose}>
-                    <ViewSwapRequest
-                      title={item?.title}
-                      description={item?.description}
-                      image={item?.image}
-                      ISBN={item?.isbn}
-                      genre={item?.genre}
-                      condition={item?.condition}
-                      owner={item?.user?.firstName}
-                      postedAt={item?.createdAt}
-                    />
-                  </DrawerContainer>
-                </Fragment>
-              );
-            })}
+                      <DrawerContainer
+                        title="Book Title"
+                        size={["full", "md"]}
+                        isOpen={isOpen}
+                        onClose={onClose}>
+                        <ViewSwapRequest
+                          title={item?.title}
+                          description={item?.description}
+                          image={item?.image}
+                          genre={item?.genre}
+                          owner={item?.user?.firstName}
+                          postedAt={item?.createdAt}
+                        />
+                      </DrawerContainer>
+                    </Fragment>
+                  );
+                })}
+              </>
+            )}
           </>
         )}
       </Box>

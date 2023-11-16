@@ -1,8 +1,19 @@
 "use client";
-import React, { FC, Fragment } from "react";
-import { Box, Badge, Text, Flex, Avatar, Button } from "@chakra-ui/react";
+import React, { FC } from "react";
+import {
+  Box,
+  Badge,
+  Text,
+  Flex,
+  Avatar,
+  Button,
+  useDisclosure,
+  Textarea,
+} from "@chakra-ui/react";
 import { FaEye } from "react-icons/fa";
-
+import ModalContainer from "@/layouts/popups/modalLayout";
+import Buttons from "@/components/atom/button/buttons";
+import { useMutation } from "@tanstack/react-query";
 interface IBookShowCaseProps {
   action: () => void;
   view: () => void;
@@ -24,6 +35,13 @@ const BookShowcaseBox: FC<IBookShowCaseProps> = ({
   username,
   author,
 }: IBookShowCaseProps) => {
+  const { onOpen, isOpen, onClose } = useDisclosure();
+
+  //handle swap mutation
+  // const { data } = useMutation({
+
+  // });
+
   return (
     <Box
       //   h={["450.242px"]}
@@ -83,7 +101,7 @@ const BookShowcaseBox: FC<IBookShowCaseProps> = ({
       </Flex>
 
       <Flex gap=".5em" alignItems={"center"}>
-        <Button w={"100%"} bg={"brand.primary"} onClick={action}>
+        <Button w={"100%"} bg={"brand.primary"} onClick={onOpen}>
           Send Request
         </Button>
         <Box
@@ -98,6 +116,15 @@ const BookShowcaseBox: FC<IBookShowCaseProps> = ({
           <FaEye />
         </Box>
       </Flex>
+
+      <ModalContainer isOpen={isOpen} onClose={onClose}>
+        <form>
+          <Textarea placeholder="Add a message to owner" />
+          <Buttons my="10px" borderRadius={"10px"} w="100%">
+            Send Request
+          </Buttons>
+        </form>
+      </ModalContainer>
     </Box>
   );
 };
