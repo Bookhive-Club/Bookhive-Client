@@ -35,12 +35,23 @@ const AccountTypeUI = () => {
         p=".6em "
         cursor={""}
         borderRadius={"15px"}
-        my="1em">
-        <Box>
-          <FcShop size="45px" />
+        my="1em"
+        justifyContent={"space-between"}>
+        <Box display="inline-flex" alignItems="center" gap="0.5em">
+          <Box>
+            <FcShop size="45px" />
+          </Box>
+          <Box>
+            <Text>User</Text>
+          </Box>
         </Box>
-        <Box>
-          <Text>User</Text>
+
+        <Box
+          bg="brand.primary"
+          w="fit-content"
+          p="2px 10px"
+          borderRadius="10px">
+          Comming Soon
         </Box>
       </Box>
     </Box>
