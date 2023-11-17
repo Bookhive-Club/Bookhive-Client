@@ -34,33 +34,33 @@ const Footer = () => {
             mt={{ base: "2em", md: "0em" }}
             gap="2em">
             <Link
-              href="#"
+              href="https://twitter.com/JoinBookhive"
               p="0.5em"
               borderRadius="50%"
               backgroundColor="#292727">
               <FaXTwitter size={20} />
             </Link>
-            <Link
+            {/* <Link
               href="#"
               p="0.5em"
               borderRadius="50%"
               backgroundColor="#292727">
               <LiaLinkedin size={20} />
-            </Link>
+            </Link> */}
             <Link
-              href="#"
+              href="https://github.com/bookhive-Club"
               p="0.5em"
               borderRadius="50%"
               backgroundColor="#292727">
               <PiGithubLogo size={20} />
             </Link>
-            <Link
+            {/* <Link
               href="#"
               p="0.5em"
               borderRadius="50%"
               backgroundColor="#292727">
               <RxDiscordLogo size={20} />
-            </Link>
+            </Link> */}
           </Flex>
         </Flex>
       </ContainerLayout>
