@@ -23,7 +23,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
         <DashboardSidebar />
       </Box> */}
         <Container
-          maxW={["100%", "70%", "80%"]}
+          maxW={["100%", "85%", "85%", "80%"]}
           height="100vh"
           mx={"auto"}
           py={"2em"}>

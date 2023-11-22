@@ -33,7 +33,7 @@ const DashboardHome = () => {
     <Box>
       <Box my={"1.5em"} alignItems={"center"} display="flex" gap="2em">
         <Avatar name={`${userData?.firstName} ${userData?.lastName}`} />
-        <Text fontSize={["20px", "24px"]}>
+        <Text fontSize={["20px", "20px", "24px"]}>
           Hi, {userData?.firstName || "Good day"} 👋
         </Text>
       </Box>

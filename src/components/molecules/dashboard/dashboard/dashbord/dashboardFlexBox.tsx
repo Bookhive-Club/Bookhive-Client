@@ -10,7 +10,7 @@ interface IContainer {
 }
 const Container = ({ title, path, content, image }: IContainer) => (
   <Box
-    w={["100%", "409px"]}
+    w={["100%", "100%", "409px"]}
     borderRadius="10px"
     p="1em"
     bg="brand.secondary"
