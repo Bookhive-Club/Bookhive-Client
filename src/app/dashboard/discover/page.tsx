@@ -8,7 +8,7 @@ import EmptyStore from "@/components/atom/store/emptyStore";
 const ReadingList = () => {
   return (
     <Box>
-      <Flex justifyContent="space-between">
+      <Flex justifyContent="space-between" flexWrap={"wrap"}>
         <Text fontWeight={"bold"} fontSize={["25px", "30px"]}>
           Book stores around you
         </Text>

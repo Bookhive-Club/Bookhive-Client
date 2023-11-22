@@ -97,7 +97,7 @@ const DashboardHeader = () => {
       <Flex
         alignItems={"center"}
         justifyContent={"space-between"}
-        px={["1em", "2em", "10em"]}
+        px={["1em", "2em", "2em", "10em"]}
         py={"1.2em"}
         bg={"brand.secondary"}>
         <Box>
@@ -105,7 +105,7 @@ const DashboardHeader = () => {
         </Box>
 
         {/* Navigation section */}
-        <Box display={["none", "none", "flex"]} gap="1em">
+        <Box display={["none", "none", "none", "flex"]} gap="1em">
           <UnorderedList
             cursor={"pointer"}
             listStyleType={"none"}
@@ -149,7 +149,7 @@ const DashboardHeader = () => {
         <Flex alignItems={"center"} gap={"2em"}>
           {/* <IoIosNotificationsOutline size={".5em"} /> */}
           <Box
-            display={["block", "block", "none"]}
+            display={["block", "block", "block", "none"]}
             cursor={"pointer"}
             onClick={openDrawer}>
             <RiMenu2Fill size="1.5em" />

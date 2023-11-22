@@ -20,6 +20,10 @@ import { create_swap_listings_schema } from "@/validations/marketplace";
 import { useMutation } from "@tanstack/react-query";
 import { axiosInstance } from "@/utils/axios";
 import { AUTH_COOKIE } from "@/constants";
+import { useDropzone } from "react-dropzone";
+import { useCallback } from "react";
+import { ImageUpload, SelectedUpload } from "@/components/atom/image_upload";
+import { File } from "buffer";
 
 const condition = [
   {
@@ -127,19 +131,28 @@ const CreateSwap = () => {
     },
   });
 
+  const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
+    useDropzone();
+
+  const selectedFile = acceptedFiles?.map((files: File) => {
+    console.log(files);
+  });
+
   return (
     <>
-      <Flex gap="1em">
-        <Box
-          bg={"#191919"}
-          py={"3em"}
-          px={"1em"}
-          w={["100%", "100%", "500px"]}></Box>
-        <Box bg={"#191919"} py={"3em"} px={"1em"} w={["100%", "100%", "700px"]}>
-          <Text fontWeight="semibold" fontSize={["20px", "25px"]}>
-            Create Swap
-          </Text>
+      <Text fontWeight="semibold" fontSize={["20px", "25px"]}>
+        Create Swap
+      </Text>
+      <Flex mt="1em" gap="1em" flexWrap={["wrap", "wrap", "wrap", "nowrap"]}>
+        <Box bg={"#191919"} py={"3em"} px={"1em"} w={["100%", "100%", "500px"]}>
+          <div {...getRootProps()}>
+            <input {...getInputProps()} />
+            <ImageUpload />
+          </div>
 
+          <SelectedUpload />
+        </Box>
+        <Box bg={"#191919"} py={"3em"} px={"1em"} w={["100%", "100%", "700px"]}>
           <Box my={"1.5em"}>
             <form onSubmit={formik.handleSubmit}>
               <InputArea
