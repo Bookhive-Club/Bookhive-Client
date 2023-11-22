@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "@/utils/axios";
 import { AUTH_COOKIE } from "@/constants";
 import { useSelector } from "react-redux";
+import IsLoadingDatas from "@/components/atom/loading_data";
 
 const CommunityPage = () => {
   const getData = () =>
@@ -23,7 +24,7 @@ const CommunityPage = () => {
   });
 
   if (isLoading) {
-    return <>Datas are loading</>;
+    return <IsLoadingDatas />;
   }
 
   const retrivedData = data?.data?.data;
@@ -32,6 +33,7 @@ const CommunityPage = () => {
     <Box pos={"relative"}>
       <Box>
         <UserProfileTop />
+        <IsLoadingDatas />
       </Box>
       <Box my={"2em"}>
         <Flex flexDir="column" gap="2em">

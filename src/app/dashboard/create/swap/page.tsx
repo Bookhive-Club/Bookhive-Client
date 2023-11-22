@@ -24,6 +24,8 @@ import { useDropzone } from "react-dropzone";
 import { useCallback } from "react";
 import { ImageUpload, SelectedUpload } from "@/components/atom/image_upload";
 import { File } from "buffer";
+import { AxiosError, AxiosResponse } from "axios";
+import { QueryClient } from "@tanstack/react-query";
 
 const condition = [
   {
@@ -75,8 +77,16 @@ const genre = [
   },
 ];
 
+interface FileObject {
+  name: string;
+  size: number;
+}
+
 const CreateSwap = () => {
   const toast = useToast();
+  const queryClient = new QueryClient();
+
+  const { getRootProps, getInputProps, acceptedFiles } = useDropzone();
 
   //create swap item
   const mutation = useMutation({
@@ -87,7 +97,8 @@ const CreateSwap = () => {
         },
       });
     },
-    onSuccess: (response) => {
+    onSuccess: (response: AxiosResponse) => {
+      queryClient.invalidateQueries();
       //@ts-ignore
       const { message } = response?.data;
 
@@ -98,7 +109,8 @@ const CreateSwap = () => {
         position: "top",
       });
     },
-    onError: (err: any) => {
+    onError: (err: AxiosError) => {
+      //@ts-ignore
       const { data } = err?.response;
       toast({
         variant: "solid",
@@ -131,11 +143,13 @@ const CreateSwap = () => {
     },
   });
 
-  const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
-    useDropzone();
-
-  const selectedFile = acceptedFiles?.map((files: File) => {
-    console.log(files);
+  const selectedFile = acceptedFiles?.map((files: FileObject) => {
+    const size = files.size;
+    return (
+      <>
+        <SelectedUpload name={files?.name} size={size} />
+      </>
+    );
   });
 
   return (
@@ -146,11 +160,11 @@ const CreateSwap = () => {
       <Flex mt="1em" gap="1em" flexWrap={["wrap", "wrap", "wrap", "nowrap"]}>
         <Box bg={"#191919"} py={"3em"} px={"1em"} w={["100%", "100%", "500px"]}>
           <div {...getRootProps()}>
-            <input {...getInputProps()} />
+            <input {...getInputProps()} accept="image/*" />
             <ImageUpload />
           </div>
 
-          <SelectedUpload />
+          {acceptedFiles && selectedFile}
         </Box>
         <Box bg={"#191919"} py={"3em"} px={"1em"} w={["100%", "100%", "700px"]}>
           <Box my={"1.5em"}>
@@ -259,6 +273,10 @@ const CreateSwap = () => {
                     loadingText="Please wait..."
                     type="submit"
                     radius="8px"
+                    _hover={{
+                      background: "none",
+                    }}
+                    color="#fff"
                     w={"100%"}
                     mt={"2em"}>
                     Post

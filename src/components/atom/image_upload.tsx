@@ -1,10 +1,11 @@
-import React from "react";
+import React, { FC } from "react";
 import { Box, Text, Flex } from "@chakra-ui/react";
 import { FcAddImage } from "react-icons/fc";
-import { FcEmptyTrash } from "react-icons/fc";
+// import { FcEmptyTrash } from "react-icons/fc";
+import { filesize } from "filesize";
+import { FcImageFile } from "react-icons/fc";
 
 const ImageUpload = () => {
-  const data = "item";
   return (
     <Flex
       justifyContent={"center"}
@@ -23,7 +24,13 @@ const ImageUpload = () => {
   );
 };
 
-const SelectedUpload = () => {
+type SelectedUpload = {
+  name: string;
+  size: number;
+};
+
+const SelectedUpload: FC<SelectedUpload> = ({ name, size }) => {
+  const fileSize = filesize(size);
   return (
     <Flex
       my="1em"
@@ -36,16 +43,25 @@ const SelectedUpload = () => {
       p="1em"
       borderRadius={"10px"}>
       <Box display={"flex"} alignItems={"center"} gap=".5em">
-        <Box borderRadius={"5px"} h="50px" w="50px" bg="red"></Box>
+        <Box
+          borderRadius={"5px"}
+          h="60px"
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          w="70px"
+          bg="#2f2f2f">
+          <FcImageFile size="2em" />
+        </Box>
         <Box>
-          <Text>Filename</Text>
-          <Text fontSize={"12px"}>File Size</Text>
+          <Text>{name}</Text>
+          <Text fontSize={"12px"}>{fileSize}</Text>
         </Box>
       </Box>
 
-      <Box>
+      {/* <Box cursor={"pointer"}>
         <FcEmptyTrash size="2em" />
-      </Box>
+      </Box> */}
     </Flex>
   );
 };
