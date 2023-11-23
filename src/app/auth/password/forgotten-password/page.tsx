@@ -10,10 +10,12 @@ import { axiosInstance } from "@/utils/axios";
 import { useRouter } from "next/navigation";
 import ModalContainer from "@/layouts/popups/modalLayout";
 import { FcSms } from "react-icons/fc";
+import Link from "next/link";
 
 const ForgottenPassowrd = () => {
   const [email, setEmail] = useState("");
   const { isOpen, onClose, onOpen } = useDisclosure();
+  const [disabled, setDisabled] = useState<boolean>(false);
   const toast = useToast();
   const payload = {
     email: email,
@@ -24,8 +26,9 @@ const ForgottenPassowrd = () => {
     mutationFn: (data) => {
       return axiosInstance.post("/auth/forgotten_password", data);
     },
-    onSuccess(data) {
+    onSuccess() {
       onOpen();
+      setDisabled(true);
     },
     onError: (error: AxiosError) => {
       //@ts-ignore
@@ -71,7 +74,11 @@ const ForgottenPassowrd = () => {
               isRequired
             />
 
-            <Buttons w="100%" type="submit" isLoading={mutation.isPending}>
+            <Buttons
+              w="100%"
+              type="submit"
+              isLoading={mutation.isPending}
+              isDisabled={disabled}>
               Reset
             </Buttons>
           </form>
@@ -98,10 +105,11 @@ const ForgottenPassowrd = () => {
           <Text textAlign="center">
             We sent a reset link to your email {email}
           </Text>
-
-          <Buttons my="1em" w="100%">
-            Check Email
-          </Buttons>
+          <Link href="https://mail.google.com/mail/u/0/">
+            <Buttons my="1em" w="100%">
+              Check Email
+            </Buttons>
+          </Link>
         </Box>
       </ModalContainer>
     </AuthVerificationLayout>
