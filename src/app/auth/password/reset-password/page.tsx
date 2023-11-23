@@ -12,7 +12,7 @@ const ResetPassword = () => {
           Create New Password
         </Text>
 
-        <Box w={["100%", "100%", "500px"]} mx={"auto"}>
+        <Box w={["100%", "100%", "100%", "500px"]} mx={"auto"}>
           <Text my={"1em"}>
             Your new password must be different from your previous used password
           </Text>

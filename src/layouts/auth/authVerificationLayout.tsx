@@ -9,7 +9,7 @@ const AuthVerificationLayout = ({ children }: { children: ReactNode }) => {
         bg={"brand.secondary"}
         py={"5em"}
         px={"2em"}
-        w={["90%", "90%", "1050px"]}
+        w={["90%", "90%", "100%", "1050px"]}
         mx={"auto"}
         textAlign={"center"}>
         {children}

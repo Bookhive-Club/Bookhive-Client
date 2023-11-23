@@ -45,7 +45,7 @@ const SignIn = () => {
         position: "top",
       });
 
-      setTimeout(() => router.push("/dashboard"), 2500);
+      setTimeout(() => router.push("/dashboard"), 1500);
     }
   }, [mutation.isSuccess]);
 

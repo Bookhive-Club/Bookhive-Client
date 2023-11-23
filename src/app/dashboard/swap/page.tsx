@@ -1,5 +1,5 @@
 import NoSwapedItem from "@/components/atom/store/noSwapItem";
-import { Box, Text, Flex } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "@/utils/axios";
 import IsLoadingDatas from "@/components/atom/loading_data";

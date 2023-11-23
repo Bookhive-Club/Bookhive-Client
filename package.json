@@ -27,6 +27,7 @@
     "@uidotdev/usehooks": "^2.4.1",
     "@vercel/analytics": "^1.1.1",
     "axios": "^1.6.2",
+    "bad-words-next": "^2.2.1",
     "cogo-toast": "^4.2.3",
     "cookies-next": "^4.1.0",
     "date-fns": "^2.30.0",
