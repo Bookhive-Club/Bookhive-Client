@@ -7,21 +7,23 @@ import IsErrorLoadingData from "@/components/atom/errors/errorLoading";
 import { AUTH_COOKIE } from "@/constants";
 
 const Swap = () => {
-  const getData = () =>
-    axiosInstance("/marketplace/get_all_swap_listings", {
-      headers: {
-        Authorization: `Bearer ${AUTH_COOKIE}`,
-      },
-    });
+  // const getData = () =>
+  //   axiosInstance("/marketplace/get_all_swap_listings", {
+  //     headers: {
+  //       Authorization: `Bearer ${AUTH_COOKIE}`,
+  //     },
+  //   });
 
-  const { data, isError, isLoading } = useQuery({
-    queryKey: ["details"],
-    queryFn: getData,
-  });
+  // const { data, isError, isLoading } = useQuery({
+  //   queryKey: ["details"],
+  //   queryFn: getData,
+  // });
 
-  if (isLoading) return <IsLoadingDatas />;
+  // console.log(data);
 
-  if (isError) return <IsErrorLoadingData />;
+  // if (isLoading) return <IsLoadingDatas />;
+
+  // if (isError) return <IsErrorLoadingData />;
   return (
     <Box>
       <NoSwapedItem />
