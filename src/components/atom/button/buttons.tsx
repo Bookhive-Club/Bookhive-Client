@@ -41,7 +41,7 @@ const Buttons: FC<TButton> = ({
   return (
     <Button
       border={border}
-      borderRadius={radius ? radius : "18px"}
+      borderRadius={radius ? radius : "10px"}
       color={color}
       bg={bg ? bg : "brand.primary"}
       size={size ? size : ["md", "lg"]}
@@ -53,9 +53,11 @@ const Buttons: FC<TButton> = ({
       isLoading={isLoading}
       loadingText={loadingText}
       type={type}
-      _hover={{
-        bg: "dark.10",
-      }}
+      _hover={
+        {
+          //bg: "dark.10",
+        }
+      }
       {...props}>
       {children}
     </Button>
