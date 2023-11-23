@@ -12,16 +12,6 @@ const Layout = ({ children }: { children: ReactNode }) => {
         <DashboardHeader />
       </Box>
       <Flex py={"1em"} my={"5em"}>
-        {/* <Box
-        top={0}
-        left={0}
-        mx={"auto"}
-        px={"4em"}ss
-        bottom={0}
-        w={"350px"}
-        display={["none", "none", "block"]}>
-        <DashboardSidebar />
-      </Box> */}
         <Container
           maxW={["100%", "85%", "85%", "80%"]}
           height="100vh"

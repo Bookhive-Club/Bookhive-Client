@@ -17,7 +17,7 @@ const DashboardHome = () => {
       },
     });
 
-  const { data, isError, isLoading, isPending } = useQuery({
+  const { data } = useQuery({
     queryKey: ["details"],
     queryFn: getData,
     refetchInterval: 3000,

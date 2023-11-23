@@ -11,7 +11,8 @@ const poppins = Poppins({
 
 export const metadata = {
   title: "Bookhive",
-  description: "An Open Platform to Engage Book Lovers.",
+  description:
+    "Discover, swap, and sell books peer-to-peer! Meet and engage with other Booklovers",
   icons: {
     icon: {
       url: "/logo.png",
@@ -21,7 +22,8 @@ export const metadata = {
   },
   openGraph: {
     title: "Bookhive",
-    description: "An Open Platform to Engage Book Lovers ( Bibliophiles ).",
+    description:
+      "Discover, swap, and sell books peer-to-peer! Meet and engage with other Booklovers",
   },
 };
 

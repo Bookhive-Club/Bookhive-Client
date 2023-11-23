@@ -1,7 +1,11 @@
 import React from "react";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Button, Text } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
 
 const IsErrorLoadingData = () => {
+  const router = useRouter();
+
+  const reloadPage = () => router.refresh();
   return (
     <Box
       h="500px"
@@ -9,7 +13,13 @@ const IsErrorLoadingData = () => {
       display={"flex"}
       alignItems={"center"}
       justifyContent={"center"}>
-      <Text>Sorry there was an issue loading datas</Text>
+      <Box>
+        <Text>Sorry there was an issue loading datas</Text>
+
+        <center>
+          <Button onClick={reloadPage}> Refresh</Button>
+        </center>
+      </Box>
     </Box>
   );
 };

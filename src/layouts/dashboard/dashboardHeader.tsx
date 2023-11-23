@@ -101,7 +101,9 @@ const DashboardHeader = () => {
         py={"1.2em"}
         bg={"brand.secondary"}>
         <Box>
-          <Logo />
+          <Link href="/dashboard">
+            <Logo />
+          </Link>
         </Box>
 
         {/* Navigation section */}
