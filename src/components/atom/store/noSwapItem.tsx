@@ -17,7 +17,7 @@ const NoSwapedItem = () => {
         <FcPackage size="4em" />
       </Box>
       <Box>You havnt made any swap yet</Box>
-      <Link href="/marketplace">
+      <Link href="/dashboard/marketplace">
         <Button>Go to Marketplace</Button>
       </Link>
     </Box>

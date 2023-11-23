@@ -10,6 +10,8 @@ import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "@/utils/axios";
 import { AUTH_COOKIE } from "@/constants";
+import IsLoadingDatas from "@/components/atom/loading_data";
+import IsErrorLoadingData from "@/components/atom/errors/errorLoading";
 
 const MarketplaceSwap = () => {
   const { onOpen, isOpen, onClose } = useDisclosure();
@@ -21,10 +23,14 @@ const MarketplaceSwap = () => {
       },
     });
 
-  const { data, isError, isLoading, isPending } = useQuery({
+  const { data, isError, isLoading } = useQuery({
     queryKey: ["details"],
     queryFn: getData,
   });
+
+  if (isLoading) return <IsLoadingDatas />;
+
+  if (isError) return <IsErrorLoadingData />;
 
   const retrivedData = data?.data?.data;
 

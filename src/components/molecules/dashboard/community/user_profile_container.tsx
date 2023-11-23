@@ -28,6 +28,8 @@ import { useFormik } from "formik";
 import { create_post_schema } from "@/validations/community";
 import { AUTH_COOKIE } from "@/constants";
 import { useRouter } from "next/navigation";
+import { useDropzone } from "react-dropzone";
+import { SelectedUpload } from "@/components/atom/image_upload";
 
 const imageUploader = (
   <Box
@@ -146,6 +148,17 @@ const UserProfileTop = () => {
     },
   });
 
+  const { getRootProps, getInputProps, acceptedFiles } = useDropzone();
+
+  const selectedFile = acceptedFiles?.map((files: FileObject) => {
+    const size = files.size;
+    return (
+      <>
+        <SelectedUpload name={files?.name} size={size} />
+      </>
+    );
+  });
+
   return (
     <Box>
       <Box
@@ -245,10 +258,13 @@ const UserProfileTop = () => {
             </Box>
           </FormControl>
 
-          <FormControl>
-            <FormLabel>{imageUploader}</FormLabel>
-            <Input type="file" display={"none"} onChange={uploadImage} />
+          <FormControl {...getRootProps()}>
+            <input {...getInputProps()} accept="image/*" />
+            {imageUploader}
           </FormControl>
+
+          <Box>{acceptedFiles && selectedFile}</Box>
+
           <Buttons
             type="submit"
             borderRadius={"10px"}
