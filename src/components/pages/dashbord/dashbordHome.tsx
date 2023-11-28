@@ -21,6 +21,7 @@ const DashboardHome = () => {
     queryKey: ["details"],
     queryFn: getData,
     refetchInterval: 3000,
+    retry: 3,
   });
 
   const userData = data?.data?.data;
