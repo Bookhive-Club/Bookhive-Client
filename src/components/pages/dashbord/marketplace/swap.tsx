@@ -16,19 +16,20 @@ import IsErrorLoadingData from "@/components/atom/errors/errorLoading";
 const MarketplaceSwap = () => {
   const { onOpen, isOpen, onClose } = useDisclosure();
 
-  const getData = () =>
-    axiosInstance("/marketplace/get_all_swap_listings", {
+  const getData = () => {
+    return axiosInstance("/marketplace/get_all_swap_listings", {
       headers: {
         Authorization: `Bearer ${AUTH_COOKIE}`,
       },
     });
+  };
 
-  const { data, isError, isLoading } = useQuery({
+  const { data, isError, isLoading, isPending } = useQuery({
     queryKey: ["details"],
     queryFn: getData,
   });
 
-  if (isLoading) return <IsLoadingDatas />;
+  if (isPending) return <IsLoadingDatas />;
 
   if (isError) return <IsErrorLoadingData />;
 
@@ -50,59 +51,51 @@ const MarketplaceSwap = () => {
         </Link>
       </Box>
       <Box display="flex" flexWrap={"wrap"} gap={["1em", "2em"]}>
-        {Array.isArray(retrivedData) && (
+        {retrivedData && retrivedData.length > 0 ? (
           <>
-            {retrivedData?.map((item, key: number) => {
-              return (
-                <Fragment key={key}>
-                  <Suspense fallback={<PeerSkeletonLoader />}>
-                    <BookShowcaseBox
-                      username={item?.user?.firstName}
-                      genre={item?.genre}
-                      title={item?.title}
-                      author={item?.author}
-                      profileimage=""
-                      bookimage={item?.image}
-                      action={() => alert(0)}
-                      view={onOpen}
-                    />
-                  </Suspense>
+            {Array.isArray(retrivedData) && (
+              <>
+                {retrivedData?.map((item, key: number) => {
+                  return (
+                    <Fragment key={key}>
+                      <Suspense fallback={<PeerSkeletonLoader />}>
+                        <BookShowcaseBox
+                          username={item?.user?.firstName}
+                          genre={item?.genre}
+                          title={item?.title}
+                          author={item?.author}
+                          profileimage=""
+                          bookimage={item?.image}
+                          action={() => alert(0)}
+                          view={onOpen}
+                        />
+                      </Suspense>
 
-                  <DrawerContainer
-                    title="Book Title"
-                    size={["full", "md"]}
-                    isOpen={isOpen}
-                    onClose={onClose}>
-                    <PreviewMarketplaceData
-                      title={item?.title}
-                      description={item?.description}
-                      image={item?.image}
-                      ISBN={item?.isbn}
-                      genre={item?.genre}
-                      condition={item?.condition}
-                      owner={item?.user?.firstName}
-                      postedAt={item?.createdAt}
-                    />
-                  </DrawerContainer>
-                </Fragment>
-              );
-            })}
+                      <DrawerContainer
+                        title="Book Title"
+                        size={["full", "md"]}
+                        isOpen={isOpen}
+                        onClose={onClose}>
+                        <PreviewMarketplaceData
+                          title={item?.title}
+                          description={item?.description}
+                          image={item?.image}
+                          ISBN={item?.isbn}
+                          genre={item?.genre}
+                          condition={item?.condition}
+                          owner={item?.user?.firstName}
+                          postedAt={item?.createdAt}
+                        />
+                      </DrawerContainer>
+                    </Fragment>
+                  );
+                })}
+              </>
+            )}
           </>
+        ) : (
+          <Text textAlign={"center"}>No Data Found</Text>
         )}
-
-        {/* <ModalContainer isOpen={isModal} onClose={closeModal}>
-          <Flex gap="1em">
-            <Avatar />
-            <Box>
-              <Text fontWeight={"semibold"}>Emmanuel </Text>
-              <Text>Swap</Text>
-            </Box>
-          </Flex>
-
-          <Box>
-            <InputArea type="text" placeholder="bokdname" />
-          </Box>
-        </ModalContainer> */}
       </Box>
     </>
   );

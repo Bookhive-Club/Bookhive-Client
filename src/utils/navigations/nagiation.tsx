@@ -29,11 +29,17 @@ const dashboardHeaderNav = [
   //   active: <HiCollection />,
   //   path: "/dashboard/reading_list",
   // },
+  // {
+  //   title: "Discover",
+  //   icon: <HiOutlineCollection size="1.2em" />,
+  //   active: <HiCollection />,
+  //   path: "/dashboard/discover",
+  // },
   {
-    title: "Discover",
+    title: "Marketplace",
     icon: <HiOutlineCollection size="1.2em" />,
     active: <HiCollection />,
-    path: "/dashboard/discover",
+    path: "/dashboard/marketplace",
   },
 
   {

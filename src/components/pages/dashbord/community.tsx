@@ -21,6 +21,7 @@ const CommunityPage = () => {
   const { data, isError, isLoading, isFetching } = useQuery({
     queryKey: ["details"],
     queryFn: getData,
+    retry: 2,
     refetchInterval: 5000,
   });
 
