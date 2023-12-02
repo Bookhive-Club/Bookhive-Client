@@ -26,6 +26,7 @@ import { ImageUpload, SelectedUpload } from "@/components/atom/image_upload";
 import { File } from "buffer";
 import { AxiosError, AxiosResponse } from "axios";
 import { QueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 const condition = [
   {
@@ -132,7 +133,13 @@ const CreateSwap = () => {
     image: "",
   };
 
-  //handle form data
+  const getSessionItem =
+    typeof window !== "undefined"
+      ? sessionStorage.getItem("user_location")
+      : "";
+
+  console.log(getSessionItem);
+
   const formik = useFormik({
     initialValues: payload,
     validationSchema: create_swap_listings_schema,

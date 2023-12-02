@@ -12,6 +12,7 @@ import { axiosInstance } from "@/utils/axios";
 import { AUTH_COOKIE } from "@/constants";
 import IsLoadingDatas from "@/components/atom/loading_data";
 import IsErrorLoadingData from "@/components/atom/errors/errorLoading";
+import { convertDistance, getPreciseDistance } from "geolib";
 
 const MarketplaceSwap = () => {
   const { onOpen, isOpen, onClose } = useDisclosure();
@@ -34,6 +35,17 @@ const MarketplaceSwap = () => {
   if (isError) return <IsErrorLoadingData />;
 
   const retrivedData = data?.data?.data;
+
+  const calculateDistance = getPreciseDistance(
+    { latitude: 51.5103, longitude: 7.49347 },
+    { latitude: "51° 31' N", longitude: "7° 28' E" }
+  );
+
+  const getDistanceInMiles = convertDistance(calculateDistance, "mi").toFixed(
+    2
+  );
+
+  const displayLocation = `${getDistanceInMiles} m away`;
 
   return (
     <>
@@ -68,6 +80,7 @@ const MarketplaceSwap = () => {
                           bookimage={item?.image}
                           action={() => alert(0)}
                           view={onOpen}
+                          location={displayLocation}
                         />
                       </Suspense>
 
@@ -85,6 +98,7 @@ const MarketplaceSwap = () => {
                           condition={item?.condition}
                           owner={item?.user?.firstName}
                           postedAt={item?.createdAt}
+                          locationDistance={displayLocation}
                         />
                       </DrawerContainer>
                     </Fragment>

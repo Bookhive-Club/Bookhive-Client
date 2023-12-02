@@ -13,7 +13,7 @@ import {
 import { FaEye } from "react-icons/fa";
 import ModalContainer from "@/layouts/popups/modalLayout";
 import Buttons from "@/components/atom/button/buttons";
-import { useMutation } from "@tanstack/react-query";
+import { convertDistance, getPreciseDistance } from "geolib";
 interface IBookShowCaseProps {
   action: () => void;
   view: () => void;
@@ -23,6 +23,7 @@ interface IBookShowCaseProps {
   profileimage: string;
   bookimage: string;
   genre: string;
+  location?: any;
 }
 
 const BookShowcaseBox: FC<IBookShowCaseProps> = ({
@@ -34,17 +35,12 @@ const BookShowcaseBox: FC<IBookShowCaseProps> = ({
   bookimage,
   username,
   author,
+  location,
 }: IBookShowCaseProps) => {
   const { onOpen, isOpen, onClose } = useDisclosure();
 
-  //handle swap mutation
-  // const { data } = useMutation({
-
-  // });
-
   return (
     <Box
-      //   h={["450.242px"]}
       borderRadius={"10px"}
       w={["90%", "90%", "250px"]}
       bg={"#212121"}
@@ -88,15 +84,9 @@ const BookShowcaseBox: FC<IBookShowCaseProps> = ({
         <Avatar size={"sm"} />
         <Box>
           <Text>{username} </Text>
-          {/* <Badge
-            my={"1em"}
-            px={"0.6em"}
-            py={"0.1em"}
-            bg={"brand.primary"}
-            color={"#fff"}
-            borderRadius={"md"}>
-            Fiction
-          </Badge> */}
+          <Text fontSize={"13px"} color={"gray.400"}>
+            {location}
+          </Text>
         </Box>
       </Flex>
 

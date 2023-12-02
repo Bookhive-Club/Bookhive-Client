@@ -15,7 +15,7 @@ interface MarketplaceData<T> {
   description: string;
   genre: string;
   condition: Status;
-  // location: string;
+  locationDistance?: any;
   ISBN: number;
   postedAt?: T;
 }
@@ -30,7 +30,7 @@ const PreviewMarketplaceData: FC<MarketplaceData<Date | string | number>> = ({
   title,
   owner,
   condition,
-  // location,
+  locationDistance,
   genre,
   description,
   ISBN,
@@ -96,8 +96,15 @@ const PreviewMarketplaceData: FC<MarketplaceData<Date | string | number>> = ({
             ))}
           </Flex>
 
-          <Box display="flex" mt={"2em"} alignItems={"center"} gap="1em">
-            <MdLocationOn /> Lagos, Nigeria
+          <Box display="flex" flexDir={"column"} mt={"2em"} gap=".2em">
+            <Box display={"inline-flex"} gap=".3em" alignItems={"center"}>
+              <MdLocationOn /> <Text>Lagos, Nigeria</Text>
+            </Box>
+            <Box>
+              <Text fontSize={"13px"} color={"gray.400"}>
+                {locationDistance}
+              </Text>
+            </Box>
           </Box>
         </Box>
 
