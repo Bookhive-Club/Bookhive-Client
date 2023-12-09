@@ -1,10 +1,4 @@
-// import { configureStore } from "@reduxjs/toolkit";
-// import { rootReducer } from "./rootReducer";
 
-// export const store = configureStore({
-//   reducer: rootReducer,
-// });
-import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';

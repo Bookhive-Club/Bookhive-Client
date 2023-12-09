@@ -27,56 +27,8 @@ import { File } from "buffer";
 import { AxiosError, AxiosResponse } from "axios";
 import { QueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
-
-const condition = [
-  {
-    name: "New",
-    value: "NEW",
-  },
-  {
-    name: "Nearly New",
-    value: "NEARLY_NEW",
-  },
-  {
-    name: "Used",
-    value: "USED",
-  },
-];
-
-const genre = [
-  {
-    name: "Self Help",
-    value: "SELF_HELP",
-  },
-  {
-    name: "Fantasy",
-    value: "FANTASY",
-  },
-  {
-    name: "Biography",
-    value: "BIOGRAPHY",
-  },
-  {
-    name: "Horror",
-    value: "HORROR",
-  },
-  {
-    name: "Thriller",
-    value: "THRILLER",
-  },
-  {
-    name: "Poetry ",
-    value: "POETRY",
-  },
-  {
-    name: "Mistry ",
-    value: "MYSTERY",
-  },
-  {
-    name: "Others ",
-    value: "OTHER",
-  },
-];
+import { CONDITION, GENRE } from "@/constants/constants";
+import { useSelector } from "react-redux";
 
 interface FileObject {
   name: string;
@@ -138,15 +90,21 @@ const CreateSwap = () => {
       ? sessionStorage.getItem("user_location")
       : "";
 
-  console.log(getSessionItem);
+  const { locationData } = useSelector((state) => state?.location);
+
+  const { latitude, longitude } = locationData;
 
   const formik = useFormik({
     initialValues: payload,
     validationSchema: create_swap_listings_schema,
     validateOnChange: true,
     onSubmit: (values) => {
-      console.log(values);
-      mutation.mutate(values);
+      mutation.mutate({
+        ...values,
+        isbn: String(values.isbn),
+        latitude: latitude,
+        longitude: longitude,
+      });
     },
   });
 
@@ -243,7 +201,7 @@ const CreateSwap = () => {
                   }
                   onChange={formik.handleChange}>
                   <option value="">Select Field</option>
-                  {condition.map((_, key) => {
+                  {CONDITION.map((_, key) => {
                     return <option key={_.value}>{_.name}</option>;
                   })}
                 </SelectionField>
@@ -256,7 +214,7 @@ const CreateSwap = () => {
                   isInvalid={formik.touched.genre && !!formik.errors.genre}
                   onChange={formik.handleChange}>
                   <option value="">Genre</option>
-                  {genre.map((_, key) => {
+                  {GENRE.map((_, key) => {
                     return <option key={_.value}>{_.name}</option>;
                   })}
                 </SelectionField>

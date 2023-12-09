@@ -1,5 +1,5 @@
 "use client";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import {
   Box,
   Badge,
@@ -38,6 +38,7 @@ const BookShowcaseBox: FC<IBookShowCaseProps> = ({
   location,
 }: IBookShowCaseProps) => {
   const { onOpen, isOpen, onClose } = useDisclosure();
+  const [message, setMessage] = useState();
 
   return (
     <Box
