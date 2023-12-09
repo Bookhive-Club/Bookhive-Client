@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, { ChangeEvent, FC, useState } from "react";
 import {
   Box,
   Badge,
@@ -9,11 +9,16 @@ import {
   Button,
   useDisclosure,
   Textarea,
+  useToast,
 } from "@chakra-ui/react";
 import { FaEye } from "react-icons/fa";
 import ModalContainer from "@/layouts/popups/modalLayout";
 import Buttons from "@/components/atom/button/buttons";
 import { convertDistance, getPreciseDistance } from "geolib";
+import { useMutation } from "@tanstack/react-query";
+import { axiosInstance } from "@/utils/axios";
+import { AUTH_COOKIE } from "@/constants";
+import { AxiosError } from "axios";
 interface IBookShowCaseProps {
   action: () => void;
   view: () => void;
@@ -24,6 +29,9 @@ interface IBookShowCaseProps {
   bookimage: string;
   genre: string;
   location?: any;
+  posterId: string;
+  swapItemId: string;
+  requesterId: string;
 }
 
 const BookShowcaseBox: FC<IBookShowCaseProps> = ({
@@ -35,11 +43,51 @@ const BookShowcaseBox: FC<IBookShowCaseProps> = ({
   bookimage,
   username,
   author,
+  requesterId,
   location,
+  posterId,
+  swapItemId,
 }: IBookShowCaseProps) => {
   const { onOpen, isOpen, onClose } = useDisclosure();
-  const [message, setMessage] = useState();
+  const [message, setMessage] = useState<string>();
+  const toast = useToast();
 
+  const payload = {
+    message: message,
+    swapItemId: swapItemId,
+    requesterId: requesterId,
+    posterId: posterId,
+  };
+
+  const sendRequest = useMutation({
+    mutationFn: () => {
+      return axiosInstance.post("/marketplace/send_swap_request", payload, {
+        headers: {
+          Authorization: `Bearer ${AUTH_COOKIE}`,
+        },
+      });
+    },
+
+    onSuccess: (res) => {
+      console.log(res);
+    },
+
+    onError: (err: AxiosError) => {
+      //@ts-ignore
+      const { data } = err?.response;
+      toast({
+        variant: "solid",
+        status: "error",
+        description: data?.message,
+        position: "top",
+      });
+    },
+  });
+
+  const sendSwapRequest = () => sendRequest.mutate();
+
+  const addMessage = (event: ChangeEvent<HTMLTextAreaElement>) =>
+    setMessage(event.target.value);
   return (
     <Box
       borderRadius={"10px"}
@@ -108,10 +156,17 @@ const BookShowcaseBox: FC<IBookShowCaseProps> = ({
         </Box>
       </Flex>
 
-      <ModalContainer isOpen={isOpen} onClose={onClose}>
+      <ModalContainer isOpen={isOpen} onClose={onClose} title="Send Message">
         <form>
-          <Textarea placeholder="Add a message to owner" />
-          <Buttons my="10px" borderRadius={"10px"} w="100%">
+          <Textarea
+            placeholder="Add a message for the owner"
+            onChange={(e) => addMessage(e)}
+          />
+          <Buttons
+            my="10px"
+            borderRadius={"10px"}
+            w="100%"
+            onClick={sendSwapRequest}>
             Send Request
           </Buttons>
         </form>

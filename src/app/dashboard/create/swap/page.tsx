@@ -90,6 +90,7 @@ const CreateSwap = () => {
       ? sessionStorage.getItem("user_location")
       : "";
 
+  //@ts-ignore
   const { locationData } = useSelector((state) => state?.location);
 
   const { latitude, longitude } = locationData;

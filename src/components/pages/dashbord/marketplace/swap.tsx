@@ -13,9 +13,11 @@ import { AUTH_COOKIE } from "@/constants";
 import IsLoadingDatas from "@/components/atom/loading_data";
 import IsErrorLoadingData from "@/components/atom/errors/errorLoading";
 import { convertDistance, getPreciseDistance } from "geolib";
+import { useSelector } from "react-redux";
 
 const MarketplaceSwap = () => {
   const { onOpen, isOpen, onClose } = useDisclosure();
+  const { userDetails } = useSelector((state) => state?.user);
 
   const getData = () => {
     return axiosInstance("/marketplace/get_all_swap_listings", {
@@ -81,6 +83,9 @@ const MarketplaceSwap = () => {
                           action={() => alert(0)}
                           view={onOpen}
                           location={displayLocation}
+                          swapItemId={item?.id}
+                          posterId={item?.usersId}
+                          requesterId={userDetails?.id}
                         />
                       </Suspense>
 
