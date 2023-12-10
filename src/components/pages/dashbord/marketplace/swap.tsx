@@ -1,7 +1,14 @@
 "use client";
 import BookShowcaseBox from "@/components/molecules/dashboard/marketplace/swapBox";
 import React, { Fragment, Suspense, useState } from "react";
-import { Box, Text, Flex, Avatar, useDisclosure } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Flex,
+  Avatar,
+  useDisclosure,
+  InputLeftElement,
+} from "@chakra-ui/react";
 import DrawerContainer from "@/layouts/popups/appDrawerLayout";
 import PreviewMarketplaceData from "@/components/templates/dashboard/marketplace/preview_marketplacedata";
 import PeerSkeletonLoader from "@/components/skeletons/dashboard/peer_showcasebox_skeleton";
@@ -14,6 +21,8 @@ import IsLoadingDatas from "@/components/atom/loading_data";
 import IsErrorLoadingData from "@/components/atom/errors/errorLoading";
 import { convertDistance, getPreciseDistance } from "geolib";
 import { useSelector } from "react-redux";
+import { convertGeoLocation } from "@/utils/calculateLocation";
+import InputArea from "@/components/atom/form/inputArea";
 
 const MarketplaceSwap = () => {
   const { onOpen, isOpen, onClose } = useDisclosure();
@@ -52,14 +61,19 @@ const MarketplaceSwap = () => {
         mb={"2em"}
         display="flex"
         alignItems="center"
-        justifyContent={"space-between"}>
+        justifyContent={"space-between"}
+        flexWrap={["wrap", "wrap", "wrap", "nowrap"]}>
         <Text fontWeight="bold" fontSize={["20px", "21px", "25px"]}>
           P2P Marketplace
         </Text>
 
-        <Link href="/dashboard/create/swap">
-          <Buttons radius="10px">List Item</Buttons>
-        </Link>
+        <Box display="flex" gap=".5em" alignItems={"center"}>
+          <InputArea type="search" placeholder="Search " />
+
+          <Link href="/dashboard/create/swap">
+            <Buttons radius="10px">List Item</Buttons>
+          </Link>
+        </Box>
       </Box>
       <Box display="flex" flexWrap={"wrap"} gap={["1em", "2em"]}>
         {retrivedData && retrivedData.length > 0 ? (
@@ -75,10 +89,9 @@ const MarketplaceSwap = () => {
                   let displayLocation;
                   const exactLocation = "0.00";
 
-                  const getDistanceInMiles = convertDistance(
-                    calculateDistance,
-                    "mi"
-                  ).toFixed(2);
+                  const getDistanceInMiles = convertGeoLocation({
+                    distance: calculateDistance,
+                  });
 
                   if (getDistanceInMiles === exactLocation) {
                     displayLocation = "Same Location";

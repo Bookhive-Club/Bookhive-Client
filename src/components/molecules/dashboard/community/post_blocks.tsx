@@ -11,12 +11,11 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { FiMoreVertical } from "react-icons/fi";
-import { parseISO } from "date-fns";
 import { HiOutlineTrash } from "react-icons/hi";
 import { TbBookmark } from "react-icons/tb";
 import { useMutation } from "@tanstack/react-query";
 import { axiosInstance } from "@/utils/axios";
-import { AUTH_COOKIE } from "@/constants";
+import { AUTH_COOKIE, FORMAT_TWITTER_DATE } from "@/constants";
 import { useSelector } from "react-redux";
 
 interface ContentDetails {
@@ -28,21 +27,6 @@ interface ContentDetails {
   postId: string;
 }
 
-const formatTwitterDate = (date: any) => {
-  const now = new Date();
-  const diffInSeconds = (now.getTime() - date.getTime()) / 1000;
-
-  if (diffInSeconds < 60) {
-    return "Just now";
-  } else if (diffInSeconds < 3600) {
-    return Math.floor(diffInSeconds / 60) + "m";
-  } else if (diffInSeconds < 86400) {
-    return Math.floor(diffInSeconds / 3600) + "h";
-  } else {
-    return Math.floor(diffInSeconds / 86400) + "d";
-  }
-};
-
 const ContentPostedBlocks: FC<ContentDetails> = ({
   name,
   date,
@@ -53,7 +37,7 @@ const ContentPostedBlocks: FC<ContentDetails> = ({
 }) => {
   //@ts-ignore
   const parseDate = parseISO(date);
-  const twitterDate = formatTwitterDate(parseDate);
+  const twitterDate = FORMAT_TWITTER_DATE(parseDate);
 
   let statusBg, statusColor;
 

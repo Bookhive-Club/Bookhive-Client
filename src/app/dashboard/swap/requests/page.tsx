@@ -1,12 +1,9 @@
 "use client";
-import BookShowcaseBox from "@/components/molecules/dashboard/marketplace/swapBox";
+
 import React, { Fragment, Suspense } from "react";
-import { Box, Text, Flex, Avatar, useDisclosure } from "@chakra-ui/react";
+import { Box, Text, useDisclosure } from "@chakra-ui/react";
 import DrawerContainer from "@/layouts/popups/appDrawerLayout";
-import PreviewMarketplaceData from "@/components/templates/dashboard/marketplace/preview_marketplacedata";
 import PeerSkeletonLoader from "@/components/skeletons/dashboard/peer_showcasebox_skeleton";
-import Buttons from "@/components/atom/button/buttons";
-import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "@/utils/axios";
 import { AUTH_COOKIE } from "@/constants";
@@ -48,14 +45,16 @@ const Page = () => {
             My Requests
           </Text>
 
-          <Text
-            fontWeight={"bold"}
-            py="0.2em"
-            rounded="2em"
-            px="1em"
-            bg="brand.primary">
-            {retrivedData?.length}
-          </Text>
+          {retrivedData && (
+            <Text
+              fontWeight={"bold"}
+              py="0.2em"
+              rounded="2em"
+              px="1em"
+              bg="brand.primary">
+              {retrivedData?.length}
+            </Text>
+          )}
         </Box>
       </Box>
       <Box display="flex" flexWrap={"wrap"} gap={["1em", "2em"]}>
@@ -67,7 +66,6 @@ const Page = () => {
             {Array.isArray(retrivedData) && (
               <>
                 {retrivedData?.map((item, key: number) => {
-                  console.log(item);
                   return (
                     <Fragment key={key}>
                       <Suspense fallback={<PeerSkeletonLoader />}>

@@ -2,7 +2,8 @@ import React, { FC, Fragment } from "react";
 import { Box, Text, Flex, Avatar } from "@chakra-ui/react";
 import Buttons from "@/components/atom/button/buttons";
 import { MdLocationOn } from "react-icons/md";
-
+import { parseISO } from "date-fns";
+import { FORMAT_TWITTER_DATE } from "@/constants";
 interface ViewSwapRequest<T> {
   image: string;
   message?: string;
@@ -20,6 +21,9 @@ const ViewSwapRequest: FC<ViewSwapRequest<Date | string | number>> = ({
   title,
   date,
 }) => {
+  const parseDate = parseISO(date);
+  const formatData = FORMAT_TWITTER_DATE(parseDate);
+
   return (
     <Box>
       <Box
@@ -62,7 +66,7 @@ const ViewSwapRequest: FC<ViewSwapRequest<Date | string | number>> = ({
               <Text>Lagos, Nigeria</Text>
             </Box>
 
-            <Text>{date}</Text>
+            <Text>{formatData} ago</Text>
           </Box>
         </Box>
 
