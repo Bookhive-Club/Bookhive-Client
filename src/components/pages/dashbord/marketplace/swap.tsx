@@ -1,14 +1,14 @@
+//@ts-nocheck
 "use client";
 import BookShowcaseBox from "@/components/molecules/dashboard/marketplace/swapBox";
-import React, { Fragment, Suspense, useState } from "react";
-import {
-  Box,
-  Text,
-  Flex,
-  Avatar,
-  useDisclosure,
-  InputLeftElement,
-} from "@chakra-ui/react";
+import React, {
+  ChangeEvent,
+  Fragment,
+  Suspense,
+  useEffect,
+  useState,
+} from "react";
+import { Box, Text, useDisclosure } from "@chakra-ui/react";
 import DrawerContainer from "@/layouts/popups/appDrawerLayout";
 import PreviewMarketplaceData from "@/components/templates/dashboard/marketplace/preview_marketplacedata";
 import PeerSkeletonLoader from "@/components/skeletons/dashboard/peer_showcasebox_skeleton";
@@ -19,13 +19,14 @@ import { axiosInstance } from "@/utils/axios";
 import { AUTH_COOKIE } from "@/constants";
 import IsLoadingDatas from "@/components/atom/loading_data";
 import IsErrorLoadingData from "@/components/atom/errors/errorLoading";
-import { convertDistance, getPreciseDistance } from "geolib";
+import { getPreciseDistance } from "geolib";
 import { useSelector } from "react-redux";
 import { convertGeoLocation } from "@/utils/calculateLocation";
 import InputArea from "@/components/atom/form/inputArea";
 
 const MarketplaceSwap = () => {
   const { onOpen, isOpen, onClose } = useDisclosure();
+
   //@ts-ignore
   const { userDetails } = useSelector((state) => state?.user);
   //@ts-ignore
@@ -35,6 +36,8 @@ const MarketplaceSwap = () => {
 
   const [userLocation, setUserLocation] = useState();
   const [bgImage, setBgImage] = useState();
+  const [loadedData, setLoadedData] = useState([]);
+  const [filteredData, setFilterdData] = useState([]);
 
   const getData = () => {
     return axiosInstance("/marketplace/get_all_swap_listings", {
@@ -49,11 +52,23 @@ const MarketplaceSwap = () => {
     queryFn: getData,
   });
 
+  useEffect(() => {
+    const retrivedData = data?.data?.data;
+    setLoadedData(retrivedData);
+    setFilterdData(retrivedData);
+  }, [data]);
+
+  const searchForSwaps = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    const filterData = loadedData?.filter((data: any) =>
+      data.title.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilterdData(filterData);
+  };
+
   if (isPending) return <IsLoadingDatas />;
 
   if (isError) return <IsErrorLoadingData />;
-
-  const retrivedData = data?.data?.data;
 
   return (
     <>
@@ -68,7 +83,11 @@ const MarketplaceSwap = () => {
         </Text>
 
         <Box display="flex" gap=".5em" alignItems={"center"}>
-          <InputArea type="search" placeholder="Search " />
+          <InputArea
+            type="search"
+            placeholder="Search "
+            onChange={(e) => searchForSwaps(e)}
+          />
 
           <Link href="/dashboard/create/swap">
             <Buttons radius="10px">List Item</Buttons>
@@ -76,11 +95,11 @@ const MarketplaceSwap = () => {
         </Box>
       </Box>
       <Box display="flex" flexWrap={"wrap"} gap={["1em", "2em"]}>
-        {retrivedData && retrivedData.length > 0 ? (
+        {filteredData && filteredData.length > 0 ? (
           <>
-            {Array.isArray(retrivedData) && (
+            {Array.isArray(filteredData) && (
               <>
-                {retrivedData?.map((item, key: number) => {
+                {filteredData?.map((item, key: number) => {
                   const calculateDistance = getPreciseDistance(
                     { latitude, longitude },
                     { latitude: item?.latitude, longitude: item?.longitude }
@@ -122,9 +141,8 @@ const MarketplaceSwap = () => {
                           requesterId={userDetails?.id}
                         />
                       </Suspense>
-
                       <DrawerContainer
-                        title="Book Title"
+                        title={item?.title}
                         size={["full", "md"]}
                         isOpen={isOpen}
                         onClose={onClose}>

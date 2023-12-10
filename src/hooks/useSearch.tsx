@@ -6,7 +6,11 @@ type SearchTerms = {
   fieldsToSearch: string[];
 };
 
-const useHooks = ({ input, toFilter, fieldsToSearch }: SearchTerms) => {
+export const useSearchFilter = ({
+  input,
+  toFilter,
+  fieldsToSearch,
+}: SearchTerms) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [filteredData, setFilteredData] = useState<any[]>([]);
 
@@ -25,4 +29,3 @@ const useHooks = ({ input, toFilter, fieldsToSearch }: SearchTerms) => {
 
   return { filteredData, setSearchTerm };
 };
- 

@@ -2,6 +2,8 @@ import React, { FC, Fragment } from "react";
 import { Box, Text, Flex, Avatar } from "@chakra-ui/react";
 import Buttons from "@/components/atom/button/buttons";
 import { MdLocationOn } from "react-icons/md";
+import { FORMAT_TWITTER_DATE } from "@/constants";
+import parseISO from "date-fns/parseISO";
 
 enum Status {
   new,
@@ -22,19 +24,17 @@ interface MarketplaceData<T> {
 
 interface Details {
   name: string;
-  value: string | number;
+  value?: string | number;
 }
 
-const PreviewMarketplaceData: FC<MarketplaceData<Date | string | number>> = ({
+const PreviewMarketplaceData: FC<MarketplaceData<Date | string>> = ({
   image,
-  title,
   owner,
   condition,
-  locationDistance,
   genre,
   description,
   ISBN,
-  // postedAt,
+  postedAt,
 }) => {
   const details: Details[] = [
     {
@@ -63,33 +63,38 @@ const PreviewMarketplaceData: FC<MarketplaceData<Date | string | number>> = ({
         backgroundRepeat={"no-repeat"}></Box>
 
       <Box my={"1em"}>
-        <Box mb=".9em" display="flex" gap="0.3em" alignItems={"center"}>
-          <Avatar src={""} name={owner} />
-          <Box>
-            <Text>{owner}</Text>
-            <Text></Text>
+        <Flex justifyContent={"space-between"}>
+          <Box mb=".9em" display="flex" gap="0.3em" alignItems={"center"}>
+            <Avatar src={""} name={owner} />
+            <Box>
+              <Text>{owner}</Text>
+              {/* @ts-ignore */}
+              <Text>{FORMAT_TWITTER_DATE(parseISO(postedAt))} ago</Text>
+            </Box>
           </Box>
-        </Box>
 
-        <Text fontSize={"1.5em"} fontWeight="semibold">
+          <Text></Text>
+        </Flex>
+        {/* <Text fontSize={"1.5em"} fontWeight="semibold">
           {title}
-        </Text>
+        </Text> */}
 
         <Text my="1em">{description}</Text>
 
         <Box my="1em">
           <Text fontWeight="semibold">Details</Text>
 
-          <Flex gap="1em" flexWrap={["wrap", "wrap", "nowrap"]}>
-            {details.map((_, key) => (
+          <Flex gap="1em" flexDirection={["column"]}>
+            {details?.map((_, key) => (
               <Fragment key={key}>
                 <Box
                   bg="dark.30"
-                  w="150px"
+                  // w="150px"
                   borderRadius={"10px"}
                   px="1em"
-                  py="1em">
-                  {_.name}: {_.value}
+                  py="1em"
+                  w="100%">
+                  {_?.name}: {_?.value}
                 </Box>
               </Fragment>
             ))}
@@ -107,11 +112,11 @@ const PreviewMarketplaceData: FC<MarketplaceData<Date | string | number>> = ({
           </Box> */}
         </Box>
 
-        <Box>
+        {/* <Box>
           <Buttons radius="10px" w={"100%"}>
             Send Swap Request
           </Buttons>
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );

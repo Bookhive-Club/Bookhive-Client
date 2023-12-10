@@ -1,19 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-   locationData: {}
+  locationData: {},
 };
 
 const locationSlice = createSlice({
-    name: "location",
-    initialState,
-    reducers: {
-       updateLocationData: (state, action) => {
-           state.locationData = action.payload;
-       },
-    }
+  name: "location",
+  initialState,
+  reducers: {
+    updateLocationData: (state, action) => {
+      state.locationData = action.payload;
+    },
+  },
 });
-
 
 export const locationReducer = locationSlice.reducer;
 
