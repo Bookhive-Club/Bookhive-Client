@@ -5,17 +5,20 @@ import { MdLocationOn } from "react-icons/md";
 
 interface ViewSwapRequest<T> {
   image: string;
-  title?: string;
+  message?: string;
   owner: string;
   description: string;
-  genre: string;
   postedAt?: T;
+  title: string;
+  date: string;
 }
 
 const ViewSwapRequest: FC<ViewSwapRequest<Date | string | number>> = ({
   image,
-  title,
+  message,
   owner,
+  title,
+  date,
 }) => {
   return (
     <Box>
@@ -45,30 +48,27 @@ const ViewSwapRequest: FC<ViewSwapRequest<Date | string | number>> = ({
         <Box my="1em">
           <Text fontWeight="semibold">Message</Text>
           <Box my="1em" bg="#0000002b" p="1em" borderRadius={"lg"}>
-            lore
+            {message}
           </Box>
 
-          <Box display="flex" mt={"2em"} alignItems={"center"} gap="1em">
-            <MdLocationOn /> Lagos, Nigeria
+          <Box
+            display="flex"
+            justifyContent={"space-between"}
+            mt={"2em"}
+            alignItems={"center"}
+            gap="1em">
+            <Box display={"inline-flex"} alignItems="center" gap="0.5em">
+              <MdLocationOn />
+              <Text>Lagos, Nigeria</Text>
+            </Box>
+
+            <Text>{date}</Text>
           </Box>
         </Box>
 
         <Box display={"flex "} gap={"1em"}>
           <Buttons radius="10px" w={"100%"} _hover={{}}>
-            Accept Request
-          </Buttons>
-
-          <Buttons
-            border={"1px solid red"}
-            color="#fff"
-            radius="10px"
-            bg="red"
-            w={"100%"}
-            _hover={{
-              background: "red",
-              color: "white",
-            }}>
-            Reject Request
+            Continue Chat
           </Buttons>
         </Box>
       </Box>

@@ -38,13 +38,25 @@ const Page = () => {
         display="flex"
         alignItems="center"
         justifyContent={"space-between"}>
-        <Text fontWeight="bold" fontSize={["18px", "19px", "22px"]}>
-          Swap Requests
-        </Text>
+        <Box
+          display={"flex"}
+          alignItems={"center"}
+          gap=".4em"
+          w="fit-content"
+          h="fit-content">
+          <Text fontWeight="bold" fontSize={["18px", "19px", "22px"]}>
+            My Requests
+          </Text>
 
-        {/* <Link href="/dashboard/create/swap">
-          <Buttons radius="10px">List Item</Buttons>
-        </Link> */}
+          <Text
+            fontWeight={"bold"}
+            py="0.2em"
+            rounded="2em"
+            px="1em"
+            bg="brand.primary">
+            {retrivedData?.length}
+          </Text>
+        </Box>
       </Box>
       <Box display="flex" flexWrap={"wrap"} gap={["1em", "2em"]}>
         {/* check if data is empty  */}
@@ -55,6 +67,7 @@ const Page = () => {
             {Array.isArray(retrivedData) && (
               <>
                 {retrivedData?.map((item, key: number) => {
+                  console.log(item);
                   return (
                     <Fragment key={key}>
                       <Suspense fallback={<PeerSkeletonLoader />}>
@@ -68,22 +81,22 @@ const Page = () => {
                           action={() => alert(0)}
                           view={onOpen}
                         />
-                      </Suspense>
 
-                      <DrawerContainer
-                        title="Book Title"
-                        size={["full", "md"]}
-                        isOpen={isOpen}
-                        onClose={onClose}>
-                        <ViewSwapRequest
-                          title={item?.title}
-                          description={item?.description}
-                          image={item?.image}
-                          genre={item?.genre}
-                          owner={item?.user?.firstName}
-                          postedAt={item?.createdAt}
-                        />
-                      </DrawerContainer>
+                        <DrawerContainer
+                          title="Book Title"
+                          size={["full", "md"]}
+                          isOpen={isOpen}
+                          onClose={onClose}>
+                          <ViewSwapRequest
+                            title={item?.title}
+                            description={item?.description}
+                            image={item?.image}
+                            message={item?.message}
+                            owner={item?.user?.firstName}
+                            date={item?.createdAt}
+                          />
+                        </DrawerContainer>
+                      </Suspense>
                     </Fragment>
                   );
                 })}
