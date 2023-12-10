@@ -9,7 +9,7 @@ enum Status {
 }
 
 interface MarketplaceData<T> {
-  image: string;
+  image: string | undefined;
   title?: string;
   owner: string;
   description: string;
@@ -54,7 +54,6 @@ const PreviewMarketplaceData: FC<MarketplaceData<Date | string | number>> = ({
   return (
     <Box>
       <Box
-        bg={"black"}
         w={"100%"}
         borderRadius={"10px"}
         height="250px"
@@ -96,7 +95,7 @@ const PreviewMarketplaceData: FC<MarketplaceData<Date | string | number>> = ({
             ))}
           </Flex>
 
-          <Box display="flex" flexDir={"column"} mt={"2em"} gap=".2em">
+          {/* <Box display="flex" flexDir={"column"} mt={"2em"} gap=".2em">
             <Box display={"inline-flex"} gap=".3em" alignItems={"center"}>
               <MdLocationOn /> <Text>Lagos, Nigeria</Text>
             </Box>
@@ -105,7 +104,7 @@ const PreviewMarketplaceData: FC<MarketplaceData<Date | string | number>> = ({
                 {locationDistance}
               </Text>
             </Box>
-          </Box>
+          </Box> */}
         </Box>
 
         <Box>

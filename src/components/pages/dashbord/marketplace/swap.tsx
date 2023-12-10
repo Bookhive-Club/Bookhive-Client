@@ -1,6 +1,6 @@
 "use client";
 import BookShowcaseBox from "@/components/molecules/dashboard/marketplace/swapBox";
-import React, { Fragment, Suspense } from "react";
+import React, { Fragment, Suspense, useState } from "react";
 import { Box, Text, Flex, Avatar, useDisclosure } from "@chakra-ui/react";
 import DrawerContainer from "@/layouts/popups/appDrawerLayout";
 import PreviewMarketplaceData from "@/components/templates/dashboard/marketplace/preview_marketplacedata";
@@ -17,7 +17,15 @@ import { useSelector } from "react-redux";
 
 const MarketplaceSwap = () => {
   const { onOpen, isOpen, onClose } = useDisclosure();
+  //@ts-ignore
   const { userDetails } = useSelector((state) => state?.user);
+  //@ts-ignore
+  const { locationData } = useSelector((state) => state?.location);
+
+  const { longitude, latitude } = locationData;
+
+  const [userLocation, setUserLocation] = useState();
+  const [bgImage, setBgImage] = useState();
 
   const getData = () => {
     return axiosInstance("/marketplace/get_all_swap_listings", {
@@ -27,7 +35,7 @@ const MarketplaceSwap = () => {
     });
   };
 
-  const { data, isError, isLoading, isPending } = useQuery({
+  const { data, isError, isPending } = useQuery({
     queryKey: ["details"],
     queryFn: getData,
   });
@@ -37,17 +45,6 @@ const MarketplaceSwap = () => {
   if (isError) return <IsErrorLoadingData />;
 
   const retrivedData = data?.data?.data;
-
-  const calculateDistance = getPreciseDistance(
-    { latitude: 51.5103, longitude: 7.49347 },
-    { latitude: "51° 31' N", longitude: "7° 28' E" }
-  );
-
-  const getDistanceInMiles = convertDistance(calculateDistance, "mi").toFixed(
-    2
-  );
-
-  const displayLocation = `${getDistanceInMiles} m away`;
 
   return (
     <>
@@ -70,6 +67,30 @@ const MarketplaceSwap = () => {
             {Array.isArray(retrivedData) && (
               <>
                 {retrivedData?.map((item, key: number) => {
+                  const calculateDistance = getPreciseDistance(
+                    { latitude, longitude },
+                    { latitude: item?.latitude, longitude: item?.longitude }
+                  );
+
+                  let displayLocation;
+                  const exactLocation = "0.00";
+
+                  const getDistanceInMiles = convertDistance(
+                    calculateDistance,
+                    "mi"
+                  ).toFixed(2);
+
+                  if (getDistanceInMiles === exactLocation) {
+                    displayLocation = "Same Location";
+                  } else {
+                    displayLocation = `${getDistanceInMiles} m away`;
+                  }
+
+                  const openDrawer = () => {
+                    onOpen();
+                    setBgImage(item?.image);
+                  };
+
                   return (
                     <Fragment key={key}>
                       <Suspense fallback={<PeerSkeletonLoader />}>
@@ -81,7 +102,7 @@ const MarketplaceSwap = () => {
                           profileimage=""
                           bookimage={item?.image}
                           action={() => alert(0)}
-                          view={onOpen}
+                          view={openDrawer}
                           location={displayLocation}
                           swapItemId={item?.id}
                           posterId={item?.usersId}
@@ -97,13 +118,13 @@ const MarketplaceSwap = () => {
                         <PreviewMarketplaceData
                           title={item?.title}
                           description={item?.description}
-                          image={item?.image}
+                          image={bgImage}
                           ISBN={item?.isbn}
                           genre={item?.genre}
                           condition={item?.condition}
                           owner={item?.user?.firstName}
                           postedAt={item?.createdAt}
-                          locationDistance={displayLocation}
+                          locationDistance={userLocation}
                         />
                       </DrawerContainer>
                     </Fragment>

@@ -35,10 +35,9 @@ interface IBookShowCaseProps {
 }
 
 const BookShowcaseBox: FC<IBookShowCaseProps> = ({
-  action,
   view,
   title,
-  profileimage,
+
   genre,
   bookimage,
   username,
@@ -50,6 +49,8 @@ const BookShowcaseBox: FC<IBookShowCaseProps> = ({
 }: IBookShowCaseProps) => {
   const { onOpen, isOpen, onClose } = useDisclosure();
   const [message, setMessage] = useState<string>();
+  const [isDisabled, setIsDisabled] = useState<boolean>(true);
+  const [err, setErr] = useState<string>("");
   const toast = useToast();
 
   const payload = {
@@ -68,8 +69,16 @@ const BookShowcaseBox: FC<IBookShowCaseProps> = ({
       });
     },
 
-    onSuccess: (res) => {
-      console.log(res);
+    onSuccess: () => {
+      toast({
+        status: "success",
+        title: "Request has been sent to user",
+        position: "top",
+      });
+
+      setTimeout(() => {
+        onClose();
+      }, 1000);
     },
 
     onError: (err: AxiosError) => {
@@ -86,8 +95,20 @@ const BookShowcaseBox: FC<IBookShowCaseProps> = ({
 
   const sendSwapRequest = () => sendRequest.mutate();
 
-  const addMessage = (event: ChangeEvent<HTMLTextAreaElement>) =>
-    setMessage(event.target.value);
+  const addMessage = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    const value = event.target.value;
+    const charLength = value.length;
+    setMessage(value);
+
+    if (charLength < 10) {
+      setErr("Message is too short");
+      setIsDisabled(true);
+    } else {
+      setErr("");
+      setIsDisabled(false);
+    }
+  };
+
   return (
     <Box
       borderRadius={"10px"}
@@ -162,11 +183,29 @@ const BookShowcaseBox: FC<IBookShowCaseProps> = ({
             placeholder="Add a message for the owner"
             onChange={(e) => addMessage(e)}
           />
+
+          {typeof message !== "undefined" ? (
+            <>
+              {message.length > 0 && (
+                <>
+                  {err && (
+                    <Text mt=".5em" color="red">
+                      {err}
+                    </Text>
+                  )}
+                </>
+              )}
+            </>
+          ) : (
+            ""
+          )}
           <Buttons
             my="10px"
             borderRadius={"10px"}
             w="100%"
-            onClick={sendSwapRequest}>
+            onClick={sendSwapRequest}
+            isLoading={sendRequest.isPending ?? "Sending Request..."}
+            isDisabled={isDisabled}>
             Send Request
           </Buttons>
         </form>
