@@ -28,6 +28,7 @@ import DrawerContainer from "../popups/appDrawerLayout";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { deleteCookie } from "cookies-next";
+import { AiOutlineMessage } from "react-icons/ai";
 
 interface MenuItem {
   name: string;
@@ -151,11 +152,21 @@ const DashboardHeader = () => {
         <Flex alignItems={"center"} gap={"2em"}>
           {/* <IoIosNotificationsOutline size={".5em"} /> */}
           <Box
+            w="fit-content"
+            bg="gray.700"
+            cursor={"pointer"}
+            p=".5em"
+            borderRadius={"10px"}>
+            <AiOutlineMessage size={"1.4em"} />
+          </Box>
+
+          <Box
             display={["block", "block", "block", "none"]}
             cursor={"pointer"}
             onClick={openDrawer}>
             <RiMenu2Fill size="1.5em" />
           </Box>
+
           <Menu>
             <MenuButton>
               <Avatar

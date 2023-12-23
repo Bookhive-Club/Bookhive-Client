@@ -17,6 +17,7 @@ import { useMutation } from "@tanstack/react-query";
 import { axiosInstance } from "@/utils/axios";
 import { AUTH_COOKIE, FORMAT_TWITTER_DATE } from "@/constants";
 import { useSelector } from "react-redux";
+import parseISO from "date-fns/parseISO";
 
 interface ContentDetails {
   name: string;

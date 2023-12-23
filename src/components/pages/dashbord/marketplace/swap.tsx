@@ -33,6 +33,7 @@ const MarketplaceSwap = () => {
   const { locationData } = useSelector((state) => state?.location);
 
   const { longitude, latitude } = locationData;
+  console.log(longitude);
 
   const [userLocation, setUserLocation] = useState();
   const [bgImage, setBgImage] = useState();
